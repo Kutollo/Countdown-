@@ -3,228 +3,300 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Anniversary Hunt — Scan & Reveal</title>
+<title>2-Year Anniversary Hunt — Scan & Reveal</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700&family=Pacifico&display=swap" rel="stylesheet">
+
 <style>
   :root{
-    --p1:#ff7ab6; --p2:#9b61ff; --card:#fff; --muted:#7a6b7a;
+    --bg1: #ffd6e8;
+    --bg2: #f2c1ff;
+    --accent:#ff6fb3;
+    --muted:#6b516b;
+    --card:#fff;
+    --glass: rgba(255,255,255,0.7);
   }
+  *{box-sizing:border-box}
+  html,body{height:100%}
   body{
-    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    margin:0; min-height:100vh;
-    background: linear-gradient(135deg,var(--p1),var(--p2));
-    color:#222;
-    display:flex; align-items:center; justify-content:center;
+    margin:0;
+    font-family: 'Raleway', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: radial-gradient(1200px 600px at 10% 10%, rgba(255,255,255,0.12), transparent),
+                linear-gradient(135deg, var(--bg1), var(--bg2));
+    display:flex;
+    align-items:center;
+    justify-content:center;
     padding:20px;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    color:#2a1730;
   }
-  .wrap{ width:100%; max-width:760px; }
-  .card{
-    background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.95));
-    border-radius:14px; padding:28px; box-shadow:0 12px 30px rgba(0,0,0,0.18);
+
+  .wrap{ width:100%; max-width:900px; }
+  header{ display:flex; gap:12px; align-items:center; margin-bottom:18px; }
+  .logo {
+    background:linear-gradient(90deg,#fff3,#fff0);
+    padding:10px 14px; border-radius:12px;
+    display:flex; gap:10px; align-items:center;
+    box-shadow:0 8px 20px rgba(160,50,120,0.08);
   }
-  h1{ margin:0 0 8px 0; font-size:20px; letter-spacing:0.2px;}
-  .sub{ color:var(--muted); margin-bottom:18px;}
-  .clue{ font-size:18px; margin:16px 0; line-height:1.4; }
-  .mini{ background:linear-gradient(90deg, #fff0, #fff0); padding:12px; border-radius:8px; border:1px dashed #f0c; }
-  .label{ font-weight:600; font-size:13px; color:#6b5870; margin-top:12px; }
-  .trigger{ margin-top:8px; font-size:16px; background:#ffeff9; padding:10px 12px; border-radius:8px; display:inline-block;}
-  .alex{ margin-top:14px; font-style:italic; color:#4c2b4c; }
-  .control-row{ margin-top:18px; display:flex; gap:8px; flex-wrap:wrap; }
-  button{ background:transparent; border:2px solid rgba(155,97,255,0.12); padding:10px 12px; border-radius:10px; cursor:pointer; }
-  .qr{ margin-top:18px; text-align:center; }
-  footer{ margin-top:20px; color:var(--muted); font-size:13px; text-align:center;}
-  .admin-list{ margin-top:14px; max-height:260px; overflow:auto; padding:8px; border-radius:8px; background:#fff7; }
-  .muted{ color:var(--muted); font-size:13px; }
-  @media (max-width:520px){ .card{ padding:18px } h1{ font-size:18px } }
+  .logo .heart{ font-family: 'Pacifico'; color:var(--accent); font-size:20px }
+  h1{ font-size:20px; margin:0; letter-spacing:0.2px; }
+  p.lead{ margin:0; color:var(--muted); font-size:13px }
+
+  main.card{
+    background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.92));
+    border-radius:18px; padding:22px;
+    box-shadow: 0 18px 40px rgba(110,30,80,0.10);
+  }
+
+  .meta{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:12px }
+  .pill{ background:linear-gradient(90deg, #fff, rgba(255,255,255,0.9)); padding:8px 10px; border-radius:999px; font-size:13px; color:var(--muted); border:1px solid rgba(255,255,255,0.4) }
+
+  .clueBox{ display:grid; grid-template-columns: 1fr 320px; gap:18px; align-items:start; }
+  @media (max-width:820px){ .clueBox{ grid-template-columns: 1fr; } }
+
+  .left{
+    padding:14px; border-radius:12px; background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.8));
+    border: 1px solid rgba(255,255,255,0.6);
+  }
+  .label{ font-weight:600; color:var(--muted); font-size:13px; margin-bottom:6px }
+  .clue{ font-size:20px; line-height:1.35; margin:6px 0 14px 0; color:#2a1730 }
+  .mini{ background: linear-gradient(90deg, rgba(255,240,245,0.7), rgba(255,245,250,0.7)); padding:12px; border-radius:10px; font-size:15px; color:#5b355b; border:1px dashed rgba(200,120,160,0.15) }
+
+  .triggerBox{ margin-top:12px; display:flex; gap:10px; flex-direction:column; }
+  .trigger{ font-size:16px; padding:10px 12px; border-radius:10px; background: linear-gradient(90deg,#fff0,#fff0); border:1px solid rgba(255,120,160,0.14); color:#5a2b5a; font-weight:600; }
+  .alex{ margin-top:10px; padding:10px 12px; border-radius:8px; background: #fff; font-style:italic; border-left:4px solid var(--accent); color:#4b2a4b; line-height:1.4; }
+
+  .right{
+    padding:12px; border-radius:12px; background: linear-gradient(180deg, rgba(255,250,255,0.9), rgba(255,255,255,0.85)); border:1px solid rgba(255,255,255,0.6);
+    display:flex; flex-direction:column; gap:12px;
+    align-items:stretch;
+  }
+  .bigBtn{ background: linear-gradient(90deg,var(--accent), #d86bd3); color:white; padding:12px; border-radius:12px; border:0; font-weight:700; cursor:pointer; box-shadow:0 8px 20px rgba(200,60,140,0.12) }
+  .ghost{ background:transparent; border:1px solid rgba(155,97,255,0.12); padding:10px; border-radius:10px; color:var(--muted); cursor:pointer; }
+
+  .qrWrap{ text-align:center; padding:10px; border-radius:8px; background: linear-gradient(90deg, rgba(255,255,255,0.6), rgba(255,255,255,0.4)); border:1px dashed rgba(200,140,200,0.12); }
+  img.qr{ max-width:160px; width:100%; border-radius:8px; display:block; margin:6px auto; }
+
+  footer{ margin-top:14px; color:var(--muted); font-size:13px; display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap }
+
+  .small{ font-size:13px; color:var(--muted) }
+
+  /* confetti final */
+  .confetti{ position:fixed; inset:0; pointer-events:none; display:none; }
+  .muted{ color:var(--muted) }
 </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="card" id="card">
-      <h1>2-Year Anniversary Hunt</h1>
-      <div class="sub">Scan the QR. This page reveals a clue, a sweet note, and the phrase to say to Alex.</div>
+    <header>
+      <div class="logo"><div class="heart">♥︎</div><div>
+        <h1>2-Year Anniversary Hunt</h1>
+        <p class="lead">Scan, reveal, and enjoy — subtle clues, playful whispers.</p>
+      </div></div>
+    </header>
 
-      <div id="content">
-        <div class="muted">Waiting for a clue... scan a QR or open the page with <code>?clue=1</code> (1–10).</div>
+    <main class="card" id="card">
+      <div class="meta">
+        <div class="pill">10 Clues • subtle hints</div>
+        <div class="pill">QR-ready • mobile-first</div>
+        <div class="pill">Alexa triggers visible</div>
       </div>
 
-      <div class="control-row" id="controls" style="display:none;">
-        <button id="speakBtn">Speak Alex's line (play)</button>
-        <button id="nextBtn">Reveal Next</button>
-        <button id="allBtn">Show All (preview)</button>
-      </div>
+      <div class="clueBox" id="clueBox">
+        <div class="left" id="leftCol">
+          <div class="label" id="placeLabel">Waiting for a clue…</div>
+          <div class="clue" id="clueText">Open this page with <code>?clue=1</code> – or scan a printed QR code.</div>
 
-      <div class="qr" id="qr"></div>
+          <div class="label">Mini note</div>
+          <div class="mini" id="miniNote">Clues will appear here when you open a clue link.</div>
+
+          <div class="triggerBox">
+            <div class="label">Say this to Alex</div>
+            <div class="trigger" id="triggerText">“…”</div>
+
+            <div class="label">Alex will say</div>
+            <div class="alex" id="alexText">—</div>
+
+            <div class="label" style="margin-top:8px">A little whisper</div>
+            <div class="small muted" id="whisperText">—</div>
+          </div>
+        </div>
+
+        <aside class="right" id="rightCol">
+          <div style="display:flex; gap:8px; align-items:center;">
+            <button class="bigBtn" id="speakBtn">Play Alex's line</button>
+            <button class="ghost" id="nextBtn" title="Reveal next clue">Next →</button>
+          </div>
+
+          <div style="display:flex; gap:8px;">
+            <button class="ghost" id="copyTrigger">Copy trigger</button>
+            <button class="ghost" id="downloadQR">Download QR</button>
+          </div>
+
+          <div class="qrWrap" id="qrWrap">
+            <div class="small muted">QR (create sticker):</div>
+            <img class="qr" id="qrImg" src="" alt="qr-code" />
+            <div class="small muted" id="qrUrlText" style="word-break:break-all"></div>
+          </div>
+
+          <div style="font-size:13px; color:var(--muted);">
+            <strong>Tip</strong>: host this file (GitHub Pages). Use the public URL `?clue=1`..`?clue=10` for each QR.
+          </div>
+        </aside>
+      </div>
 
       <footer>
-        Tip: host this file on GitHub Pages or any static host. Use the page URL + <code>?clue=1</code> to create your QR codes.
+        <div class="small muted">Test with ?admin=true to preview all clues.</div>
+        <div class="small muted">Designed for mobile scanning • Alex lines are shown for copying.</div>
       </footer>
-    </div>
+    </main>
   </div>
 
+  <canvas class="confetti" id="confetti"></canvas>
+
 <script>
-/* ====== DATA: clues + notes + triggers + alex lines ====== */
+/* ----- Data: subtle clues + notes + triggers + alex lines ----- */
 const CLUES = [
   null,
-  { place:"Pillow", clue:"Start where your head rests at night… a little sweetness is waiting for you 😘",
-    mini:"A little sweetness to start… just like you make my mornings better 😘",
-    trigger:"Yum, I found my first treat!",
-    alex:"Mmm… just like your smile, sweet and irresistible. This adventure is going to be hot and full of fun—enjoy every second 😏💖",
-    whisper:"Ready to play, my love?"
-  },
-  { place:"Under bed", clue:"Look under the place where your legs relax… something soft and playful awaits 😏",
-    mini:"Soft and playful… imagine wearing this for me tonight 😏🔥",
-    trigger:"Oooh, what’s this?",
-    alex:"Oooh… careful now, that one’s dangerously flirty. I can already feel the sparks—you’re irresistible 😌🔥",
-    whisper:"I hope you like this one… very tempting 😏"
-  },
-  { place:"Wardrobe", clue:"Peek where your favorite outfits hide… a little sweet surprise is among your clothes 💖",
-    mini:"Sweet like this, but nothing compares to you 💖",
-    trigger:"Another treat for me!",
-    alex:"Sweet, just like you… every bite makes me think of your smile. I can’t wait to see what you reach for next 😏💖",
-    whisper:"Almost halfway… can you handle the next one?"
-  },
-  { place:"Oven", clue:"Where it gets hot and steamy… your next surprise is baking 😏🔥",
-    mini:"Hot and irresistible… can’t wait to see this on you 😘❤️",
-    trigger:"Wow… look at this!",
-    alex:"Hot, hot, hot… just like someone I know. I can already imagine how amazing you’ll look—it's going to be unforgettable 😏🔥",
-    whisper:"Be careful… this one might burn your heart 😏"
-  },
-  { place:"Kitchen cupboard", clue:"Where we store little daily treats… a sweet bite awaits 🍫",
-    mini:"Another treat for my favorite girl… enjoy every bite 😏",
-    trigger:"Mmm, chocolate again!",
-    alex:"Every bite makes me think of you… naughty and sweet. Keep going—you're doing so well 😌🍫",
-    whisper:"Careful… these treats might make you even sweeter 😏"
-  },
-  { place:"Bathroom", clue:"Time to freshen up… a playful surprise is waiting where you wash up 😏",
-    mini:"Dangerously cute… just like you 😌🔥 I might not survive seeing these on you later…",
-    trigger:"Oh my… these are cute!",
-    alex:"Oooh… dangerously cute. I’m already imagining you wearing these—it's driving me wild 😌💖",
-    whisper:"Hmm… you’re driving me wild 😏"
-  },
-  { place:"Behind storage box", clue:"Behind the box where extra things hide… another treat is sneaky 😘",
-    mini:"Almost there… a little sweetness before the grand finale 😘",
-    trigger:"Yay, another one!",
-    alex:"Almost there… the sweetest is still waiting. I can’t wait to see your reaction when you find it 😏🔥",
-    whisper:"I love watching you get closer to your final surprise 😌"
-  },
-  { place:"Fridge", clue:"Look inside the cold place… a chill but sweet surprise awaits 😏",
-    mini:"Cold outside… but you keep my heart on fire 🔥💖",
-    trigger:"Cold, but yummy!",
-    alex:"Mmm… cold outside, but you’re heating up my heart. Each move you make is making me crave you more 😏🔥",
-    whisper:"Getting closer… can you feel it?"
-  },
-  { place:"On top of wardrobe", clue:"The next treasure is up high… reach for the top to claim it 😌",
-    mini:"Wear me close… my eyes are always with you 😏❤️",
-    trigger:"Oh wow, a bracelet!",
-    alex:"Wear me close… I’ll always be watching you. Imagine me tracing your wrist with my fingers—I'm melting already 😌🔥",
-    whisper:"Careful climbing… don’t fall into my arms 😏"
-  },
-  { place:"Under kitchen unit", clue:"Final stretch! Blindfold your eyes… let your hands feel the way to the last surprise 😏🔥",
-    mini:"Two years with you… and every day still feels like the first 💕🔥",
-    trigger:"Found it… my final surprise!",
-    alex:"Oooh… this one’s just for you. Two years of love, teasing, and unforgettable moments—and the night is only beginning 😌🔥",
-    whisper:"Two years down… forever to go. Come here, my love 😘❤️"
-  }
+  { place:"Soft Rest", clue:"Where dreams take a breath — a small sweetness waits nearby.", mini:"A quiet sweetness to begin our night.", trigger:"Yum, I found my first treat!", alex:"Mmm… such a sweet start. Keep going — there’s warmth and mischief ahead.", whisper:"Ready to play, my love?" },
+  { place:"Under Quiet", clue:"A tucked-away spot beneath where you stretch out — check lightly.", mini:"Something soft and playful hides below.", trigger:"Oooh, what’s this?", alex:"Oooh… that one has a playful edge. Careful, it might make the evening more interesting.", whisper:"I hope you like this one… very tempting." },
+  { place:"Closet of Looks", clue:"Where favorite pieces wait for their moment — a small surprise nestles there.", mini:"A tiny treat among the familiar.", trigger:"Another treat for me!", alex:"Sweet, like a secret smile. You’re doing wonderfully — keep going.", whisper:"Almost halfway… can you handle the next one?" },
+  { place:"Warm Place", clue:"A place that warms and holds — something cozy hides where heat lives.", mini:"Something to make the night feel a little warmer.", trigger:"Wow… look at this!", alex:"Warmth and wonder — this is getting exciting. Picture it, and feel it.", whisper:"Be careful… this one might burn your heart." },
+  { place:"Everyday Cup", clue:"Where daily comforts gather — a little bite waits out of sight.", mini:"A sweet moment for you to see.", trigger:"Mmm, chocolate again!", alex:"A small bite, a lingering thought of you. Sweet and tempting.", whisper:"Careful… these treats might make you even sweeter." },
+  { place:"Fresh Space", clue:"Where water meets mirror and moments of change begin — something playful hides there.", mini:"A playful piece to try on later.", trigger:"Oh my… these are cute!", alex:"Fresh and flirty — this will add a spark. I’m already smiling at the thought.", whisper:"Hmm… you’re driving me wild." },
+  { place:"Hidden Box", clue:"Behind the things that hold our extras — a tiny surprise peeks out.", mini:"One more small sweetness before the end.", trigger:"Yay, another one!", alex:"Almost there — keep the smile. The best is near.", whisper:"I love watching you get closer to your final surprise." },
+  { place:"Chill Chest", clue:"A cool, quiet place where treats rest — reach gently.", mini:"Cold exterior, warm intent.", trigger:"Cold, but yummy!", alex:"Chilly on the outside, but the night’s feeling warm. You’re getting very close.", whisper:"Getting closer… can you feel it?" },
+  { place:"High Corner", clue:"Look where the light touches the topmost shelf — a small treasure waits.", mini:"A keepsake to hold close.", trigger:"Oh wow, a bracelet!", alex:"Wear this so a part of me is always near you. I like the thought of it on your wrist.", whisper:"Careful climbing… don’t fall into my arms." },
+  { place:"Low Secret", clue:"Down low where day-to-day things rest — a final piece is tucked away.", mini:"A letter from my heart, waiting for yours.", trigger:"Found it… my final surprise!", alex:"This last one is all feeling — read it slowly. The evening is just beginning.", whisper:"Two years down… forever to go. Come here, my love." }
 ];
 
-/* ====== helper: get query param ====== */
+/* ----- util: read query param ----- */
 function getParam(name){
   const u = new URL(location.href);
   return u.searchParams.get(name);
 }
 
-/* ====== render function ====== */
+/* ----- render a single clue ----- */
 function renderClue(id){
-  const cont = document.getElementById('content');
-  const controls = document.getElementById('controls');
-  const qrEl = document.getElementById('qr');
+  const left = document.getElementById('leftCol');
+  const placeLabel = document.getElementById('placeLabel');
+  const clueText = document.getElementById('clueText');
+  const miniNote = document.getElementById('miniNote');
+  const triggerText = document.getElementById('triggerText');
+  const alexText = document.getElementById('alexText');
+  const whisperText = document.getElementById('whisperText');
+  const qrImg = document.getElementById('qrImg');
+  const qrUrlText = document.getElementById('qrUrlText');
+
   if(!id || isNaN(id) || id<1 || id>10){
-    cont.innerHTML = `<div class="muted">Open a clue by visiting <code>?clue=1</code> through <code>?clue=10</code>, or scan a QR card. Preview all: <a href="?admin=true">?admin=true</a></div>`;
-    controls.style.display='none';
-    qrEl.innerHTML='';
+    placeLabel.textContent = 'Waiting for a clue…';
+    clueText.innerHTML = 'Open this page with <code>?clue=1</code> (1–10) or scan a QR card. Preview: <a href="?admin=true">?admin=true</a>';
+    miniNote.textContent = 'Clues will appear here when you open a clue link.';
+    triggerText.textContent = '“…”';
+    alexText.textContent = '—';
+    whisperText.textContent = '—';
+    qrImg.src = '';
+    qrUrlText.textContent = '';
     return;
   }
+
   const d = CLUES[id];
-  cont.innerHTML = `
-    <div class="label">Clue #${id} — <strong>${d.place}</strong></div>
-    <div class="clue">${d.clue}</div>
-    <div class="label">Mini note</div>
-    <div class="mini">${d.mini}</div>
-    <div class="label">Say this to Alex</div>
-    <div class="trigger">"${d.trigger}"</div>
-    <div class="label">Alex will say</div>
-    <div class="alex">"${d.alex}"</div>
-    <div class="label">A little whisper from me</div>
-    <div class="muted">${d.whisper}</div>
-  `;
-  controls.style.display='flex';
-  // create QR (link to this same page with clue param)
-  const url = location.origin + location.pathname + '?clue=' + id;
-  const encoder = encodeURIComponent(url);
-  // Use Google Chart API for QR image
-  const qrUrl = 'https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=' + encoder;
-  qrEl.innerHTML = `<div class="muted">QR for this clue (print this on the sticker):</div><img src="${qrUrl}" alt="qr" style="margin-top:8px;border-radius:8px;max-width:60%;height:auto">`;
+  placeLabel.textContent = `Clue ${id} — ${d.place}`;
+  clueText.textContent = d.clue;
+  miniNote.textContent = d.mini;
+  triggerText.textContent = `"${d.trigger}"`;
+  alexText.textContent = d.alex;
+  whisperText.textContent = d.whisper;
+
+  const base = location.origin + location.pathname;
+  const url = base + '?clue=' + id;
+  const enc = encodeURIComponent(url);
+  const qr = 'https://chart.googleapis.com/chart?chs=400x400&cht=qr&chl=' + enc;
+  qrImg.src = qr;
+  qrImg.alt = 'QR for clue ' + id;
+  qrUrlText.textContent = url;
+  document.getElementById('qrWrap').style.display = 'block';
 }
 
-/* speak alex line using Web Speech API */
-function speakText(text){
-  if(!('speechSynthesis' in window)) { alert('Speech not supported on this device.'); return; }
-  const u = new SpeechSynthesisUtterance(text);
-  u.rate = 0.95;
-  u.pitch = 1.05;
-  u.lang = 'en-US';
-  speechSynthesis.cancel(); // stop other
+/* ----- admin view: all clues ----- */
+function renderAdmin(){
+  const left = document.getElementById('leftCol');
+  let html = '<div class="label">All clues (preview)</div>';
+  for(let i=1;i<=10;i++){
+    const d = CLUES[i];
+    html += `<div style="padding:12px;border-radius:8px;margin-top:8px;background:linear-gradient(90deg, rgba(255,255,255,0.7), rgba(255,255,255,0.6));border:1px solid rgba(200,160,200,0.07)"><strong>Clue ${i} — ${d.place}</strong><div style="margin-top:6px;color:var(--muted)">${d.clue}</div><div style="margin-top:8px"><em>Say:</em> "${d.trigger}"</div></div>`;
+  }
+  left.innerHTML = html;
+  document.getElementById('qrWrap').style.display = 'none';
+}
+
+/* ----- speak using Web Speech API ----- */
+function speakText(txt){
+  if(!('speechSynthesis' in window)){
+    alert('Speech not supported on this device.');
+    return;
+  }
+  const u = new SpeechSynthesisUtterance(txt);
+  u.rate = 0.95; u.pitch = 1.05; u.lang = 'en-US';
+  speechSynthesis.cancel();
   speechSynthesis.speak(u);
 }
 
-/* admin preview list */
-function showAdmin(){
-  const cont = document.getElementById('content');
-  let html = '<div class="label">Preview all clues</div><div class="admin-list">';
-  for(let i=1;i<=10;i++){
-    const d=CLUES[i];
-    html += `<div style="padding:8px;border-bottom:1px dashed #eee"><strong>Clue ${i} — ${d.place}</strong><div style="font-size:14px;margin-top:6px">${d.clue}</div><div style="margin-top:6px"><em>Say:</em> "${d.trigger}"</div></div>`;
-  }
-  html += '</div>';
-  cont.innerHTML = html;
-  document.getElementById('controls').style.display='flex';
-  document.getElementById('qr').innerHTML='';
-}
-
-/* init */
-(function(){
+/* ----- events & init ----- */
+(function init(){
   const q = getParam('clue');
   const admin = getParam('admin');
-  if(admin==='true') { showAdmin(); return; }
-  if(q) {
+
+  if(admin === 'true'){
+    renderAdmin();
+  } else if(q){
     renderClue(Number(q));
   } else {
     renderClue(null);
   }
 
-  document.getElementById('speakBtn').onclick = ()=>{
-    const q = getParam('clue');
-    if(!q) return;
+  document.getElementById('speakBtn').addEventListener('click', ()=>{
+    const q = Number(getParam('clue')||0);
+    if(!q || !CLUES[q]) return;
     speakText(CLUES[q].alex);
-  };
-  document.getElementById('nextBtn').onclick = ()=>{
-    const q = Number(getParam('clue') || 0);
-    const nxt = Math.min(10, q+1) || 1;
-    const newUrl = location.origin + location.pathname + '?clue=' + nxt;
-    history.pushState({},'',newUrl);
+  });
+
+  document.getElementById('nextBtn').addEventListener('click', ()=>{
+    const q = Number(getParam('clue')||0);
+    const nxt = q >=10 ? 1 : q+1;
+    history.pushState({},'', location.pathname + '?clue=' + nxt);
     renderClue(nxt);
-  };
-  document.getElementById('allBtn').onclick = ()=>{
-    const newUrl = location.origin + location.pathname + '?admin=true';
-    history.pushState({},'',newUrl);
-    showAdmin();
-  };
+  });
+
+  document.getElementById('copyTrigger').addEventListener('click', async ()=>{
+    const q = Number(getParam('clue')||0);
+    if(!q || !CLUES[q]) return alert('Open a clue first.');
+    try {
+      await navigator.clipboard.writeText(CLUES[q].trigger);
+      alert('Trigger copied to clipboard: ' + CLUES[q].trigger);
+    } catch(e){ alert('Copy failed — just read it aloud from the screen.'); }
+  });
+
+  document.getElementById('downloadQR').addEventListener('click', ()=>{
+    const q = Number(getParam('clue')||0);
+    if(!q || !CLUES[q]) return alert('Open a clue first.');
+    const base = location.origin + location.pathname;
+    const url = base + '?clue=' + q;
+    const enc = encodeURIComponent(url);
+    const qr = 'https://chart.googleapis.com/chart?chs=600x600&cht=qr&chl=' + enc;
+    // open in new tab so user can save
+    window.open(qr, '_blank');
+  });
 
   window.addEventListener('popstate', ()=>{
-    const q = getParam('clue'); const admin = getParam('admin');
-    if(admin==='true') showAdmin(); else renderClue(Number(q));
+    const q2 = getParam('clue');
+    const admin2 = getParam('admin');
+    if(admin2 === 'true') renderAdmin(); else renderClue(Number(q2));
   });
 })();
 </script>
+
 </body>
 </html>
