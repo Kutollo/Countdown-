@@ -1,184 +1,230 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Counting the Days Until You’re Home 💖</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Anniversary Hunt — Scan & Reveal</title>
 <style>
-  body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #ffd6e8, #ffb6c1);
-    color: #fff;
-    overflow-x: hidden;
-    text-align: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+  :root{
+    --p1:#ff7ab6; --p2:#9b61ff; --card:#fff; --muted:#7a6b7a;
   }
-  h1 {
-    margin-top: 100px;
-    font-size: 2.5em;
-    animation: heartbeat 1.5s infinite;
+  body{
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin:0; min-height:100vh;
+    background: linear-gradient(135deg,var(--p1),var(--p2));
+    color:#222;
+    display:flex; align-items:center; justify-content:center;
+    padding:20px;
   }
-  @keyframes heartbeat {
-    0%,100% {transform: scale(1);}
-    50% {transform: scale(1.1);}
+  .wrap{ width:100%; max-width:760px; }
+  .card{
+    background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.95));
+    border-radius:14px; padding:28px; box-shadow:0 12px 30px rgba(0,0,0,0.18);
   }
-  .countdown {
-    font-size: 3em;
-    margin-top: 20px;
-    color: #fff;
-    text-shadow: 0 0 20px #ff69b4;
-  }
-  .section {
-    padding: 60px 20px;
-  }
-  button {
-    background: #ff69b4;
-    border: none;
-    padding: 12px 25px;
-    color: #fff;
-    border-radius: 30px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  button:hover {
-    background: #ff85c1;
-  }
-  #loveNotes div {
-    background: rgba(255,255,255,0.2);
-    border-radius: 15px;
-    margin: 10px auto;
-    padding: 15px;
-    max-width: 400px;
-  }
-  #gallery img {
-    width: 100%;
-    max-width: 250px;
-    border-radius: 20px;
-    margin: 10px;
-    transition: transform 0.3s;
-  }
-  #gallery img:hover {
-    transform: scale(1.05);
-  }
-  canvas {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: -1;
-  }
+  h1{ margin:0 0 8px 0; font-size:20px; letter-spacing:0.2px;}
+  .sub{ color:var(--muted); margin-bottom:18px;}
+  .clue{ font-size:18px; margin:16px 0; line-height:1.4; }
+  .mini{ background:linear-gradient(90deg, #fff0, #fff0); padding:12px; border-radius:8px; border:1px dashed #f0c; }
+  .label{ font-weight:600; font-size:13px; color:#6b5870; margin-top:12px; }
+  .trigger{ margin-top:8px; font-size:16px; background:#ffeff9; padding:10px 12px; border-radius:8px; display:inline-block;}
+  .alex{ margin-top:14px; font-style:italic; color:#4c2b4c; }
+  .control-row{ margin-top:18px; display:flex; gap:8px; flex-wrap:wrap; }
+  button{ background:transparent; border:2px solid rgba(155,97,255,0.12); padding:10px 12px; border-radius:10px; cursor:pointer; }
+  .qr{ margin-top:18px; text-align:center; }
+  footer{ margin-top:20px; color:var(--muted); font-size:13px; text-align:center;}
+  .admin-list{ margin-top:14px; max-height:260px; overflow:auto; padding:8px; border-radius:8px; background:#fff7; }
+  .muted{ color:var(--muted); font-size:13px; }
+  @media (max-width:520px){ .card{ padding:18px } h1{ font-size:18px } }
 </style>
 </head>
 <body>
+  <div class="wrap">
+    <div class="card" id="card">
+      <h1>2-Year Anniversary Hunt</h1>
+      <div class="sub">Scan the QR. This page reveals a clue, a sweet note, and the phrase to say to Alex.</div>
 
-<canvas id="hearts"></canvas>
+      <div id="content">
+        <div class="muted">Waiting for a clue... scan a QR or open the page with <code>?clue=1</code> (1–10).</div>
+      </div>
 
-<h1>Counting the Days Until You’re Home 💖</h1>
-<div class="countdown" id="countdown"></div>
-<p>Every second brings me closer to you...</p>
-<button id="musicBtn">🎵 Play Song</button>
-<audio id="bgMusic" src="music/song.mp3"></audio>
+      <div class="control-row" id="controls" style="display:none;">
+        <button id="speakBtn">Speak Alex's line (play)</button>
+        <button id="nextBtn">Reveal Next</button>
+        <button id="allBtn">Show All (preview)</button>
+      </div>
 
-<div class="section" id="loveNotes">
-  <h2>💌 Daily Love Notes</h2>
-</div>
+      <div class="qr" id="qr"></div>
 
-<div class="section" id="gallery">
-  <h2>📸 Our Memories</h2>
-  <img src="images/memory1.jpg" alt="Memory 1">
-  <img src="images/memory2.jpg" alt="Memory 2">
-  <img src="images/memory3.jpg" alt="Memory 3">
-</div>
-
-<div class="section" id="playlist">
-  <h2>🎧 Our Playlist</h2>
-  <iframe style="border-radius:12px" 
-    src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M" 
-    width="300" height="380" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"></iframe>
-</div>
+      <footer>
+        Tip: host this file on GitHub Pages or any static host. Use the page URL + <code>?clue=1</code> to create your QR codes.
+      </footer>
+    </div>
+  </div>
 
 <script>
-/* Countdown */
-const countdownEl = document.getElementById('countdown');
-const targetDate = new Date('November 21, 2025 00:00:00').getTime();
-const timer = setInterval(() => {
-  const now = new Date().getTime();
-  const distance = targetDate - now;
-  if (distance <= 0) {
-    clearInterval(timer);
-    countdownEl.innerHTML = "💞 She’s Home 💞";
-    document.body.style.background = "linear-gradient(135deg, #ff85c1, #ff69b4)";
-    alert("She’s finally home! 💗");
+/* ====== DATA: clues + notes + triggers + alex lines ====== */
+const CLUES = [
+  null,
+  { place:"Pillow", clue:"Start where your head rests at night… a little sweetness is waiting for you 😘",
+    mini:"A little sweetness to start… just like you make my mornings better 😘",
+    trigger:"Yum, I found my first treat!",
+    alex:"Mmm… just like your smile, sweet and irresistible. This adventure is going to be hot and full of fun—enjoy every second 😏💖",
+    whisper:"Ready to play, my love?"
+  },
+  { place:"Under bed", clue:"Look under the place where your legs relax… something soft and playful awaits 😏",
+    mini:"Soft and playful… imagine wearing this for me tonight 😏🔥",
+    trigger:"Oooh, what’s this?",
+    alex:"Oooh… careful now, that one’s dangerously flirty. I can already feel the sparks—you’re irresistible 😌🔥",
+    whisper:"I hope you like this one… very tempting 😏"
+  },
+  { place:"Wardrobe", clue:"Peek where your favorite outfits hide… a little sweet surprise is among your clothes 💖",
+    mini:"Sweet like this, but nothing compares to you 💖",
+    trigger:"Another treat for me!",
+    alex:"Sweet, just like you… every bite makes me think of your smile. I can’t wait to see what you reach for next 😏💖",
+    whisper:"Almost halfway… can you handle the next one?"
+  },
+  { place:"Oven", clue:"Where it gets hot and steamy… your next surprise is baking 😏🔥",
+    mini:"Hot and irresistible… can’t wait to see this on you 😘❤️",
+    trigger:"Wow… look at this!",
+    alex:"Hot, hot, hot… just like someone I know. I can already imagine how amazing you’ll look—it's going to be unforgettable 😏🔥",
+    whisper:"Be careful… this one might burn your heart 😏"
+  },
+  { place:"Kitchen cupboard", clue:"Where we store little daily treats… a sweet bite awaits 🍫",
+    mini:"Another treat for my favorite girl… enjoy every bite 😏",
+    trigger:"Mmm, chocolate again!",
+    alex:"Every bite makes me think of you… naughty and sweet. Keep going—you're doing so well 😌🍫",
+    whisper:"Careful… these treats might make you even sweeter 😏"
+  },
+  { place:"Bathroom", clue:"Time to freshen up… a playful surprise is waiting where you wash up 😏",
+    mini:"Dangerously cute… just like you 😌🔥 I might not survive seeing these on you later…",
+    trigger:"Oh my… these are cute!",
+    alex:"Oooh… dangerously cute. I’m already imagining you wearing these—it's driving me wild 😌💖",
+    whisper:"Hmm… you’re driving me wild 😏"
+  },
+  { place:"Behind storage box", clue:"Behind the box where extra things hide… another treat is sneaky 😘",
+    mini:"Almost there… a little sweetness before the grand finale 😘",
+    trigger:"Yay, another one!",
+    alex:"Almost there… the sweetest is still waiting. I can’t wait to see your reaction when you find it 😏🔥",
+    whisper:"I love watching you get closer to your final surprise 😌"
+  },
+  { place:"Fridge", clue:"Look inside the cold place… a chill but sweet surprise awaits 😏",
+    mini:"Cold outside… but you keep my heart on fire 🔥💖",
+    trigger:"Cold, but yummy!",
+    alex:"Mmm… cold outside, but you’re heating up my heart. Each move you make is making me crave you more 😏🔥",
+    whisper:"Getting closer… can you feel it?"
+  },
+  { place:"On top of wardrobe", clue:"The next treasure is up high… reach for the top to claim it 😌",
+    mini:"Wear me close… my eyes are always with you 😏❤️",
+    trigger:"Oh wow, a bracelet!",
+    alex:"Wear me close… I’ll always be watching you. Imagine me tracing your wrist with my fingers—I'm melting already 😌🔥",
+    whisper:"Careful climbing… don’t fall into my arms 😏"
+  },
+  { place:"Under kitchen unit", clue:"Final stretch! Blindfold your eyes… let your hands feel the way to the last surprise 😏🔥",
+    mini:"Two years with you… and every day still feels like the first 💕🔥",
+    trigger:"Found it… my final surprise!",
+    alex:"Oooh… this one’s just for you. Two years of love, teasing, and unforgettable moments—and the night is only beginning 😌🔥",
+    whisper:"Two years down… forever to go. Come here, my love 😘❤️"
+  }
+];
+
+/* ====== helper: get query param ====== */
+function getParam(name){
+  const u = new URL(location.href);
+  return u.searchParams.get(name);
+}
+
+/* ====== render function ====== */
+function renderClue(id){
+  const cont = document.getElementById('content');
+  const controls = document.getElementById('controls');
+  const qrEl = document.getElementById('qr');
+  if(!id || isNaN(id) || id<1 || id>10){
+    cont.innerHTML = `<div class="muted">Open a clue by visiting <code>?clue=1</code> through <code>?clue=10</code>, or scan a QR card. Preview all: <a href="?admin=true">?admin=true</a></div>`;
+    controls.style.display='none';
+    qrEl.innerHTML='';
     return;
   }
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-  countdownEl.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-}, 1000);
-
-/* Love Notes (Unlock by date) */
-const loveNotes = [
-  "Day 1 – I miss your voice already 💕",
-  "Day 2 – Can’t wait to hold you again 💞",
-  "Day 3 – You’re the reason I smile 😊",
-  "Day 4 – I replay our memories all day 🌸",
-  "Day 5 – You’re my calm and my chaos ❤️",
-  "Day 6 – Counting seconds till I see you 🕒",
-  "Day 7 – I’m so proud of us 💫",
-  "Day 8 – I dream of your laughter 😍",
-  "Day 9 – I’d cross worlds for you 💋",
-  "Day 10 – Almost home, my love 💗",
-  "Day 11 – You’re my favorite hello 🌷",
-  "Day 12 – My heart beats your name 💞",
-  "Day 13 – One more sleep 😍",
-  "Day 14 – You’re home! 💖"
-];
-const loveNotesDiv = document.getElementById('loveNotes');
-loveNotes.forEach((note, i) => {
-  const noteDiv = document.createElement('div');
-  noteDiv.innerText = note;
-  loveNotesDiv.appendChild(noteDiv);
-});
-
-/* Floating Hearts */
-const canvas = document.getElementById('hearts');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-const hearts = [];
-for (let i = 0; i < 30; i++) {
-  hearts.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    size: Math.random() * 20 + 10,
-    speed: Math.random() * 1 + 0.5
-  });
+  const d = CLUES[id];
+  cont.innerHTML = `
+    <div class="label">Clue #${id} — <strong>${d.place}</strong></div>
+    <div class="clue">${d.clue}</div>
+    <div class="label">Mini note</div>
+    <div class="mini">${d.mini}</div>
+    <div class="label">Say this to Alex</div>
+    <div class="trigger">"${d.trigger}"</div>
+    <div class="label">Alex will say</div>
+    <div class="alex">"${d.alex}"</div>
+    <div class="label">A little whisper from me</div>
+    <div class="muted">${d.whisper}</div>
+  `;
+  controls.style.display='flex';
+  // create QR (link to this same page with clue param)
+  const url = location.origin + location.pathname + '?clue=' + id;
+  const encoder = encodeURIComponent(url);
+  // Use Google Chart API for QR image
+  const qrUrl = 'https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=' + encoder;
+  qrEl.innerHTML = `<div class="muted">QR for this clue (print this on the sticker):</div><img src="${qrUrl}" alt="qr" style="margin-top:8px;border-radius:8px;max-width:60%;height:auto">`;
 }
-function drawHearts() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = 'rgba(255,105,180,0.7)';
-  hearts.forEach(h => {
-    ctx.beginPath();
-    const x = h.x, y = h.y, s = h.size;
-    ctx.moveTo(x, y);
-    ctx.bezierCurveTo(x - s/2, y - s/2, x - s, y + s/3, x, y + s);
-    ctx.bezierCurveTo(x + s, y + s/3, x + s/2, y - s/2, x, y);
-    ctx.fill();
-    h.y -= h.speed;
-    if (h.y < -10) h.y = canvas.height + 10;
-  });
-  requestAnimationFrame(drawHearts);
-}
-drawHearts();
 
-/* Music */
-const music = document.getElementById('bgMusic');
-document.getElementById('musicBtn').onclick = () => music.play();
+/* speak alex line using Web Speech API */
+function speakText(text){
+  if(!('speechSynthesis' in window)) { alert('Speech not supported on this device.'); return; }
+  const u = new SpeechSynthesisUtterance(text);
+  u.rate = 0.95;
+  u.pitch = 1.05;
+  u.lang = 'en-US';
+  speechSynthesis.cancel(); // stop other
+  speechSynthesis.speak(u);
+}
+
+/* admin preview list */
+function showAdmin(){
+  const cont = document.getElementById('content');
+  let html = '<div class="label">Preview all clues</div><div class="admin-list">';
+  for(let i=1;i<=10;i++){
+    const d=CLUES[i];
+    html += `<div style="padding:8px;border-bottom:1px dashed #eee"><strong>Clue ${i} — ${d.place}</strong><div style="font-size:14px;margin-top:6px">${d.clue}</div><div style="margin-top:6px"><em>Say:</em> "${d.trigger}"</div></div>`;
+  }
+  html += '</div>';
+  cont.innerHTML = html;
+  document.getElementById('controls').style.display='flex';
+  document.getElementById('qr').innerHTML='';
+}
+
+/* init */
+(function(){
+  const q = getParam('clue');
+  const admin = getParam('admin');
+  if(admin==='true') { showAdmin(); return; }
+  if(q) {
+    renderClue(Number(q));
+  } else {
+    renderClue(null);
+  }
+
+  document.getElementById('speakBtn').onclick = ()=>{
+    const q = getParam('clue');
+    if(!q) return;
+    speakText(CLUES[q].alex);
+  };
+  document.getElementById('nextBtn').onclick = ()=>{
+    const q = Number(getParam('clue') || 0);
+    const nxt = Math.min(10, q+1) || 1;
+    const newUrl = location.origin + location.pathname + '?clue=' + nxt;
+    history.pushState({},'',newUrl);
+    renderClue(nxt);
+  };
+  document.getElementById('allBtn').onclick = ()=>{
+    const newUrl = location.origin + location.pathname + '?admin=true';
+    history.pushState({},'',newUrl);
+    showAdmin();
+  };
+
+  window.addEventListener('popstate', ()=>{
+    const q = getParam('clue'); const admin = getParam('admin');
+    if(admin==='true') showAdmin(); else renderClue(Number(q));
+  });
+})();
 </script>
 </body>
 </html>
