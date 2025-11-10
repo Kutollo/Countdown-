@@ -29,23 +29,23 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     box-shadow: 0 0 30px rgba(255,150,220,0.6);
+    text-align: center;
     position: relative;
   }
 
   h1 {
     font-family: 'Dancing Script', cursive;
     font-size: 2rem;
-    margin: 0;
-    text-align: center;
+    margin: 0 0 10px 0;
   }
 
   p {
     font-size: 1rem;
     line-height: 1.4;
-    margin: 5px 0;
-    text-align: center;
+    margin: 5px 0 20px 0;
   }
 
   button {
@@ -58,7 +58,6 @@
     cursor: pointer;
     box-shadow: 0 0 15px rgba(255,90,190,0.6);
     transition: transform 0.2s ease;
-    margin-top: 10px;
   }
 
   button:hover { transform: scale(1.05); }
@@ -95,7 +94,8 @@
   <!-- Note Section -->
   <div id="noteSection">
     <h1>💌 A Sweet Note</h1>
-    <p>A little sweetness to start… just like you make my mornings better 😘<br><em style="font-family: 'Dancing Script', cursive; color:#9b027f;">– Yours forever 💖</em></p>
+    <p>A little sweetness to start… just like you make my mornings better 😘<br>
+    <em style="font-family: 'Dancing Script', cursive; color:#9b027f;">– Yours forever 💖</em></p>
     <button onclick="showClue()">Next →</button>
   </div>
 
@@ -103,7 +103,6 @@
   <div id="clueSection" class="hidden">
     <h1>🔐 Your Next Clue</h1>
     <p>Look under the place where your legs relax… something soft and playful awaits 😏</p>
-    <button onclick="window.location.href='surprise2.html'">Go Find It 💗</button>
   </div>
 </div>
 
