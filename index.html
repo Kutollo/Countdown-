@@ -1,72 +1,142 @@
-<!DOCTYPE html><html>
+<!DOCTYPE html>
+<html>
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Our 2-Year Anniversary 💖</title>
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <style>
-  body {
+  html, body {
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #ffc6e5, #ff9fdb, #ffb0ec);
     color: #5a0044;
     height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     overflow: hidden;
-  }.container { background: rgba(255, 255, 255, 0.9); padding: 40px; border-radius: 30px; max-width: 500px; text-align: center; box-shadow: 0 0 30px rgba(255, 150, 220, 0.6); animation: fadeIn 1.2s ease; position: relative; }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-h1 { font-family: 'Dancing Script', cursive; font-size: 2.2rem; margin-bottom: 10px; }
+  .container {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 20px;
+    border-radius: 25px;
+    width: 90%;
+    max-width: 480px;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(255, 150, 220, 0.6);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 90vh;
+  }
 
-h2 { margin-top: 0; font-size: 1.3rem; color: #9b027f; }
+  h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+    margin: 0;
+  }
 
-p { font-size: 1rem; line-height: 1.5; }
+  h2 {
+    font-size: 1.2rem;
+    color: #9b027f;
+    margin: 5px 0 15px 0;
+  }
 
-.rules { text-align: left; background: #ffe0f2; padding: 15px; border-radius: 20px; margin: 20px 0; box-shadow: 0 0 10px rgba(255, 150, 220, 0.4); }
+  p {
+    font-size: 1rem;
+    line-height: 1.4;
+    margin: 5px 0;
+  }
 
-button { background: #ff4fb3; color: white; padding: 15px 35px; border-radius: 30px; border: none; cursor: pointer; margin-top: 20px; font-size: 1.1rem; box-shadow: 0 0 15px rgba(255, 90, 190, 0.6); transition: transform 0.2s ease; }
+  .rules {
+    text-align: left;
+    background: #ffe0f2;
+    padding: 10px;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    flex-grow: 1;
+    overflow: hidden;
+  }
 
-button:hover { transform: scale(1.05); }
+  button {
+    background: #ff4fb3;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    box-shadow: 0 0 15px rgba(255, 90, 190, 0.6);
+    transition: transform 0.2s ease;
+    margin-top: 10px;
+  }
 
-.hidden { display: none; }
+  button:hover { transform: scale(1.05); }
 
-@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .hidden { display: none; }
 
-.hearts span { position: absolute; bottom: -10px; color: #ff4fa8; font-size: 1.5rem; animation: float 6s linear infinite; opacity: 0.7; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-@keyframes float { 0% { transform: translateY(0) scale(1); opacity: 0.6; } 50% { opacity: 1; } 100% { transform: translateY(-800px) scale(1.8); opacity: 0; } } </style>
+  /* Floating hearts */
+  .hearts span {
+    position: absolute;
+    bottom: -10px;
+    color: #ff4fa8;
+    font-size: 1.5rem;
+    animation: float 6s linear infinite;
+    opacity: 0.7;
+  }
 
+  @keyframes float {
+    0% { transform: translateY(0) scale(1); opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-800px) scale(1.8); opacity: 0; }
+  }
+
+</style>
 </head>
-<body><div class="hearts">
+<body>
+
+<div class="hearts">
   <span style="left:10%; animation-delay:0s;">💗</span>
   <span style="left:30%; animation-delay:1s;">💖</span>
   <span style="left:50%; animation-delay:2s;">💕</span>
   <span style="left:70%; animation-delay:3s;">💞</span>
   <span style="left:90%; animation-delay:4s;">💘</span>
-</div><div class="container">
-  <h1>Happy 2-Year Anniversary 💖</h1>
-  <h2>My Love, My Heart, My Everything</h2>
-  <p>
-    Today marks two beautiful years of loving you. 🌸 Every moment with you has been sweet, soft, and magical. Tonight, you begin a secret journey crafted just for you.
-  </p>  <div class="rules">
-    <h3>Rules of the Journey 💗</h3>
-    <ul>
-      <li>✨ Each QR unlocks a special surprise.</li>
-      <li>✨ Read the note first before revealing the next clue.</li>
-      <li>✨ Follow each clue carefully to find the next surprise.</li>
-      <li>✨ Enjoy each moment, every smile, every blush. 😘</li>
-    </ul>
-  </div><button onclick="showFirstClue()">Begin the Journey 💗</button>
+</div>
 
-  <div id="firstClue" class="hidden" style="margin-top:20px; font-size:1.1rem;">
-    <h3>🔐 Your First Clue</h3>
-    <p>Start where your head rests at night… a little sweetness is waiting for you 😘</p>
+<div class="container">
+  <div>
+    <h1>Happy 2-Year Anniversary 💖</h1>
+    <h2>My Love, My Heart, My Everything</h2>
+    <p>Today marks two beautiful years of loving you. 🌸 Every moment with you has been sweet, soft, and magical. Tonight, you begin a secret journey crafted just for you.</p>
+    <div class="rules">
+      <h3>Rules of the Journey 💗</h3>
+      <ul>
+        <li>✨ Each QR unlocks a special surprise.</li>
+        <li>✨ Read the note first before revealing the next clue.</li>
+        <li>✨ Follow each clue carefully to find the next surprise.</li>
+        <li>✨ Enjoy each moment, every smile, every blush. 😘</li>
+      </ul>
+    </div>
   </div>
-</div><script>
+  <div>
+    <button onclick="showFirstClue()">Begin the Journey 💗</button>
+    <div id="firstClue" class="hidden" style="margin-top:15px; font-size:1.1rem;">
+      <h3>🔐 Your First Clue</h3>
+      <p>Start where your head rests at night… a little sweetness is waiting for you 😘</p>
+    </div>
+  </div>
+</div>
+
+<script>
 function showFirstClue() {
   document.getElementById('firstClue').classList.remove('hidden');
 }
-</script></body>
+</script>
+
+</body>
 </html>
