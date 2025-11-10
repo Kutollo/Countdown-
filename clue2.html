@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Surprise 💖</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ffd8f0, #ffc2e6);
+    color: #5a0050;
+    min-height: 100vh;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .card {
+    background: rgba(255, 255, 255, 0.85);
+    padding: 30px;
+    border-radius: 25px;
+    max-width: 450px;
+    box-shadow: 0 0 25px rgba(255, 150, 220, 0.6);
+    animation: fadeIn 1s ease;
+  }
+
+  h2 { margin-top:0; }
+  p { font-size: 1.1rem; }
+
+  button {
+    background: #ff4fb3;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    box-shadow: 0 0 10px rgba(255, 90, 190, 0.6);
+    transition: transform 0.2s ease;
+    margin-top: 20px;
+  }
+
+  button:hover { transform: scale(1.05); }
+
+  .hidden { display: none; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h2>💖 A Little Note for You</h2>
+
+  <!-- Step 1: Note -->
+  <div id="noteSection">
+    <p>A little sweetness to start… just like you make my mornings better 😘</p>
+    <button onclick="showClue()">Next →</button>
+  </div>
+
+  <!-- Step 2: Clue -->
+  <div id="clueSection" class="hidden">
+    <h3>🔐 Your Next Surprise Awaits</h3>
+    <p>Look under the place where your legs relax… something soft and playful is waiting 😏</p>
+    <button onclick="window.location.href='surprise2.html'">Go Find It 💗</button>
+  </div>
+</div>
+
+<script>
+function showClue() {
+  document.getElementById('noteSection').classList.add('hidden');
+  document.getElementById('clueSection').classList.remove('hidden');
+}
+</script>
+
+</body>
+</html>
