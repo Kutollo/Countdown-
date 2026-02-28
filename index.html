@@ -3,145 +3,224 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>2-Year Anniversary 💖</title>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<title>MyPinkHeart Turns 21st 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
 <style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #ffc6e5, #ff9fdb, #ffb0ec);
-    color: #5a0044;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
 
-  .container {
-    background: rgba(255,255,255,0.95);
-    width: 90%;
-    max-width: 480px;
-    height: 90%;
-    border-radius: 25px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    box-shadow: 0 0 30px rgba(255,150,220,0.6);
-    position: relative;
-  }
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+overflow:hidden;
+background:url("https://images.unsplash.com/photo-1502780402662-acc01917a918") no-repeat center center/cover;
+}
 
-  h1 {
-    font-family: 'Dancing Script', cursive;
-    font-size: 2rem;
-    margin: 0;
-    text-align: center;
-  }
+.overlay{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(135deg, rgba(255,105,180,0.85), rgba(255,20,147,0.85));
+z-index:0;
+}
 
-  h2 {
-    font-size: 1.2rem;
-    color: #9b027f;
-    margin: 5px 0 15px 0;
-    text-align: center;
-  }
+.container{
+position:relative;
+z-index:1;
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(10px);
+padding:40px;
+border-radius:25px;
+box-shadow:0 15px 35px rgba(0,0,0,0.3);
+max-width:550px;
+width:90%;
+}
 
-  p {
-    font-size: 1rem;
-    line-height: 1.4;
-    margin: 5px 0;
-    text-align: center;
-  }
+h1{font-family:'Great Vibes',cursive;font-size:45px;}
+h2{font-weight:300;margin-bottom:20px;}
 
-  .rules {
-    background: #ffe0f2;
-    border-radius: 20px;
-    padding: 10px;
-    font-size: 0.95rem;
-    flex-grow: 1;
-    overflow-y: auto;
-    margin-bottom: 10px;
-  }
+.countdown{display:flex;justify-content:space-between;margin-top:20px;}
 
-  ul {
-    margin: 0;
-    padding-left: 18px;
-  }
+.time-box{
+background:rgba(255,255,255,0.25);
+padding:15px;
+border-radius:15px;
+width:70px;
+}
 
-  button {
-    background: #ff4fb3;
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 30px;
-    font-size: 1rem;
-    cursor: pointer;
-    box-shadow: 0 0 15px rgba(255,90,190,0.6);
-    transition: transform 0.2s ease;
-  }
+.time-box span{display:block;font-size:28px;font-weight:bold;}
 
-  button:hover { transform: scale(1.05); }
+.message{margin-top:20px;font-size:15px;}
 
-  .hidden { display: none; }
+button{
+margin-top:15px;
+padding:10px 20px;
+border:none;
+border-radius:20px;
+background:#ff69b4;
+color:white;
+cursor:pointer;
+font-weight:bold;
+transition:0.3s;
+}
 
-  .hearts span {
-    position: absolute;
-    bottom: -10px;
-    color: #ff4fa8;
-    font-size: 1.5rem;
-    animation: float 6s linear infinite;
-    opacity: 0.7;
-  }
+button:hover{background:#ff1493;}
 
-  @keyframes float {
-    0% { transform: translateY(0) scale(1); opacity: 0.6; }
-    50% { opacity: 1; }
-    100% { transform: translateY(-800px) scale(1.8); opacity: 0; }
-  }
+.photo{
+margin-top:20px;
+width:100%;
+border-radius:20px;
+box-shadow:0 10px 20px rgba(0,0,0,0.3);
+}
 
+.popup{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%) scale(0);
+background:white;
+color:#ff1493;
+padding:30px;
+border-radius:20px;
+width:90%;
+max-width:400px;
+box-shadow:0 20px 40px rgba(0,0,0,0.4);
+transition:0.4s ease;
+z-index:10;
+}
+
+.popup.active{transform:translate(-50%,-50%) scale(1);}
+
+.heart{
+position:absolute;
+color:white;
+font-size:20px;
+animation:float 6s infinite ease-in;
+opacity:0.7;
+}
+
+@keyframes float{
+0%{transform:translateY(100vh);opacity:0;}
+50%{opacity:1;}
+100%{transform:translateY(-10vh);opacity:0;}
+}
+
+.firework{
+position:absolute;
+width:5px;
+height:5px;
+background:white;
+border-radius:50%;
+animation:explode 1s ease-out forwards;
+}
+
+@keyframes explode{
+to{
+transform:translate(var(--x), var(--y));
+opacity:0;
+}
+}
 </style>
 </head>
 <body>
 
-<div class="hearts">
-  <span style="left:10%; animation-delay:0s;">💗</span>
-  <span style="left:30%; animation-delay:1s;">💖</span>
-  <span style="left:50%; animation-delay:2s;">💕</span>
-  <span style="left:70%; animation-delay:3s;">💞</span>
-  <span style="left:90%; animation-delay:4s;">💘</span>
-</div>
+<div class="overlay"></div>
 
 <div class="container">
-  <div>
-    <h1>Happy 2-Year Anniversary 💖</h1>
-    <h2>My Love, My Heart, My Everything</h2>
-    <p>Today marks two beautiful years of loving you. 🌸 Every moment with you has been sweet, soft, and magical. Tonight, you begin a secret journey crafted just for you.</p>
-    
-    <div class="rules">
-      <h3>Rules of the Journey 💗</h3>
-      <ul>
-        <li>✨ Each QR unlocks a special surprise.</li>
-        <li>✨ Read the note first before revealing the next clue.</li>
-        <li>✨ Follow each clue carefully to find the next surprise.</li>
-        <li>✨ Enjoy each moment, every smile, every blush. 😘</li>
-      </ul>
-    </div>
-  </div>
-  
-  <div>
-    <button onclick="showFirstClue()">Begin the Journey 💗</button>
-    <div id="firstClue" class="hidden" style="margin-top:15px; font-size:1.1rem;">
-      <h3>🔐 Your First Clue</h3>
-      <p>Start where your head rests at night… a little sweetness is waiting for you 😘</p>
-    </div>
-  </div>
+<h1>Tiisetso Desiree Mnisi 💖</h1>
+<h2>Countdown to Your 21st Birthday 🎂</h2>
+
+<div class="countdown">
+<div class="time-box"><span id="days">0</span><small>Days</small></div>
+<div class="time-box"><span id="hours">0</span><small>Hours</small></div>
+<div class="time-box"><span id="minutes">0</span><small>Minutes</small></div>
+<div class="time-box"><span id="seconds">0</span><small>Seconds</small></div>
 </div>
 
+<div class="message">
+Every second brings me closer to celebrating the most beautiful woman in my life.  
+I love you endlessly, Tiisetso 💕
+</div>
+
+<img src="ourphoto.jpg" class="photo" alt="Our Love">
+
+<button onclick="openLetter()">Open Secret Love Letter 💌</button>
+<button onclick="showProposal()">Will You Stay With Me Forever? 💍</button>
+</div>
+
+<div class="popup" id="letter">
+<h3 style="font-family:'Great Vibes',cursive;font-size:30px;">My Dearest Tiisetso 💖</h3>
+<p>
+From the day you walked into my life, everything changed.  
+You are my peace, my happiness, my answered prayer.  
+Watching you turn 21 is a blessing because I get to witness your growth, your beauty, and your strength.  
+No matter where life takes us, I promise to support you, protect you, and love you with everything in me.  
+You are my forever, Tiisetso Desiree Mnisi. 💕
+</p>
+<button onclick="closeLetter()">Close</button>
+</div>
+
+<audio autoplay loop>
+<source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+</audio>
+
 <script>
-function showFirstClue() {
-  document.getElementById('firstClue').classList.remove('hidden');
+const birthday=new Date("March 6, 2026 00:00:00").getTime();
+
+setInterval(()=>{
+const now=new Date().getTime();
+const distance=birthday-now;
+
+if(distance<0){
+document.querySelector(".container").innerHTML=
+"<h1>Happy 21st Birthday Tiisetso Desiree Mnisi 💖🎉</h1><p>You are my greatest blessing. I love you forever.</p>";
+launchFireworks();
+return;
+}
+
+document.getElementById("days").innerText=Math.floor(distance/(1000*60*60*24));
+document.getElementById("hours").innerText=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+document.getElementById("minutes").innerText=Math.floor((distance%(1000*60*60))/(1000*60));
+document.getElementById("seconds").innerText=Math.floor((distance%(1000*60))/1000);
+},1000);
+
+function createHeart(){
+const heart=document.createElement("div");
+heart.classList.add("heart");
+heart.innerHTML="💖";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=Math.random()*20+10+"px";
+heart.style.animationDuration=Math.random()*3+3+"s";
+document.body.appendChild(heart);
+setTimeout(()=>{heart.remove();},6000);
+}
+setInterval(createHeart,500);
+
+function openLetter(){document.getElementById("letter").classList.add("active");}
+function closeLetter(){document.getElementById("letter").classList.remove("active");}
+
+function showProposal(){
+alert("I choose you today, tomorrow, and forever. 💍 Will you stay with me always?");
+}
+
+function launchFireworks(){
+for(let i=0;i<100;i++){
+let fw=document.createElement("div");
+fw.classList.add("firework");
+fw.style.left="50%";
+fw.style.top="50%";
+fw.style.setProperty('--x',(Math.random()-0.5)*500+"px");
+fw.style.setProperty('--y',(Math.random()-0.5)*500+"px");
+document.body.appendChild(fw);
+setTimeout(()=>{fw.remove();},1000);
+}
 }
 </script>
 
