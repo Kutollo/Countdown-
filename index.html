@@ -3,159 +3,179 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MyPinkHeart Turns 21 💖</title>
+<title>MyPinkHeart Turns 21st 💖</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
 
 body{
-min-height:100vh;
-background:linear-gradient(135deg,#ff69b4,#ff1493);
-display:flex;
-justify-content:center;
-align-items:flex-start;
-overflow-x:hidden;
-padding:30px 0;
-color:white;
-text-align:center;
+  min-height:100vh; /* allow scrolling */
+  display:flex;
+  justify-content:center;
+  align-items:flex-start; /* start from top */
+  text-align:center;
+  color:white;
+  background:url("https://images.unsplash.com/photo-1502780402662-acc01917a918") no-repeat center center/cover;
+  padding:20px 0;
+  overflow-x:hidden;
+}
+
+.overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:linear-gradient(135deg, rgba(255,105,180,0.85), rgba(255,20,147,0.85));
+  z-index:0;
 }
 
 .container{
-background:rgba(255,255,255,0.15);
-backdrop-filter:blur(12px);
-padding:25px;
-border-radius:25px;
-width:95%;
-max-width:600px;
-animation:fadeIn 2s ease;
-}
-
-@keyframes fadeIn{
-from{opacity:0;transform:translateY(30px);}
-to{opacity:1;transform:translateY(0);}
+  position:relative;
+  z-index:1;
+  background:rgba(255,255,255,0.15);
+  backdrop-filter:blur(10px);
+  padding:25px;
+  border-radius:25px;
+  box-shadow:0 15px 35px rgba(0,0,0,0.3);
+  max-width:600px;
+  width:95%;
+  margin-top:40px;
 }
 
 h1{
-font-family:'Great Vibes',cursive;
-font-size:40px;
+  font-family:'Great Vibes',cursive;
+  font-size:38px;
+}
+
+h2{
+  font-weight:300;
+  margin-bottom:20px;
+  font-size:18px;
 }
 
 .countdown{
-display:flex;
-flex-wrap:wrap;
-gap:10px;
-margin-top:20px;
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap; /* makes it responsive */
+  gap:10px;
+  margin-top:20px;
 }
 
 .time-box{
-flex:1 1 70px;
-background:rgba(255,255,255,0.25);
-padding:12px;
-border-radius:15px;
+  flex:1 1 70px;
+  background:rgba(255,255,255,0.25);
+  padding:12px;
+  border-radius:15px;
 }
 
 .time-box span{
-display:block;
-font-size:24px;
-font-weight:bold;
+  display:block;
+  font-size:24px;
+  font-weight:bold;
 }
 
 .message{
-margin-top:20px;
-font-size:14px;
-min-height:50px;
+  margin-top:20px;
+  font-size:14px;
+  line-height:1.6;
 }
 
 button{
-margin-top:12px;
-padding:12px;
-border:none;
-border-radius:25px;
-background:white;
-color:#ff1493;
-font-weight:bold;
-cursor:pointer;
-width:100%;
-transition:0.3s;
+  margin-top:15px;
+  padding:12px 20px;
+  border:none;
+  border-radius:25px;
+  background:#ff69b4;
+  color:white;
+  cursor:pointer;
+  font-weight:bold;
+  width:100%; /* full width for phone */
+  transition:0.3s;
 }
 
 button:hover{
-transform:scale(1.05);
+  background:#ff1493;
+}
+
+.photo{
+  margin-top:20px;
+  width:100%;
+  border-radius:20px;
+  box-shadow:0 10px 20px rgba(0,0,0,0.3);
 }
 
 .popup{
-position:fixed;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%) scale(0);
-background:white;
-color:#ff1493;
-padding:25px;
-border-radius:20px;
-width:90%;
-max-width:350px;
-transition:0.4s;
-z-index:10;
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(0);
+  background:white;
+  color:#ff1493;
+  padding:25px;
+  border-radius:20px;
+  width:90%;
+  max-width:400px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.4);
+  transition:0.4s ease;
+  z-index:10;
 }
 
 .popup.active{
-transform:translate(-50%,-50%) scale(1);
+  transform:translate(-50%,-50%) scale(1);
 }
 
-.balloon{
-position:absolute;
-bottom:-100px;
-font-size:30px;
-animation:float 8s infinite ease-in;
+.heart{
+  position:absolute;
+  color:white;
+  font-size:20px;
+  animation:float 6s infinite ease-in;
+  opacity:0.7;
 }
 
 @keyframes float{
-0%{transform:translateY(0);}
-100%{transform:translateY(-120vh);}
+  0%{transform:translateY(100vh);opacity:0;}
+  50%{opacity:1;}
+  100%{transform:translateY(-10vh);opacity:0;}
 }
 
-.confetti{
-position:absolute;
-width:8px;
-height:8px;
-background:white;
-top:0;
-animation:fall 3s linear forwards;
+.firework{
+  position:absolute;
+  width:5px;
+  height:5px;
+  background:white;
+  border-radius:50%;
+  animation:explode 1s ease-out forwards;
 }
 
-@keyframes fall{
-to{transform:translateY(100vh);opacity:0;}
+@keyframes explode{
+  to{
+    transform:translate(var(--x), var(--y));
+    opacity:0;
+  }
 }
 
-.music-btn{
-position:fixed;
-bottom:20px;
-right:20px;
-background:white;
-color:#ff1493;
-border-radius:50%;
-width:55px;
-height:55px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:20px;
-cursor:pointer;
-box-shadow:0 10px 20px rgba(0,0,0,0.3);
-}
-
+/* Small screen adjustments */
 @media(max-width:400px){
-h1{font-size:30px;}
+  h1{font-size:30px;}
+  .time-box span{font-size:20px;}
 }
 </style>
 </head>
 <body>
 
+<div class="overlay"></div>
+
 <div class="container">
 <h1>MyPinkHeart 💖</h1>
-<h3>Countdown to 21 🎂</h3>
+<h2>Countdown to Your 21st Birthday 🎂</h2>
 
 <div class="countdown">
 <div class="time-box"><span id="days">0</span><small>Days</small></div>
@@ -164,26 +184,28 @@ h1{font-size:30px;}
 <div class="time-box"><span id="seconds">0</span><small>Seconds</small></div>
 </div>
 
-<div class="message" id="loveMessage">
-You are my answered prayer 💕
+<div class="message">
+Every second brings me closer to celebrating the most beautiful woman in my life.  
+I love you endlessly, Tiisetso 💕
 </div>
 
-<button onclick="nextMessage()">Next Love Note 💌</button>
-<button onclick="openProposal()">Will You Stay With Me Forever? 💍</button>
+<img src="ourphoto.jpg" class="photo" alt="Our Love">
+
+<button onclick="openLetter()">Open Secret Love Letter 💌</button>
+<button onclick="showProposal()">Will You Stay With Me Forever? 💍</button>
 </div>
 
-<div class="popup" id="proposal">
-<h3>Tiisetso 💖</h3>
-<p>Will you stay with me forever?</p>
-<button onclick="sayYes()">YES 😍</button>
-<button id="noBtn">NO 🙈</button>
+<div class="popup" id="letter">
+<h3 style="font-family:'Great Vibes',cursive;font-size:26px;">My Dearest Tiisetso 💖</h3>
+<p style="margin-top:10px; line-height:1.6;">
+From the day you walked into my life, everything changed.  
+You are my peace, my happiness, my answered prayer.  
+Watching you turn 21 is a blessing because I get to witness your growth, your beauty and your strength.  
+No matter where life takes us, I promise to support you, protect you and love you with everything in me.  
+You are my forever, Tiisetso Desiree Mnisi. 💕
+</p>
+<button onclick="closeLetter()">Close</button>
 </div>
-
-<div class="music-btn" onclick="toggleMusic()">🎵</div>
-
-<audio id="bgMusic" loop>
-<source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
-</audio>
 
 <script>
 const birthday=new Date("March 6, 2026 00:00:00").getTime();
@@ -194,8 +216,8 @@ const distance=birthday-now;
 
 if(distance<0){
 document.querySelector(".container").innerHTML=
-"<h1>Happy 21st Birthday Tiisetso 💖🎉</h1><p>You are my forever.</p>";
-launchConfetti();
+"<h1>Happy 21st Birthday Tiisetso Desiree Mnisi 💖🎉</h1><p>You are my greatest blessing. I love you forever.</p>";
+launchFireworks();
 return;
 }
 
@@ -205,59 +227,36 @@ document.getElementById("minutes").innerText=Math.floor((distance%(1000*60*60))/
 document.getElementById("seconds").innerText=Math.floor((distance%(1000*60))/1000);
 },1000);
 
-const messages=[
-"You are my answered prayer 💕",
-"Watching you grow is my blessing 🌸",
-"21 looks perfect on you 😍",
-"I choose you every day 💍",
-"My forever starts with you 💖"
-];
+function createHeart(){
+const heart=document.createElement("div");
+heart.classList.add("heart");
+heart.innerHTML="💖";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=Math.random()*20+10+"px";
+heart.style.animationDuration=Math.random()*3+3+"s";
+document.body.appendChild(heart);
+setTimeout(()=>{heart.remove();},6000);
+}
+setInterval(createHeart,800);
 
-let index=0;
-function nextMessage(){
-index=(index+1)%messages.length;
-document.getElementById("loveMessage").innerText=messages[index];
+function openLetter(){document.getElementById("letter").classList.add("active");}
+function closeLetter(){document.getElementById("letter").classList.remove("active");}
+
+function showProposal(){
+alert("I choose you today, tomorrow and forever. 💍 Will you stay with me always?");
 }
 
-function openProposal(){
-document.getElementById("proposal").classList.add("active");
-}
-
-function sayYes(){
-alert("You just made me the happiest man alive 💖");
-launchConfetti();
-}
-
-document.getElementById("noBtn").addEventListener("mouseover",function(){
-this.style.position="absolute";
-this.style.left=Math.random()*200+"px";
-this.style.top=Math.random()*200+"px";
-});
-
-function launchConfetti(){
+function launchFireworks(){
 for(let i=0;i<100;i++){
-let c=document.createElement("div");
-c.classList.add("confetti");
-c.style.left=Math.random()*100+"vw";
-c.style.background=`hsl(${Math.random()*360},100%,70%)`;
-document.body.appendChild(c);
-setTimeout(()=>{c.remove();},3000);
+let fw=document.createElement("div");
+fw.classList.add("firework");
+fw.style.left="50%";
+fw.style.top="50%";
+fw.style.setProperty('--x',(Math.random()-0.5)*500+"px");
+fw.style.setProperty('--y',(Math.random()-0.5)*500+"px");
+document.body.appendChild(fw);
+setTimeout(()=>{fw.remove();},1000);
 }
-}
-
-for(let i=0;i<21;i++){
-let balloon=document.createElement("div");
-balloon.classList.add("balloon");
-balloon.innerHTML="🎈";
-balloon.style.left=Math.random()*100+"vw";
-balloon.style.animationDuration=Math.random()*5+5+"s";
-document.body.appendChild(balloon);
-}
-
-function toggleMusic(){
-const music=document.getElementById("bgMusic");
-if(music.paused){music.play();}
-else{music.pause();}
 }
 </script>
 
