@@ -8,164 +8,168 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Poppins',sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
 
 body{
-  min-height:100vh; /* allow scrolling */
-  display:flex;
-  justify-content:center;
-  align-items:flex-start; /* start from top */
-  text-align:center;
-  color:white;
-  background:url("https://images.unsplash.com/photo-1502780402662-acc01917a918") no-repeat center center/cover;
-  padding:20px 0;
-  overflow-x:hidden;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:flex-start;
+text-align:center;
+color:white;
+background:url("https://images.unsplash.com/photo-1502780402662-acc01917a918") no-repeat center center/cover;
+padding:30px 0;
+overflow-x:hidden;
 }
 
 .overlay{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:linear-gradient(135deg, rgba(255,105,180,0.85), rgba(255,20,147,0.85));
-  z-index:0;
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:linear-gradient(135deg, rgba(255,105,180,0.85), rgba(255,20,147,0.85));
+z-index:0;
 }
 
 .container{
-  position:relative;
-  z-index:1;
-  background:rgba(255,255,255,0.15);
-  backdrop-filter:blur(10px);
-  padding:25px;
-  border-radius:25px;
-  box-shadow:0 15px 35px rgba(0,0,0,0.3);
-  max-width:600px;
-  width:95%;
-  margin-top:40px;
+position:relative;
+z-index:1;
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(15px);
+padding:25px;
+border-radius:25px;
+box-shadow:0 15px 35px rgba(0,0,0,0.3);
+max-width:600px;
+width:95%;
+animation:fadeIn 1.5s ease;
+}
+
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;transform:translateY(0);}
 }
 
 h1{
-  font-family:'Great Vibes',cursive;
-  font-size:38px;
+font-family:'Great Vibes',cursive;
+font-size:38px;
 }
 
-h2{
-  font-weight:300;
-  margin-bottom:20px;
-  font-size:18px;
-}
+h2{font-weight:300;margin-bottom:20px;font-size:18px;}
 
 .countdown{
-  display:flex;
-  justify-content:space-between;
-  flex-wrap:wrap; /* makes it responsive */
-  gap:10px;
-  margin-top:20px;
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+justify-content:space-between;
 }
 
 .time-box{
-  flex:1 1 70px;
-  background:rgba(255,255,255,0.25);
-  padding:12px;
-  border-radius:15px;
+flex:1 1 70px;
+background:rgba(255,255,255,0.25);
+padding:12px;
+border-radius:15px;
 }
 
-.time-box span{
-  display:block;
-  font-size:24px;
-  font-weight:bold;
-}
+.time-box span{display:block;font-size:24px;font-weight:bold;}
 
 .message{
-  margin-top:20px;
-  font-size:14px;
-  line-height:1.6;
+margin-top:20px;
+font-size:14px;
+line-height:1.6;
+min-height:80px;
 }
 
 button{
-  margin-top:15px;
-  padding:12px 20px;
-  border:none;
-  border-radius:25px;
-  background:#ff69b4;
-  color:white;
-  cursor:pointer;
-  font-weight:bold;
-  width:100%; /* full width for phone */
-  transition:0.3s;
+margin-top:12px;
+padding:12px;
+border:none;
+border-radius:25px;
+background:#ff69b4;
+color:white;
+cursor:pointer;
+font-weight:bold;
+width:100%;
+transition:0.3s;
 }
 
-button:hover{
-  background:#ff1493;
-}
+button:hover{background:#ff1493;}
 
 .photo{
-  margin-top:20px;
-  width:100%;
-  border-radius:20px;
-  box-shadow:0 10px 20px rgba(0,0,0,0.3);
+margin-top:20px;
+width:100%;
+border-radius:20px;
+box-shadow:0 10px 20px rgba(0,0,0,0.3);
 }
 
+/* POPUPS */
 .popup{
-  position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%) scale(0);
-  background:white;
-  color:#ff1493;
-  padding:25px;
-  border-radius:20px;
-  width:90%;
-  max-width:400px;
-  box-shadow:0 20px 40px rgba(0,0,0,0.4);
-  transition:0.4s ease;
-  z-index:10;
+position:fixed;
+top:50%;left:50%;
+transform:translate(-50%,-50%) scale(0);
+background:white;
+color:#ff1493;
+padding:25px;
+border-radius:20px;
+width:90%;
+max-width:400px;
+box-shadow:0 20px 40px rgba(0,0,0,0.4);
+transition:0.4s ease;
+z-index:10;
 }
 
-.popup.active{
-  transform:translate(-50%,-50%) scale(1);
+.popup.active{transform:translate(-50%,-50%) scale(1);}
+
+.popup button{
+width:auto;
+margin:10px;
+padding:10px 20px;
 }
 
+.no-btn{
+position:absolute;
+}
+
+/* FLOATING HEARTS */
 .heart{
-  position:absolute;
-  color:white;
-  font-size:20px;
-  animation:float 6s infinite ease-in;
-  opacity:0.7;
+position:absolute;
+color:white;
+font-size:20px;
+animation:float 6s infinite ease-in;
+opacity:0.7;
 }
 
 @keyframes float{
-  0%{transform:translateY(100vh);opacity:0;}
-  50%{opacity:1;}
-  100%{transform:translateY(-10vh);opacity:0;}
+0%{transform:translateY(100vh);opacity:0;}
+50%{opacity:1;}
+100%{transform:translateY(-10vh);opacity:0;}
 }
 
+/* CONFETTI */
+.confetti{
+position:fixed;
+width:8px;
+height:14px;
+top:0;
+opacity:0.9;
+animation:fall linear forwards;
+}
+
+@keyframes fall{
+to{
+transform:translateY(100vh) rotate(720deg);
+opacity:0;
+}
+}
+
+/* FIREWORKS */
 .firework{
-  position:absolute;
-  width:5px;
-  height:5px;
-  background:white;
-  border-radius:50%;
-  animation:explode 1s ease-out forwards;
+position:absolute;
+width:5px;height:5px;
+background:white;border-radius:50%;
+animation:explode 1s ease-out forwards;
 }
 
 @keyframes explode{
-  to{
-    transform:translate(var(--x), var(--y));
-    opacity:0;
-  }
-}
-
-/* Small screen adjustments */
-@media(max-width:400px){
-  h1{font-size:30px;}
-  .time-box span{font-size:20px;}
+to{transform:translate(var(--x), var(--y));opacity:0;}
 }
 </style>
 </head>
@@ -184,30 +188,33 @@ button:hover{
 <div class="time-box"><span id="seconds">0</span><small>Seconds</small></div>
 </div>
 
-<div class="message">
-Every second brings me closer to celebrating the most beautiful woman in my life.  
-I love you endlessly, Tiisetso 💕
-</div>
+<div class="message" id="dailyMessage"></div>
 
 <img src="ourphoto.jpg" class="photo" alt="Our Love">
 
-<button onclick="openLetter()">Open Secret Love Letter 💌</button>
-<button onclick="showProposal()">Will You Stay With Me Forever? 💍</button>
+<button onclick="openLetter()">Open Today’s Love Letter 💌</button>
+<button onclick="openProposal()">Special Question 💍</button>
 </div>
 
+<!-- LOVE LETTER -->
 <div class="popup" id="letter">
-<h3 style="font-family:'Great Vibes',cursive;font-size:26px;">My Dearest Tiisetso 💖</h3>
-<p style="margin-top:10px; line-height:1.6;">
-From the day you walked into my life, everything changed.  
-You are my peace, my happiness, my answered prayer.  
-Watching you turn 21 is a blessing because I get to witness your growth, your beauty and your strength.  
-No matter where life takes us, I promise to support you, protect you and love you with everything in me.  
-You are my forever, Tiisetso Desiree Mnisi. 💕
-</p>
+<h3 style="font-family:'Great Vibes',cursive;font-size:26px;">My Beautiful Tiisetso 💖</h3>
+<p id="letterText" style="margin-top:10px; line-height:1.6;"></p>
 <button onclick="closeLetter()">Close</button>
 </div>
 
+<!-- PROPOSAL -->
+<div class="popup" id="proposal">
+<h3 style="font-family:'Great Vibes',cursive;font-size:26px;">One Question 😘</h3>
+<p id="proposalQuestion"></p>
+<div style="position:relative;height:120px;">
+<button onclick="sayYes()">YES 💖</button>
+<button class="no-btn" id="noBtn">No 😅</button>
+</div>
+</div>
+
 <script>
+// COUNTDOWN
 const birthday=new Date("March 6, 2026 00:00:00").getTime();
 
 setInterval(()=>{
@@ -216,7 +223,7 @@ const distance=birthday-now;
 
 if(distance<0){
 document.querySelector(".container").innerHTML=
-"<h1>Happy 21st Birthday Tiisetso Desiree Mnisi 💖🎉</h1><p>You are my greatest blessing. I love you forever.</p>";
+"<h1>Happy 21st Birthday Tiisetso Desiree Mnisi 💖🎉</h1><p>You are my forever blessing.</p>";
 launchFireworks();
 return;
 }
@@ -227,6 +234,92 @@ document.getElementById("minutes").innerText=Math.floor((distance%(1000*60*60))/
 document.getElementById("seconds").innerText=Math.floor((distance%(1000*60))/1000);
 },1000);
 
+// DAILY MESSAGE
+const notes=[
+"Another day closer to celebrating your beautiful soul. 💕",
+"Your smile is still my favorite thing in this world. 😘",
+"I fall for you again every single day. 💖",
+"You are my peace in a loud world. 🌸",
+"21 looks powerful on you already. 🔥"
+];
+document.getElementById("dailyMessage").innerText=
+notes[new Date().getDate()%notes.length];
+
+// TYPEWRITER EFFECT
+function typeWriterEffect(text, elementId, speed){
+const element=document.getElementById(elementId);
+element.innerHTML="";
+let i=0;
+function typing(){
+if(i<text.length){
+if(text.charAt(i)==="\n"){
+element.innerHTML+="<br><br>";
+}else{
+element.innerHTML+=text.charAt(i);
+}
+i++;
+setTimeout(typing,speed);
+}
+}
+typing();
+}
+
+function openLetter(){
+const message=
+"My Beautiful Tiisetso 💖\n\n"+
+"You are my best decision, my answered prayer and my forever love.\n"+
+"I choose you today, tomorrow and always.\n\n"+
+"You will forever be my MyPinkHeart. 💕";
+
+typeWriterEffect(message,"letterText",40);
+document.getElementById("letter").classList.add("active");
+}
+
+function closeLetter(){
+document.getElementById("letter").classList.remove("active");
+}
+
+// PROPOSAL
+const questions=[
+"Will you keep building our love story with me? 💖",
+"Can I keep loving you forever? 😘",
+"Will you always be my MyPinkHeart? 💕"
+];
+
+function openProposal(){
+document.getElementById("proposalQuestion").innerText=
+questions[Math.floor(Math.random()*questions.length)];
+document.getElementById("proposal").classList.add("active");
+}
+
+function sayYes(){
+document.getElementById("proposal").classList.remove("active");
+launchConfetti();
+}
+
+// RUNAWAY NO BUTTON
+const noBtn=document.getElementById("noBtn");
+noBtn.addEventListener("mouseover",()=>{
+noBtn.style.top=Math.random()*80+"px";
+noBtn.style.left=Math.random()*200+"px";
+});
+
+// CONFETTI
+function launchConfetti(){
+const colors=["#ff69b4","#ff1493","#ffffff","#ffd1f0","#ff85c1"];
+for(let i=0;i<150;i++){
+let confetti=document.createElement("div");
+confetti.classList.add("confetti");
+confetti.style.left=Math.random()*100+"vw";
+confetti.style.backgroundColor=
+colors[Math.floor(Math.random()*colors.length)];
+confetti.style.animationDuration=(Math.random()*3+2)+"s";
+document.body.appendChild(confetti);
+setTimeout(()=>{confetti.remove();},5000);
+}
+}
+
+// FLOATING HEARTS
 function createHeart(){
 const heart=document.createElement("div");
 heart.classList.add("heart");
@@ -239,13 +332,7 @@ setTimeout(()=>{heart.remove();},6000);
 }
 setInterval(createHeart,800);
 
-function openLetter(){document.getElementById("letter").classList.add("active");}
-function closeLetter(){document.getElementById("letter").classList.remove("active");}
-
-function showProposal(){
-alert("I choose you today, tomorrow and forever. 💍 Will you stay with me always?");
-}
-
+// FIREWORKS
 function launchFireworks(){
 for(let i=0;i<100;i++){
 let fw=document.createElement("div");
