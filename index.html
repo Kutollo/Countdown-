@@ -198,7 +198,7 @@ h1{font-size:30px;}
 
 <img src="ourphoto.jpg" class="photo" alt="Our Love">
 
-<button onclick="openLetter()">Open 6-Day Countdown Letter 💌</button>
+<button onclick="openLetter()">Open 4-Day Countdown Letter 💌</button>
 <button onclick="showExcitement()">I Can’t Wait! 😍💖</button>
 </div>
 
@@ -220,7 +220,7 @@ const distance=birthday-now;
 
 if(distance<0){
 document.querySelector(".container").innerHTML=
-"<h1>Happy 21st Birthday Tiisetso Desiree Mnisi 💖🎉</h1><p>The big day is here! You’re unstoppable, glowing, and my favorite human ever. 💕✨</p>";
+"<h1>Happy 21st Birthday Tiisetso Desiree Mnisi 💖🎉</h1><p>The big day is here! I can’t wait to see you in May/June and celebrate all your amazing 21 years together! 💕✨</p>";
 launchFireworks();
 return;
 }
@@ -257,14 +257,14 @@ document.getElementById("typingText").innerHTML="";
 
 // Excitement button alert
 function showExcitement(){
-alert("Only 6 days to go!! 🎉💖 I’m already imagining your smile, your laugh, your glow… Tiisetso, you’re my favorite part of every day! 😍✨");
+alert("Only 4 days left!! 🎉💖 I’m imagining your smile, your laugh, and our time together in May/June… Tiisetso, you’re my favorite part of every day! 😍✨");
 }
 
-// Typing effect for 6-day countdown message
-const countdownMsg = `Just 6 more days until my favorite human turns 21 🎉💖!
-I can’t wait to shower you with hugs, kisses, and way too much cake 😏🍰
-Tiisetso, get ready… the countdown to the cutest, most magical celebration of the year has begun! 💕✨
-P.S. I might start dancing with excitement any second now 💃😂`;
+// Typing effect for 4-day countdown message
+const countdownMsg = `Only 4 days to go until my favorite human turns 21 🎉💖!
+Even though miles separate us right now, I can already feel the excitement building…
+I’m counting down every second until I can finally hug you tight in May/June 😏💞
+Tiisetso, get ready… your 21st is going to be legendary, and I’ll be there in spirit (and soon enough in person!) 💕✨`;
 
 let j = 0;
 function typeCountdown() {
@@ -282,15 +282,18 @@ function typeCountdown() {
 }
 typeCountdown(); // Start on page load
 
-// Typing effect for letter popup
+// Typing effect for popup letter
 const letterMsg = `Tiisetso Desiree Mnisi 💖
 
-Just 6 days away from your 21st… the excitement is real!
+Just 4 days left until your 21st… and I’m already bursting with excitement!  
 
-I can’t wait to see your smile, hear your laugh, and celebrate YOU.
-Every day with you feels like magic ✨
-Get ready for hugs, kisses, and endless surprises 💕
-I’m counting down every second until your special day!`;
+Being apart is tough, but thinking about seeing you in May and June keeps me going 😍  
+Every laugh, every smile, every memory we share feels even more precious now.  
+
+I can’t wait to celebrate YOU — your beauty, your heart, your 21 amazing years.  
+Get ready for endless hugs, kisses, and all the love I’ve been saving for you 💕✨  
+
+Until then, know that every second apart makes me love you more. 💖`;
 
 let i = 0;
 function startTypingLetter(){
@@ -323,4 +326,4 @@ setTimeout(()=>{fw.remove();},1000);
 </script>
 
 </body>
-</html>
+  </html>
