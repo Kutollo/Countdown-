@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MyPinkHeart Countdown 💖</title>
+<title>MyPinkHeart Turns 21 💖</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
 
@@ -24,8 +24,10 @@ overflow-x:hidden;
 
 .overlay{
 position:fixed;
-top:0; left:0;
-width:100%; height:100%;
+top:0;
+left:0;
+width:100%;
+height:100%;
 background:linear-gradient(135deg, rgba(255,105,180,0.85), rgba(255,20,147,0.85));
 z-index:0;
 }
@@ -43,8 +45,16 @@ width:95%;
 margin-top:40px;
 }
 
-h1{font-family:'Great Vibes',cursive;font-size:38px;}
-h2{font-weight:300;margin-bottom:20px;font-size:18px;}
+h1{
+font-family:'Great Vibes',cursive;
+font-size:38px;
+}
+
+h2{
+font-weight:300;
+margin-bottom:20px;
+font-size:18px;
+}
 
 .countdown{
 display:flex;
@@ -61,9 +71,18 @@ padding:12px;
 border-radius:15px;
 }
 
-.time-box span{display:block;font-size:24px;font-weight:bold;}
+.time-box span{
+display:block;
+font-size:24px;
+font-weight:bold;
+}
 
-.message{margin-top:20px;font-size:14px;line-height:1.6;}
+.message{
+margin-top:20px;
+font-size:14px;
+line-height:1.6;
+min-height:80px;
+}
 
 button{
 margin-top:15px;
@@ -78,7 +97,9 @@ width:100%;
 transition:0.3s;
 }
 
-button:hover{background:#ff1493;}
+button:hover{
+background:#ff1493;
+}
 
 .photo{
 margin-top:20px;
@@ -88,19 +109,26 @@ box-shadow:0 10px 20px rgba(0,0,0,0.3);
 }
 
 .popup{
-position:fixed; top:50%; left:50%;
+position:fixed;
+top:50%;
+left:50%;
 transform:translate(-50%,-50%) scale(0);
-background:white; color:#ff1493;
+background:white;
+color:#ff1493;
 padding:25px;
 border-radius:20px;
-width:90%; max-width:400px;
+width:90%;
+max-width:400px;
 box-shadow:0 20px 40px rgba(0,0,0,0.4);
 transition:0.4s ease;
 z-index:10;
-max-height:80vh; overflow-y:auto;
+max-height:80vh;
+overflow-y:auto;
 }
 
-.popup.active{transform:translate(-50%,-50%) scale(1);}
+.popup.active{
+transform:translate(-50%,-50%) scale(1);
+}
 
 .heart{
 position:absolute;
@@ -140,9 +168,15 @@ animation:blink 1s infinite;
 margin-left:3px;
 }
 
-@keyframes blink{0%,50%,100%{opacity:1;}25%,75%{opacity:0;}}
+@keyframes blink{
+0%,50%,100%{opacity:1;}
+25%,75%{opacity:0;}
+}
 
-@media(max-width:400px){h1{font-size:30px;} .time-box span{font-size:20px;}}
+@media(max-width:400px){
+h1{font-size:30px;}
+.time-box span{font-size:20px;}
+}
 </style>
 </head>
 <body>
@@ -160,31 +194,36 @@ margin-left:3px;
 <div class="time-box"><span id="seconds">0</span><small>Seconds</small></div>
 </div>
 
-<div class="message">
-6 days to go! I’m already planning how to spoil you silly, Tiisetso 💕
-</div>
+<div class="message" id="countdownMessage"></div>
 
 <img src="ourphoto.jpg" class="photo" alt="Our Love">
 
-<button onclick="openLetter()">Open a Naughty Little Note 💌</button>
-<button onclick="showQuestion()">A Teasing Question 😏</button>
+<button onclick="openLetter()">Open 6-Day Countdown Letter 💌</button>
+<button onclick="showExcitement()">I Can’t Wait! 😍💖</button>
 </div>
 
 <div class="popup" id="letter">
-<h3 style="font-family:'Great Vibes',cursive;font-size:26px;">
-A 6-Day Countdown 💖
-</h3>
+<h3 style="font-family:'Great Vibes',cursive;font-size:26px;">Counting Down the Magic ✨</h3>
 <p id="typingText" style="margin-top:10px; line-height:1.7;"></p>
 <span class="cursor"></span>
 <button onclick="closeLetter()">Close 💕</button>
 </div>
 
 <script>
+// Birthday countdown date
 const birthday=new Date("March 6, 2026 00:00:00").getTime();
 
+// Update countdown every second
 setInterval(()=>{
 const now=new Date().getTime();
 const distance=birthday-now;
+
+if(distance<0){
+document.querySelector(".container").innerHTML=
+"<h1>Happy 21st Birthday Tiisetso Desiree Mnisi 💖🎉</h1><p>The big day is here! You’re unstoppable, glowing, and my favorite human ever. 💕✨</p>";
+launchFireworks();
+return;
+}
 
 document.getElementById("days").innerText=Math.floor(distance/(1000*60*60*24));
 document.getElementById("hours").innerText=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
@@ -192,6 +231,7 @@ document.getElementById("minutes").innerText=Math.floor((distance%(1000*60*60))/
 document.getElementById("seconds").innerText=Math.floor((distance%(1000*60))/1000);
 },1000);
 
+// Floating hearts
 function createHeart(){
 const heart=document.createElement("div");
 heart.classList.add("heart");
@@ -204,9 +244,10 @@ setTimeout(()=>{heart.remove();},6000);
 }
 setInterval(createHeart,800);
 
+// Open/Close letter popup
 function openLetter(){
 document.getElementById("letter").classList.add("active");
-startTyping();
+startTypingLetter();
 }
 
 function closeLetter(){
@@ -214,36 +255,51 @@ document.getElementById("letter").classList.remove("active");
 document.getElementById("typingText").innerHTML="";
 }
 
-function showQuestion(){
-alert("Hey Tiisetso… in these 6 days before your 21st, do you want me to whisper all the naughty things I’m planning for your birthday? 😏💖");
+// Excitement button alert
+function showExcitement(){
+alert("Only 6 days to go!! 🎉💖 I’m already imagining your smile, your laugh, your glow… Tiisetso, you’re my favorite part of every day! 😍✨");
 }
 
-const message = `
-Tiisetso Desiree Mnisi 💖
+// Typing effect for 6-day countdown message
+const countdownMsg = `Just 6 more days until my favorite human turns 21 🎉💖!
+I can’t wait to shower you with hugs, kisses, and way too much cake 😏🍰
+Tiisetso, get ready… the countdown to the cutest, most magical celebration of the year has begun! 💕✨
+P.S. I might start dancing with excitement any second now 💃😂`;
 
-Only 6 days left until you officially turn 21… and I can’t stop thinking about you.
+let j = 0;
+function typeCountdown() {
+  const el = document.getElementById("countdownMessage");
+  el.innerHTML = "";
+  j = 0;
+  function typeLetter(){
+    if(j < countdownMsg.length){
+      el.innerHTML += countdownMsg.charAt(j);
+      j++;
+      setTimeout(typeLetter, 35);
+    }
+  }
+  typeLetter();
+}
+typeCountdown(); // Start on page load
 
-You’re stunning, smart, and dangerously irresistible. 😏
+// Typing effect for letter popup
+const letterMsg = `Tiisetso Desiree Mnisi 💖
 
-I might be a little naughty thinking of all the ways I’ll make you laugh… and blush… in these next 6 days. 💕  
-Your smile drives me wild.  
-Your laugh is my favorite song.  
+Just 6 days away from your 21st… the excitement is real!
 
-Prepare yourself for kisses, hugs, tickles, and maybe some cheeky surprises. 😘
-
-Countdown is on, my beautiful troublemaker… and I can’t wait to celebrate YOU.
-`;
+I can’t wait to see your smile, hear your laugh, and celebrate YOU.
+Every day with you feels like magic ✨
+Get ready for hugs, kisses, and endless surprises 💕
+I’m counting down every second until your special day!`;
 
 let i = 0;
-
-function startTyping(){
+function startTypingLetter(){
 const typingElement = document.getElementById("typingText");
 typingElement.innerHTML="";
 i = 0;
-
 function type(){
-if(i < message.length){
-typingElement.innerHTML += message.charAt(i);
+if(i < letterMsg.length){
+typingElement.innerHTML += letterMsg.charAt(i);
 i++;
 setTimeout(type, 35);
 }
@@ -251,6 +307,7 @@ setTimeout(type, 35);
 type();
 }
 
+// Fireworks on birthday
 function launchFireworks(){
 for(let i=0;i<100;i++){
 let fw=document.createElement("div");
