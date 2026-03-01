@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MyPinkHeart Turns 21st 💖</title>
+<title>MyPinkHeart 💖</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
 
@@ -17,40 +17,25 @@ justify-content:center;
 align-items:flex-start;
 text-align:center;
 color:white;
-background:url("https://images.unsplash.com/photo-1502780402662-acc01917a918") no-repeat center center/cover;
+background:linear-gradient(135deg,#ff69b4,#ff1493);
 padding:30px 0;
 overflow-x:hidden;
 }
 
-.overlay{
-position:fixed;
-top:0;left:0;
-width:100%;height:100%;
-background:linear-gradient(135deg, rgba(255,105,180,0.85), rgba(255,20,147,0.85));
-z-index:0;
-}
-
 .container{
-position:relative;
-z-index:1;
 background:rgba(255,255,255,0.15);
 backdrop-filter:blur(15px);
 padding:25px;
 border-radius:25px;
-box-shadow:0 15px 35px rgba(0,0,0,0.3);
 max-width:600px;
 width:95%;
-animation:fadeIn 1.5s ease;
-}
-
-@keyframes fadeIn{
-from{opacity:0;transform:translateY(20px);}
-to{opacity:1;transform:translateY(0);}
+box-shadow:0 15px 35px rgba(0,0,0,0.3);
 }
 
 h1{
 font-family:'Great Vibes',cursive;
 font-size:38px;
+margin-bottom:10px;
 }
 
 h2{font-weight:300;margin-bottom:20px;font-size:18px;}
@@ -69,72 +54,44 @@ padding:12px;
 border-radius:15px;
 }
 
-.time-box span{display:block;font-size:24px;font-weight:bold;}
-
-.message{
-margin-top:20px;
-font-size:14px;
-line-height:1.6;
-min-height:80px;
-}
+.time-box span{display:block;font-size:22px;font-weight:bold;}
 
 button{
 margin-top:12px;
 padding:12px;
 border:none;
 border-radius:25px;
-background:#ff69b4;
-color:white;
+background:#ffffff;
+color:#ff1493;
 cursor:pointer;
 font-weight:bold;
 width:100%;
 transition:0.3s;
 }
 
-button:hover{background:#ff1493;}
+button:hover{transform:scale(1.05);}
 
-.photo{
+.section{
 margin-top:20px;
-width:100%;
+padding:15px;
+background:rgba(255,255,255,0.2);
 border-radius:20px;
-box-shadow:0 10px 20px rgba(0,0,0,0.3);
 }
 
-/* POPUPS */
-.popup{
+.hidden-heart{
 position:fixed;
-top:50%;left:50%;
-transform:translate(-50%,-50%) scale(0);
-background:white;
-color:#ff1493;
-padding:25px;
-border-radius:20px;
-width:90%;
-max-width:400px;
-box-shadow:0 20px 40px rgba(0,0,0,0.4);
-transition:0.4s ease;
-z-index:10;
+bottom:10px;
+right:10px;
+font-size:20px;
+cursor:pointer;
+opacity:0.4;
 }
 
-.popup.active{transform:translate(-50%,-50%) scale(1);}
-
-.popup button{
-width:auto;
-margin:10px;
-padding:10px 20px;
-}
-
-.no-btn{
-position:absolute;
-}
-
-/* FLOATING HEARTS */
 .heart{
 position:absolute;
-color:white;
-font-size:20px;
+font-size:18px;
 animation:float 6s infinite ease-in;
-opacity:0.7;
+opacity:0.6;
 }
 
 @keyframes float{
@@ -143,39 +100,20 @@ opacity:0.7;
 100%{transform:translateY(-10vh);opacity:0;}
 }
 
-/* CONFETTI */
 .confetti{
 position:fixed;
 width:8px;
 height:14px;
 top:0;
-opacity:0.9;
 animation:fall linear forwards;
 }
 
 @keyframes fall{
-to{
-transform:translateY(100vh) rotate(720deg);
-opacity:0;
-}
-}
-
-/* FIREWORKS */
-.firework{
-position:absolute;
-width:5px;height:5px;
-background:white;border-radius:50%;
-animation:explode 1s ease-out forwards;
-}
-
-@keyframes explode{
-to{transform:translate(var(--x), var(--y));opacity:0;}
+to{transform:translateY(100vh) rotate(720deg);opacity:0;}
 }
 </style>
 </head>
 <body>
-
-<div class="overlay"></div>
 
 <div class="container">
 <h1>MyPinkHeart 💖</h1>
@@ -188,126 +126,96 @@ to{transform:translate(var(--x), var(--y));opacity:0;}
 <div class="time-box"><span id="seconds">0</span><small>Seconds</small></div>
 </div>
 
-<div class="message" id="dailyMessage"></div>
-
-<img src="ourphoto.jpg" class="photo" alt="Our Love">
-
-<button onclick="openLetter()">Open Today’s Love Letter 💌</button>
-<button onclick="openProposal()">Special Question 💍</button>
+<div class="section">
+<h3>Day <span id="loveDays"></span> of Loving You 💕</h3>
 </div>
 
-<!-- LOVE LETTER -->
-<div class="popup" id="letter">
-<h3 style="font-family:'Great Vibes',cursive;font-size:26px;">My Beautiful Tiisetso 💖</h3>
-<p id="letterText" style="margin-top:10px; line-height:1.6;"></p>
-<button onclick="closeLetter()">Close</button>
+<div class="section">
+<button onclick="whyILoveYou()">Why I Love You 💌</button>
+<p id="loveReason"></p>
 </div>
 
-<!-- PROPOSAL -->
-<div class="popup" id="proposal">
-<h3 style="font-family:'Great Vibes',cursive;font-size:26px;">One Question 😘</h3>
-<p id="proposalQuestion"></p>
-<div style="position:relative;height:120px;">
-<button onclick="sayYes()">YES 💖</button>
-<button class="no-btn" id="noBtn">No 😅</button>
+<div class="section">
+<button onclick="futureDream()">Our Future Together 💍</button>
+<p id="futureText"></p>
 </div>
+
+<div class="section">
+<button onclick="virtualHug()">I Need a Hug 🤗</button>
+<p id="hugText"></p>
 </div>
+
+</div>
+
+<div class="hidden-heart" onclick="secretTap()">💖</div>
 
 <script>
+
 // COUNTDOWN
 const birthday=new Date("March 6, 2026 00:00:00").getTime();
-
 setInterval(()=>{
 const now=new Date().getTime();
 const distance=birthday-now;
-
-if(distance<0){
-document.querySelector(".container").innerHTML=
-"<h1>Happy 21st Birthday Tiisetso Desiree Mnisi 💖🎉</h1><p>You are my forever blessing.</p>";
-launchFireworks();
-return;
-}
-
 document.getElementById("days").innerText=Math.floor(distance/(1000*60*60*24));
 document.getElementById("hours").innerText=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
 document.getElementById("minutes").innerText=Math.floor((distance%(1000*60*60))/(1000*60));
 document.getElementById("seconds").innerText=Math.floor((distance%(1000*60))/1000);
 },1000);
 
-// DAILY MESSAGE
-const notes=[
-"Another day closer to celebrating your beautiful soul. 💕",
-"Your smile is still my favorite thing in this world. 😘",
-"I fall for you again every single day. 💖",
-"You are my peace in a loud world. 🌸",
-"21 looks powerful on you already. 🔥"
-];
-document.getElementById("dailyMessage").innerText=
-notes[new Date().getDate()%notes.length];
+// LOVE DAY COUNTER (CHANGE DATE BELOW)
+const relationshipStart=new Date("June 1, 2023");
+const today=new Date();
+const diff=Math.floor((today-relationshipStart)/(1000*60*60*24));
+document.getElementById("loveDays").innerText=diff;
 
-// TYPEWRITER EFFECT
-function typeWriterEffect(text, elementId, speed){
-const element=document.getElementById(elementId);
-element.innerHTML="";
-let i=0;
-function typing(){
-if(i<text.length){
-if(text.charAt(i)==="\n"){
-element.innerHTML+="<br><br>";
-}else{
-element.innerHTML+=text.charAt(i);
-}
-i++;
-setTimeout(typing,speed);
-}
-}
-typing();
-}
-
-function openLetter(){
-const message=
-"My Beautiful Tiisetso 💖\n\n"+
-"You are my best decision, my answered prayer and my forever love.\n"+
-"I choose you today, tomorrow and always.\n\n"+
-"You will forever be my MyPinkHeart. 💕";
-
-typeWriterEffect(message,"letterText",40);
-document.getElementById("letter").classList.add("active");
-}
-
-function closeLetter(){
-document.getElementById("letter").classList.remove("active");
-}
-
-// PROPOSAL
-const questions=[
-"Will you keep building our love story with me? 💖",
-"Can I keep loving you forever? 😘",
-"Will you always be my MyPinkHeart? 💕"
+// WHY I LOVE YOU
+const reasons=[
+"I love how your smile changes my whole day.",
+"I love how safe I feel when I'm with you.",
+"I love how strong and ambitious you are.",
+"I love how your laugh is my favorite sound.",
+"I love how you make ordinary days magical."
 ];
 
-function openProposal(){
-document.getElementById("proposalQuestion").innerText=
-questions[Math.floor(Math.random()*questions.length)];
-document.getElementById("proposal").classList.add("active");
+function whyILoveYou(){
+document.getElementById("loveReason").innerText=
+reasons[Math.floor(Math.random()*reasons.length)];
 }
 
-function sayYes(){
-document.getElementById("proposal").classList.remove("active");
+// FUTURE DREAM
+const dreams=[
+"Traveling the world together ✈️",
+"Building our peaceful home 🏡",
+"Supporting each other’s dreams 🎓",
+"Growing old still holding hands 🤍"
+];
+let dreamIndex=0;
+function futureDream(){
+document.getElementById("futureText").innerText=dreams[dreamIndex];
+dreamIndex=(dreamIndex+1)%dreams.length;
+}
+
+// VIRTUAL HUG
+function virtualHug(){
+document.getElementById("hugText").innerText=
+"Come here… this hug is yours 🤍";
 launchConfetti();
 }
 
-// RUNAWAY NO BUTTON
-const noBtn=document.getElementById("noBtn");
-noBtn.addEventListener("mouseover",()=>{
-noBtn.style.top=Math.random()*80+"px";
-noBtn.style.left=Math.random()*200+"px";
-});
+// SECRET HEART
+let tapCount=0;
+function secretTap(){
+tapCount++;
+if(tapCount===5){
+alert("You found the hidden part of my heart… it belongs to you 💕");
+tapCount=0;
+}
+}
 
 // CONFETTI
 function launchConfetti(){
-const colors=["#ff69b4","#ff1493","#ffffff","#ffd1f0","#ff85c1"];
-for(let i=0;i<150;i++){
+const colors=["#ffffff","#ffd1f0","#ff69b4","#ff1493"];
+for(let i=0;i<120;i++){
 let confetti=document.createElement("div");
 confetti.classList.add("confetti");
 confetti.style.left=Math.random()*100+"vw";
@@ -332,19 +240,6 @@ setTimeout(()=>{heart.remove();},6000);
 }
 setInterval(createHeart,800);
 
-// FIREWORKS
-function launchFireworks(){
-for(let i=0;i<100;i++){
-let fw=document.createElement("div");
-fw.classList.add("firework");
-fw.style.left="50%";
-fw.style.top="50%";
-fw.style.setProperty('--x',(Math.random()-0.5)*500+"px");
-fw.style.setProperty('--y',(Math.random()-0.5)*500+"px");
-document.body.appendChild(fw);
-setTimeout(()=>{fw.remove();},1000);
-}
-}
 </script>
 
 </body>
