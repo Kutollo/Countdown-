@@ -152,7 +152,7 @@ They can be things you want to have, experience, feel, achieve, or become.
 <textarea id="wishList" placeholder="Write each wish on a new line..."></textarea>
 
 <br>
-<button onclick="pickFive()">Choose My 5 💕</button>
+<button id="pickBtn" onclick="pickFive()">Choose My 5 💕</button>
 
 <div class="result" id="result"></div>
 </div>
@@ -190,8 +190,8 @@ setInterval(function(){
 },1000);
 
 
-// Love Letter (No distance, no holding)
-const letterText = "My beautiful love ❤️\n\nIn just 2 days, you step into 21 — a powerful, radiant new chapter of your life. This year isn’t just another number. It’s growth. It’s confidence. It’s stepping into your womanhood with grace and fire.\n\nI admire your mind, your strength, your softness, your ambition, and the way you carry yourself. 21 looks like elevation. It looks like glow. It looks like you becoming even more unstoppable.\n\nTwo days left… and the world better be ready for you ✨";
+// Love Letter (Focused on her growth & glow)
+const letterText = "My dearest love ❤️\n\nIn just 2 days, you will shine brighter than ever as you turn 21. This year is yours — a time to explore, laugh, dream bigger, and step boldly into every opportunity that excites you. 21 isn’t just a number, it’s a celebration of your power, your charm, your glow, and your unstoppable spirit.\n\nTwo days away… get ready to conquer, to sparkle, and to make this year unforgettable ✨";
 let l = 0;
 function typeLetter(){
     if(l < letterText.length){
@@ -235,6 +235,9 @@ function pickFive(){
     output += "<br>I officially promise to fulfill these before you turn 22 💍";
 
     document.getElementById("result").innerHTML = output;
+
+    // Hide button to prevent cheating
+    document.getElementById("pickBtn").style.display = "none";
 }
 
 </script>
