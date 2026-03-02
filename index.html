@@ -2,266 +2,265 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MyPinkHeart 💕</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<title>2 Days Until 21 💖</title>
+
 <style>
 body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(to right, #ffb6c1, #ff69b4);
-  color: white;
-  text-align: center;
-  overflow-x: hidden;
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    text-align: center;
+    color: white;
+    overflow-x: hidden;
+    background: linear-gradient(rgba(255,105,180,0.7), rgba(255,105,180,0.7)), 
+                url("ourphoto.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 h1 {
-  margin-top: 30px;
-  font-size: 36px;
-  font-weight: 700;
+    margin-top: 40px;
+    font-size: 2.5em;
+    animation: glow 2s infinite alternate;
 }
 
-/* Countdown boxes */
-.countdown {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 15px;
-  margin: 20px 0;
+@keyframes glow {
+    from { text-shadow: 0 0 10px white; }
+    to { text-shadow: 0 0 25px #ff4da6; }
 }
 
-.time-box {
-  background: rgba(255,255,255,0.25);
-  backdrop-filter: blur(5px);
-  padding: 20px;
-  border-radius: 20px;
-  min-width: 80px;
+#countdown {
+    font-size: 2em;
+    margin: 20px 0;
 }
 
-.time-box span {
-  display: block;
-  font-size: 36px;
-  font-weight: 700;
+.section {
+    margin: 40px 20px;
 }
 
-.time-box small {
-  display: block;
-  font-size: 14px;
-  margin-top: 5px;
+.energy-bar {
+    width: 80%;
+    margin: 20px auto;
+    background: rgba(255,255,255,0.3);
+    border-radius: 30px;
+    overflow: hidden;
 }
 
-/* Main message */
-.message {
-  width: 90%;
-  max-width: 600px;
-  margin: 20px auto;
-  font-size: 18px;
-  line-height: 1.6;
-  min-height: 140px;
-  background: rgba(255,255,255,0.15);
-  backdrop-filter: blur(5px);
-  padding: 20px;
-  border-radius: 20px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+.energy-fill {
+    height: 25px;
+    width: 98%;
+    background: #ff1493;
+    animation: pulse 1.5s infinite;
 }
 
-/* Buttons */
+@keyframes pulse {
+    0% { opacity: 0.7; }
+    50% { opacity: 1; }
+    100% { opacity: 0.7; }
+}
+
+.reasons-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 10px;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+.reason {
+    padding: 15px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 14px;
+}
+
+.reason:hover {
+    background: rgba(255,255,255,0.5);
+}
+
+.locked {
+    filter: blur(3px);
+}
+
 button {
-  padding: 12px 20px;
-  border: none;
-  border-radius: 25px;
-  background: white;
-  color: #ff1493;
-  font-weight: bold;
-  margin: 10px;
-  cursor: pointer;
-  transition: 0.3s;
-  width: 90%;
-  max-width: 300px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    background: #ff1493;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 15px;
 }
 
 button:hover {
-  background: #ff1493;
-  color: white;
+    background: #ff4da6;
 }
 
-img {
-  width: 80%;
-  max-width: 300px;
-  border-radius: 20px;
-  margin-top: 20px;
-  box-shadow: 0 0 25px rgba(255,255,255,0.6);
+#loveLetter {
+    display: none;
+    max-width: 700px;
+    margin: 20px auto;
+    background: rgba(0,0,0,0.5);
+    padding: 20px;
+    border-radius: 15px;
+    line-height: 1.6em;
 }
 
 .heart {
-  position: fixed;
-  top: -10px;
-  font-size: 20px;
-  animation: fall linear infinite;
+    position: fixed;
+    animation: float 6s linear infinite;
+    color: rgba(255,255,255,0.5);
 }
 
-@keyframes fall {
-  to { transform: translateY(100vh); }
-}
-
-.categories {
-  margin-top: 20px;
-}
-
-@media(max-width:400px){
-  h1{font-size:28px;}
-  .message{font-size:16px; padding:15px;}
-  .time-box span{font-size:28px;}
-  button{padding:10px 18px;}
-  img{max-width:250px;}
+@keyframes float {
+    from { transform: translateY(100vh); }
+    to { transform: translateY(-10vh); }
 }
 </style>
 </head>
+
 <body>
 
-<h1>MyPinkHeart's 21st Countdown 💕</h1>
+<h1>2 Days Until My Pink Heart Turns 21 💖</h1>
 
-<img src="ourphoto.jpg" alt="Our Photo">
+<div id="countdown"></div>
 
-<div class="countdown">
-  <div class="time-box">
-    <span id="days">0</span>
-    <small>Days</small>
-  </div>
-  <div class="time-box">
-    <span id="hours">0</span>
-    <small>Hours</small>
-  </div>
-  <div class="time-box">
-    <span id="minutes">0</span>
-    <small>Minutes</small>
-  </div>
-  <div class="time-box">
-    <span id="seconds">0</span>
-    <small>Seconds</small>
-  </div>
+<div class="section">
+    📍 Distance: 1,867km<br>
+    💖 Heart Distance: 0km<br><br>
+    Even 1,867km couldn't stop this love.
 </div>
 
-<div class="message" id="mainMessage"></div>
+<div class="section">
+    <h2>Birthday Energy Level 🔥</h2>
+    <div class="energy-bar">
+        <div class="energy-fill"></div>
+    </div>
+    <p>Warning: Energy reaching dangerous levels 👑</p>
+</div>
 
-<button onclick="openLetter()">Open My Heart 💌</button>
+<div class="section">
+    <h2>21 Reasons I Love You (Unlocking Soon...)</h2>
+    <p>Greatness deserves perfect timing.</p>
+    <div class="reasons-container" id="reasons"></div>
+</div>
 
-<div class="categories">
-  <p>Choose ONE category to answer 😏👇</p>
-  <button onclick="showQuestion('romantic')">Romantic 💖</button>
-  <button onclick="showQuestion('birthday')">Birthday 🎂</button>
-  <button onclick="showQuestion('funny')">Funny 😂</button>
-  <button onclick="showQuestion('naughty')">Naughty 😈</button>
-  <button onclick="showQuestion('didyouknow')">Did You Know? 🤔</button>
+<div class="section">
+    <button onclick="toggleLetter()">💌 Open Secret Love Letter</button>
+    <div id="loveLetter">
+        My Pink Heart 💖<br><br>
+        2 days left until you step into your 21st year.
+        Even though I’m 1,867km away, my heart feels like it’s right next to yours.
+        Watching you grow into the woman you are becoming is my biggest blessing.
+        <br><br>
+        I can’t wait for May and June when distance becomes zero.
+        Until then, every second is counting down to celebrating you.
+        <br><br>
+        You are my peace. My future. My answered prayer.
+        Happy almost 21st, my love.
+    </div>
 </div>
 
 <script>
-// Countdown to 6 March 2026
+
+// Countdown
 const birthday = new Date("March 6, 2026 00:00:00").getTime();
 
-function updateCountdown(){
-  const now = new Date().getTime();
-  const gap = birthday - now;
+const timer = setInterval(function() {
+    const now = new Date().getTime();
+    const distance = birthday - now;
 
-  if(gap < 0){
-    document.getElementById("days").innerText = 0;
-    document.getElementById("hours").innerText = 0;
-    document.getElementById("minutes").innerText = 0;
-    document.getElementById("seconds").innerText = 0;
-    return;
-  }
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-  const days = Math.floor(gap / (1000*60*60*24));
-  const hours = Math.floor((gap % (1000*60*60*24)) / (1000*60*60));
-  const minutes = Math.floor((gap % (1000*60*60)) / (1000*60));
-  const seconds = Math.floor((gap % (1000*60)) / 1000);
+    document.getElementById("countdown").innerHTML =
+        days + "d " + hours + "h "
+        + minutes + "m " + seconds + "s ";
 
-  document.getElementById("days").innerText = days;
-  document.getElementById("hours").innerText = hours;
-  document.getElementById("minutes").innerText = minutes;
-  document.getElementById("seconds").innerText = seconds;
-}
-setInterval(updateCountdown, 1000);
-updateCountdown();
+    if (distance < 0) {
+        clearInterval(timer);
+        document.getElementById("countdown").innerHTML =
+            "Welcome to 21 My Pink Heart 💖🎉";
+        unlockReasons();
+    }
+}, 1000);
 
-// Typing effect main message
-const mainText = `3 DAYS TO GO 😍💖
 
-My beautiful MyPinkHeart...
+// 21 Locked Reasons
+const reasonsContainer = document.getElementById("reasons");
 
-In just 3 days, the world celebrates 21 years of the most breathtaking, kind, sweet, and unforgettable woman.
-
-Even though we are miles apart right now, my heart feels closer to you than ever.
-Every second that passes is one second closer to your 21st... and one second closer to more memories with you.
-
-Your birthday isn't just a day... it's a reminder that heaven really did send me someone special. 💕✨`;
-
-let i = 0;
-function typeMain(){
-  if(i < mainText.length){
-    document.getElementById("mainMessage").innerHTML += mainText.charAt(i);
-    i++;
-    setTimeout(typeMain, 35);
-  }
-}
-typeMain();
-
-// Romantic Letter
-function openLetter(){
-  alert(`My Love 💌
-
-Three days... just three days until you turn 21.
-
-I wish I could hold your face in my hands at midnight and whisper how proud I am of the woman you're becoming.
-
-You are soft yet strong.
-Sweet yet powerful.
-Calm yet unforgettable.
-
-Your smile alone could fix my worst day.
-Your voice alone can calm my storm.
-
-Being in love with you feels like winning every single day.
-
-Happy almost 21st to the woman who owns my heart completely. 💖`);
+for (let i = 1; i <= 21; i++) {
+    const div = document.createElement("div");
+    div.classList.add("reason", "locked");
+    div.innerHTML = i + " 🔒";
+    div.onclick = function() {
+        alert("Not yet my love... Unlocks on March 6 💖");
+    };
+    reasonsContainer.appendChild(div);
 }
 
-// Category Questions
-function showQuestion(type){
-  let question = "";
+function unlockReasons() {
+    const messages = [
+        "Your smile melts me.",
+        "You make distance feel small.",
+        "You are my peace.",
+        "You glow differently.",
+        "You inspire me.",
+        "Your laugh is addictive.",
+        "You are strong and soft.",
+        "You love deeply.",
+        "You are intelligent.",
+        "You are my safe place.",
+        "You support my dreams.",
+        "You are kind-hearted.",
+        "You are my biggest blessing.",
+        "You are my favorite person.",
+        "You make life sweeter.",
+        "You understand me.",
+        "You are my future.",
+        "You make 1,867km feel like nothing.",
+        "You are beautiful inside and out.",
+        "You are rare.",
+        "You are my forever."
+    ];
 
-  if(type === "romantic"){
-    question = "Romantic 💖: When you imagine us years from now, what kind of love story do you see us telling about how we survived distance and grew stronger?";
-  }
-  if(type === "birthday"){
-    question = "Birthday 🎂: Since we can't celebrate together right now… do you want us to have a late 21st celebration when we finally meet again? And what would your dream celebration with me look like? 😏💕";
-  }
-  if(type === "funny"){
-    question = "Funny 😂: Now that you're almost 21... should I be scared of your new 'legal adult confidence' baddie or should I relax and worry less?";
-  }
-  if(type === "naughty"){
-    question = "Naughty 😈: On our first night together as my 21-year-old queen... what's one thing you secretly want us to do that would leave us both breathless? 🔥";
-  }
-  if(type === "didyouknow"){
-    question = "Did You Know? 🤔: We met the year I turned 21... and now 3 years later you're turning 21. Do you think life planned that so we'd understand each other at the same stage of growth? 💕";
-  }
+    const boxes = document.querySelectorAll(".reason");
 
-  alert(question);
+    boxes.forEach((box, index) => {
+        box.classList.remove("locked");
+        box.innerHTML = (index + 1) + ". " + messages[index];
+        box.onclick = null;
+    });
+}
+
+// Toggle Love Letter
+function toggleLetter() {
+    const letter = document.getElementById("loveLetter");
+    letter.style.display = letter.style.display === "none" ? "block" : "none";
 }
 
 // Floating hearts
-setInterval(function(){
-  const heart = document.createElement("div");
-  heart.classList.add("heart");
-  heart.innerHTML = "💖";
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.animationDuration = (Math.random()*3+2) + "s";
-  document.body.appendChild(heart);
-  setTimeout(()=>{
-    heart.remove();
-  },5000);
-},300);
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = Math.random() * 20 + 15 + "px";
+    heart.style.animationDuration = Math.random() * 3 + 3 + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 6000);
+}
+
+setInterval(createHeart, 800);
+
 </script>
 
 </body>
