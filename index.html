@@ -1,155 +1,174 @@
-<!DOCTYPE html>  
-<html>  
-<head>  
-<title>MyPinkHeart 💕</title>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>  
-body{  
-  margin:0;  
-  padding:0;  
-  font-family: 'Segoe UI', cursive;  
-  background: linear-gradient(to right, #ffb6c1, #ff69b4);  
-  color:white;  
-  text-align:center;  
-  overflow-x:hidden;  
-}  
-  
-h1{  
-  margin-top:30px;  
-  font-size:40px;  
-}  
-  
-.countdown{  
-  font-size:24px;  
-  margin:20px 0;  
-  line-height:1.4;
-}  
-  
-.message{  
-  width:90%;  
-  margin:auto;  
-  font-size:18px;  
-  line-height:1.6;  
-  min-height:120px;  
-}  
-  
-button{  
-  padding:12px 20px;  
-  border:none;  
-  border-radius:25px;  
-  background:white;  
-  color:#ff1493;  
-  font-weight:bold;  
-  margin:10px;  
-  cursor:pointer;  
-  transition:0.3s;  
-  width:90%;  
-  max-width:300px;
-}  
-  
-button:hover{  
-  background:#ff1493;  
-  color:white;  
-}  
-  
-img{  
-  width:80%;  
-  max-width:300px;  
-  border-radius:20px;  
-  margin-top:20px;  
-  box-shadow:0 0 20px rgba(255,255,255,0.7);  
-}  
-  
-.heart{  
-  position:fixed;  
-  top:-10px;  
-  font-size:20px;  
-  animation:fall linear infinite;  
-}  
-  
-@keyframes fall{  
-  to{  
-    transform:translateY(100vh);  
-  }  
-}  
-  
-.categories{  
-  margin-top:20px;  
-}  
+<title>MyPinkHeart 💕</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to right, #ffb6c1, #ff69b4);
+  color: white;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+h1 {
+  margin-top: 30px;
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.countdown {
+  font-size: 22px;
+  margin: 20px 0;
+  line-height: 1.4;
+  background: rgba(255,255,255,0.2);
+  display: inline-block;
+  padding: 15px 25px;
+  border-radius: 25px;
+}
+
+.message {
+  width: 90%;
+  max-width: 600px;
+  margin: 20px auto;
+  font-size: 18px;
+  line-height: 1.6;
+  min-height: 140px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(5px);
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 25px;
+  background: white;
+  color: #ff1493;
+  font-weight: bold;
+  margin: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 90%;
+  max-width: 300px;
+}
+
+button:hover {
+  background: #ff1493;
+  color: white;
+}
+
+img {
+  width: 80%;
+  max-width: 300px;
+  border-radius: 20px;
+  margin-top: 20px;
+  box-shadow: 0 0 25px rgba(255,255,255,0.6);
+}
+
+.heart {
+  position: fixed;
+  top: -10px;
+  font-size: 20px;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to { transform: translateY(100vh); }
+}
+
+.categories {
+  margin-top: 20px;
+}
 
 @media(max-width:400px){
-  h1{font-size:32px;}
-  .message{font-size:16px;}
-  .countdown{font-size:20px;}
+  h1{font-size:28px;}
+  .message{font-size:16px; padding:15px;}
+  .countdown{font-size:18px; padding:10px 15px;}
   button{padding:10px 18px;}
   img{max-width:250px;}
 }
-</style>  
-</head>  
-<body>  
-  
-<h1>Tiisetso’s 21st Countdown 💕</h1>  
-  
-<img src="ourphoto.jpg" alt="Our Photo">  
-  
-<div class="countdown" id="countdown"></div>  
-  
-<div class="message" id="mainMessage"></div>  
-  
-<button onclick="openLetter()">Open My Heart 💌</button>  
-  
-<div class="categories">  
-  <p>Choose ONE category to answer 😏👇</p>  
-  <button onclick="showQuestion('romantic')">Romantic 💖</button>  
-  <button onclick="showQuestion('birthday')">Birthday 🎂</button>  
-  <button onclick="showQuestion('funny')">Funny 😂</button>  
-  <button onclick="showQuestion('naughty')">Naughty 😈</button>  
-  <button onclick="showQuestion('didyouknow')">Did You Know? 🤔</button>  
-</div>  
-  
-<script>  
-// Countdown to 6 March 2026  
-const birthday = new Date("March 6, 2026 00:00:00").getTime();  
-  
-setInterval(function(){  
-  const now = new Date().getTime();  
-  const gap = birthday - now;  
-  
-  const days = Math.floor(gap / (1000 * 60 * 60 * 24));  
-  const hours = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));  
-  const minutes = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));  
-  
-  document.getElementById("countdown").innerHTML =  
-  "Only " + days + " days, " + hours + " hours and " + minutes + " minutes left until you turn 21 🎉💖";  
-},1000);  
-  
-// Typing effect main message  
-const mainText = `4 DAYS TO GO 😍💖
+</style>
+</head>
+<body>
+
+<h1>Tiisetso’s 21st Countdown 💕</h1>
+
+<img src="ourphoto.jpg" alt="Our Photo">
+
+<div class="countdown" id="countdown">Loading countdown...</div>
+
+<div class="message" id="mainMessage"></div>
+
+<button onclick="openLetter()">Open My Heart 💌</button>
+
+<div class="categories">
+  <p>Choose ONE category to answer 😏👇</p>
+  <button onclick="showQuestion('romantic')">Romantic 💖</button>
+  <button onclick="showQuestion('birthday')">Birthday 🎂</button>
+  <button onclick="showQuestion('funny')">Funny 😂</button>
+  <button onclick="showQuestion('naughty')">Naughty 😈</button>
+  <button onclick="showQuestion('didyouknow')">Did You Know? 🤔</button>
+</div>
+
+<script>
+// Countdown to 6 March 2026
+const birthday = new Date("March 6, 2026 00:00:00").getTime();
+
+function updateCountdown(){
+  const now = new Date().getTime();
+  const gap = birthday - now;
+
+  if(gap < 0){
+    document.getElementById("countdown").innerHTML = "Happy 21st Birthday Tiisetso 💖🎉";
+    return;
+  }
+
+  const days = Math.floor(gap / (1000*60*60*24));
+  const hours = Math.floor((gap % (1000*60*60*24)) / (1000*60*60));
+  const minutes = Math.floor((gap % (1000*60*60)) / (1000*60));
+  const seconds = Math.floor((gap % (1000*60)) / 1000);
+
+  document.getElementById("countdown").innerHTML =
+    "Only " + days + " days, " + hours + " hours, " + minutes + " minutes and " + seconds + " seconds left until you turn 21 🎉💖";
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+// Typing effect main message
+const mainText = `3 DAYS TO GO 😍💖
 
 My beautiful Tiisetso Desiree Mnisi...
 
-In just 4 days, the world celebrates 21 years of the most breathtaking, kind, sweet, and unforgettable woman.
+In just 3 days, the world celebrates 21 years of the most breathtaking, kind, sweet, and unforgettable woman.
 
 Even though we are miles apart right now, my heart feels closer to you than ever.
 Every second that passes is one second closer to your 21st… and one second closer to more memories with you.
 
-Your birthday isn’t just a day… it’s a reminder that heaven really did send me someone special. 💕✨`;  
-  
-let i = 0;  
-function typeMain(){  
-  if(i < mainText.length){  
-    document.getElementById("mainMessage").innerHTML += mainText.charAt(i);  
-    i++;  
-    setTimeout(typeMain, 35);  
-  }  
-}  
-typeMain();  
-  
-// Romantic Letter  
-function openLetter(){  
+Your birthday isn’t just a day… it’s a reminder that heaven really did send me someone special. 💕✨`;
+
+let i = 0;
+function typeMain(){
+  if(i < mainText.length){
+    document.getElementById("mainMessage").innerHTML += mainText.charAt(i);
+    i++;
+    setTimeout(typeMain, 35);
+  }
+}
+typeMain();
+
+// Romantic Letter
+function openLetter(){
   alert(`My Love 💌
 
-Four days… just four days until you turn 21.
+Three days… just three days until you turn 21.
 
 I wish I could hold your face in my hands at midnight and whisper how proud I am of the woman you’re becoming.
 
@@ -162,45 +181,45 @@ Your voice alone can calm my storm.
 
 Being in love with you feels like winning every single day.
 
-Happy almost 21st to the woman who owns my heart completely. 💖`);  
-}  
-  
-// Category Questions  
-function showQuestion(type){  
-  let question = "";  
-  
-  if(type === "romantic"){  
-    question = "Romantic 💖: When you imagine us years from now, what kind of love story do you see us telling about how we survived distance and grew stronger?";  
-  }  
-  if(type === "birthday"){  
-    question = "Birthday 🎂: Since we can’t celebrate together right now… do you want us to have a late 21st celebration when we finally meet again? And what would your dream celebration with me look like? 😏💕";  
-  }  
-  if(type === "funny"){  
-    question = "Funny 😂: Now that you’re almost 21… should I be scared of your new ‘legal adult confidence’ baddie or should I relax and worry less?";  
-  }  
-  if(type === "naughty"){  
-    question = "Naughty 😈: On our first night together as my 21-year-old queen… what’s one thing you secretly want us to do that would leave us both breathless? 🔥";  
-  }  
-  if(type === "didyouknow"){  
-    question = "Did You Know? 🤔: We met the year I turned 21… and now 3 years later you’re turning 21. Do you think life planned that so we’d understand each other at the same stage of growth? 💕";  
-  }  
-  
-  alert(question);  
-}  
-  
-// Floating hearts  
-setInterval(function(){  
-  const heart = document.createElement("div");  
-  heart.classList.add("heart");  
-  heart.innerHTML = "💖";  
-  heart.style.left = Math.random() * 100 + "vw";  
-  heart.style.animationDuration = (Math.random()*3+2) + "s";  
-  document.body.appendChild(heart);  
-  setTimeout(()=>{  
-    heart.remove();  
-  },5000);  
-},300);  
-</script>  
-  
-</body>  
+Happy almost 21st to the woman who owns my heart completely. 💖`);
+}
+
+// Category Questions
+function showQuestion(type){
+  let question = "";
+
+  if(type === "romantic"){
+    question = "Romantic 💖: When you imagine us years from now, what kind of love story do you see us telling about how we survived distance and grew stronger?";
+  }
+  if(type === "birthday"){
+    question = "Birthday 🎂: Since we can’t celebrate together right now… do you want us to have a late 21st celebration when we finally meet again? And what would your dream celebration with me look like? 😏💕";
+  }
+  if(type === "funny"){
+    question = "Funny 😂: Now that you’re almost 21… should I be scared of your new ‘legal adult confidence’ baddie or should I relax and worry less?";
+  }
+  if(type === "naughty"){
+    question = "Naughty 😈: On our first night together as my 21-year-old queen… what’s one thing you secretly want us to do that would leave us both breathless? 🔥";
+  }
+  if(type === "didyouknow"){
+    question = "Did You Know? 🤔: We met the year I turned 21… and now 3 years later you’re turning 21. Do you think life planned that so we’d understand each other at the same stage of growth? 💕";
+  }
+
+  alert(question);
+}
+
+// Floating hearts
+setInterval(function(){
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "💖";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (Math.random()*3+2) + "s";
+  document.body.appendChild(heart);
+  setTimeout(()=>{
+    heart.remove();
+  },5000);
+},300);
+</script>
+
+</body>
 </html>
