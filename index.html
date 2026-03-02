@@ -2,174 +2,113 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>2 Days Until 21 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2 Days To 21 ❤️</title>
 
 <style>
-body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    text-align: center;
-    color: white;
-    overflow-x: hidden;
-    background: linear-gradient(rgba(255,105,180,0.7), rgba(255,105,180,0.7)), 
+body{
+    margin:0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
                 url("ourphoto.jpg");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    color:white;
+    text-align:center;
+    padding:20px;
 }
 
-h1 {
-    margin-top: 40px;
-    font-size: 2.5em;
-    animation: glow 2s infinite alternate;
+h1{
+    font-size:30px;
+    margin-top:20px;
 }
 
-@keyframes glow {
-    from { text-shadow: 0 0 10px white; }
-    to { text-shadow: 0 0 25px #ff4da6; }
+.countdown{
+    font-size:38px;
+    margin:20px 0;
+    font-weight:bold;
 }
 
-#countdown {
-    font-size: 2em;
-    margin: 20px 0;
+.section{
+    background: rgba(255,255,255,0.15);
+    padding:20px;
+    border-radius:20px;
+    margin:20px auto;
+    width:90%;
+    max-width:600px;
 }
 
-.section {
-    margin: 40px 20px;
+textarea{
+    width:95%;
+    height:200px;
+    border-radius:15px;
+    padding:15px;
+    border:none;
+    font-size:14px;
+    margin-top:15px;
 }
 
-.energy-bar {
-    width: 80%;
-    margin: 20px auto;
-    background: rgba(255,255,255,0.3);
-    border-radius: 30px;
-    overflow: hidden;
+button{
+    margin-top:20px;
+    padding:15px 30px;
+    border:none;
+    border-radius:30px;
+    font-size:18px;
+    background:white;
+    color:#ff4fa3;
+    cursor:pointer;
+    font-weight:bold;
 }
 
-.energy-fill {
-    height: 25px;
-    width: 98%;
-    background: #ff1493;
-    animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-    0% { opacity: 0.7; }
-    50% { opacity: 1; }
-    100% { opacity: 0.7; }
-}
-
-.reasons-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-    gap: 10px;
-    max-width: 600px;
-    margin: 20px auto;
-}
-
-.reason {
-    padding: 15px;
-    background: rgba(255,255,255,0.3);
-    border-radius: 15px;
-    cursor: pointer;
-    transition: 0.3s;
-    font-size: 14px;
-}
-
-.reason:hover {
-    background: rgba(255,255,255,0.5);
-}
-
-.locked {
-    filter: blur(3px);
-}
-
-button {
-    padding: 12px 25px;
-    border: none;
-    border-radius: 25px;
-    background: #ff1493;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 15px;
-}
-
-button:hover {
-    background: #ff4da6;
-}
-
-#loveLetter {
-    display: none;
-    max-width: 700px;
-    margin: 20px auto;
-    background: rgba(0,0,0,0.5);
-    padding: 20px;
-    border-radius: 15px;
-    line-height: 1.6em;
-}
-
-.heart {
-    position: fixed;
-    animation: float 6s linear infinite;
-    color: rgba(255,255,255,0.5);
-}
-
-@keyframes float {
-    from { transform: translateY(100vh); }
-    to { transform: translateY(-10vh); }
+.result{
+    margin-top:20px;
+    font-size:16px;
 }
 </style>
 </head>
 
 <body>
 
-<h1>2 Days Until My Pink Heart Turns 21 💖</h1>
+<h1 id="typing"></h1>
 
-<div id="countdown"></div>
+<div class="countdown" id="countdown"></div>
 
 <div class="section">
-    📍 Distance: 1,867km<br>
-    💖 Heart Distance: 0km<br><br>
-    Even 1,867km couldn't stop this love.
+<h2>💌 Love Letter - 2 Days To Go</h2>
+<p id="loveLetter"></p>
 </div>
 
 <div class="section">
-    <h2>Birthday Energy Level 🔥</h2>
-    <div class="energy-bar">
-        <div class="energy-fill"></div>
-    </div>
-    <p>Warning: Energy reaching dangerous levels 👑</p>
-</div>
+<h2>💫 21 Before 22</h2>
+<p>Write 21 things you want to have, experience, feel, or achieve before turning 22 ❤️</p>
 
-<div class="section">
-    <h2>21 Reasons I Love You (Unlocking Soon...)</h2>
-    <p>Greatness deserves perfect timing.</p>
-    <div class="reasons-container" id="reasons"></div>
-</div>
+<textarea id="wishList" placeholder="Write each wish on a new line..."></textarea>
 
-<div class="section">
-    <button onclick="toggleLetter()">💌 Open Secret Love Letter</button>
-    <div id="loveLetter">
-        My Pink Heart 💖<br><br>
-        2 days left until you step into your 21st year.
-        Even though I’m 1,867km away, my heart feels like it’s right next to yours.
-        Watching you grow into the woman you are becoming is my biggest blessing.
-        <br><br>
-        I can’t wait for May and June when distance becomes zero.
-        Until then, every second is counting down to celebrating you.
-        <br><br>
-        You are my peace. My future. My answered prayer.
-        Happy almost 21st, my love.
-    </div>
+<br>
+<button onclick="pickFive()">Choose My 5 💕</button>
+
+<div class="result" id="result"></div>
 </div>
 
 <script>
 
+// Typing Effect Header
+const headerText = "2 Days Until You Turn 21 My Pink Heart 💖";
+let h = 0;
+function typeHeader(){
+    if(h < headerText.length){
+        document.getElementById("typing").innerHTML += headerText.charAt(h);
+        h++;
+        setTimeout(typeHeader, 60);
+    }
+}
+typeHeader();
+
+
 // Countdown
 const birthday = new Date("March 6, 2026 00:00:00").getTime();
-
-const timer = setInterval(function() {
+setInterval(function(){
     const now = new Date().getTime();
     const distance = birthday - now;
 
@@ -179,87 +118,45 @@ const timer = setInterval(function() {
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
     document.getElementById("countdown").innerHTML =
-        days + "d " + hours + "h "
-        + minutes + "m " + seconds + "s ";
+        days + " Days " + hours + " Hours " + minutes + " Minutes " + seconds + " Seconds";
+},1000);
 
-    if (distance < 0) {
-        clearInterval(timer);
-        document.getElementById("countdown").innerHTML =
-            "Welcome to 21 My Pink Heart 💖🎉";
-        unlockReasons();
+
+// Love Letter Typing Effect
+const letterText = "My Love ❤️\n\nOnly 2 days left until you turn 21. I wish I could hold your hand at midnight and watch your face light up. Even though we are 1,867km apart, nothing feels distant about my love for you.\n\nI am so proud of the woman you are becoming. 21 looks powerful on you already. I can't wait to celebrate you properly, spoil you, and make memories that will make 21 unforgettable.\n\nTwo more sleeps… and my queen enters her new era 👑💕";
+let l = 0;
+function typeLetter(){
+    if(l < letterText.length){
+        document.getElementById("loveLetter").innerHTML += letterText.charAt(l);
+        l++;
+        setTimeout(typeLetter, 25);
     }
-}, 1000);
-
-
-// 21 Locked Reasons
-const reasonsContainer = document.getElementById("reasons");
-
-for (let i = 1; i <= 21; i++) {
-    const div = document.createElement("div");
-    div.classList.add("reason", "locked");
-    div.innerHTML = i + " 🔒";
-    div.onclick = function() {
-        alert("Not yet my love... Unlocks on March 6 💖");
-    };
-    reasonsContainer.appendChild(div);
 }
+typeLetter();
 
-function unlockReasons() {
-    const messages = [
-        "Your smile melts me.",
-        "You make distance feel small.",
-        "You are my peace.",
-        "You glow differently.",
-        "You inspire me.",
-        "Your laugh is addictive.",
-        "You are strong and soft.",
-        "You love deeply.",
-        "You are intelligent.",
-        "You are my safe place.",
-        "You support my dreams.",
-        "You are kind-hearted.",
-        "You are my biggest blessing.",
-        "You are my favorite person.",
-        "You make life sweeter.",
-        "You understand me.",
-        "You are my future.",
-        "You make 1,867km feel like nothing.",
-        "You are beautiful inside and out.",
-        "You are rare.",
-        "You are my forever."
-    ];
 
-    const boxes = document.querySelectorAll(".reason");
+// Random 5 Picker
+function pickFive(){
+    let wishes = document.getElementById("wishList").value.split("\n").filter(w => w.trim() !== "");
+    
+    if(wishes.length < 5){
+        alert("You need at least 5 wishes 😌");
+        return;
+    }
 
-    boxes.forEach((box, index) => {
-        box.classList.remove("locked");
-        box.innerHTML = (index + 1) + ". " + messages[index];
-        box.onclick = null;
+    let shuffled = wishes.sort(() => 0.5 - Math.random());
+    let selected = shuffled.slice(0,5);
+
+    let output = "<h3>Your 5 Selected 💖</h3>";
+    selected.forEach((wish,index)=>{
+        output += (index+1) + ". " + wish + "<br>";
     });
+
+    output += "<br><br>📸 Screenshot this and send it to him 😉";
+    output += "<br>He officially promises to fulfill these before you turn 22 💍";
+
+    document.getElementById("result").innerHTML = output;
 }
-
-// Toggle Love Letter
-function toggleLetter() {
-    const letter = document.getElementById("loveLetter");
-    letter.style.display = letter.style.display === "none" ? "block" : "none";
-}
-
-// Floating hearts
-function createHeart() {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "💖";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = Math.random() * 20 + 15 + "px";
-    heart.style.animationDuration = Math.random() * 3 + 3 + "s";
-    document.body.appendChild(heart);
-
-    setTimeout(() => {
-        heart.remove();
-    }, 6000);
-}
-
-setInterval(createHeart, 800);
 
 </script>
 
