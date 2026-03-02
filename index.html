@@ -19,13 +19,11 @@ body{
     padding:20px;
 }
 
-/* Header */
 h1{
     font-size:30px;
     margin-top:20px;
 }
 
-/* Countdown Frames */
 .countdown{
     display:flex;
     justify-content:center;
@@ -53,7 +51,6 @@ h1{
     letter-spacing:1px;
 }
 
-/* Sections */
 .section{
     background: rgba(255,255,255,0.15);
     padding:20px;
@@ -89,6 +86,12 @@ button{
     margin-top:20px;
     font-size:16px;
 }
+
+.instructions{
+    display:none;
+    margin-top:15px;
+    text-align:left;
+}
 </style>
 </head>
 
@@ -118,18 +121,33 @@ button{
 
 <!-- Love Letter -->
 <div class="section">
-<h2>💌 2 Days To Your 21st</h2>
+<h2>💌 2 Days To 21</h2>
 <p id="loveLetter"></p>
 </div>
 
 <!-- 21 Before 22 -->
 <div class="section">
 <h2>💫 21 Before 22</h2>
+
+<button onclick="toggleInstructions()">Tap To See Challenge Instructions 💖</button>
+
+<div class="instructions" id="instructions">
 <p>
-My love, write down 21 beautiful things your heart desires —  
-things you want to have, experience, feel, or achieve before you turn 22 ❤️  
-Dream freely. Think boldly. This is your new era speaking.
+This is your 21 Before 22 challenge ✨
+<br><br>
+1️⃣ Write 21 things your heart truly desires before you turn 22.
+<br>
+They can be things you want to have, experience, feel, achieve, or become.
+<br><br>
+2️⃣ When you're done, press “Choose My 5”.
+<br><br>
+3️⃣ The system will randomly select 5 for you.
+<br><br>
+4️⃣ Screenshot the results and send them to me 😉
+<br><br>
+5️⃣ I officially commit to making those 5 happen before you turn 22.
 </p>
+</div>
 
 <textarea id="wishList" placeholder="Write each wish on a new line..."></textarea>
 
@@ -141,7 +159,7 @@ Dream freely. Think boldly. This is your new era speaking.
 
 <script>
 
-// Typing Header
+// Header Typing
 const headerText = "2 Days Until You Turn 21 My Queen 👑💖";
 let h = 0;
 function typeHeader(){
@@ -154,7 +172,7 @@ function typeHeader(){
 typeHeader();
 
 
-// Countdown Logic
+// Countdown
 const birthday = new Date("March 6, 2026 00:00:00").getTime();
 setInterval(function(){
     const now = new Date().getTime();
@@ -172,8 +190,8 @@ setInterval(function(){
 },1000);
 
 
-// Love Letter Typing
-const letterText = "My beautiful love ❤️\n\nIn just 2 days, you step into 21 — a new chapter, a new glow, a new level of you. I wish I could be there at midnight, holding you close and whispering how proud I am of the woman you are becoming.\n\nEven though 1,867km separates us right now, nothing could ever separate my heart from yours. Your 21st birthday isn’t just about turning a year older… it’s about celebrating your strength, your softness, your dreams, and everything that makes you you.\n\nTwo more days, my love. And your new era begins ✨";
+// Love Letter (No distance, no holding)
+const letterText = "My beautiful love ❤️\n\nIn just 2 days, you step into 21 — a powerful, radiant new chapter of your life. This year isn’t just another number. It’s growth. It’s confidence. It’s stepping into your womanhood with grace and fire.\n\nI admire your mind, your strength, your softness, your ambition, and the way you carry yourself. 21 looks like elevation. It looks like glow. It looks like you becoming even more unstoppable.\n\nTwo days left… and the world better be ready for you ✨";
 let l = 0;
 function typeLetter(){
     if(l < letterText.length){
@@ -185,7 +203,18 @@ function typeLetter(){
 typeLetter();
 
 
-// Random 5 Picker
+// Toggle Instructions
+function toggleInstructions(){
+    const box = document.getElementById("instructions");
+    if(box.style.display === "none"){
+        box.style.display = "block";
+    } else {
+        box.style.display = "none";
+    }
+}
+
+
+// Random Picker
 function pickFive(){
     let wishes = document.getElementById("wishList").value.split("\n").filter(w => w.trim() !== "");
     
