@@ -9,7 +9,7 @@
 body{
     margin:0;
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
+    background: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
                 url("ourphoto.jpg");
     background-size: cover;
     background-position: center;
@@ -19,24 +19,48 @@ body{
     padding:20px;
 }
 
+/* Header */
 h1{
     font-size:30px;
     margin-top:20px;
 }
 
+/* Countdown Frames */
 .countdown{
-    font-size:38px;
-    margin:20px 0;
-    font-weight:bold;
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin:30px 0;
+    flex-wrap:wrap;
 }
 
+.time-box{
+    background:rgba(255,255,255,0.15);
+    padding:20px;
+    border-radius:20px;
+    min-width:90px;
+    border:2px solid white;
+}
+
+.time-box span{
+    font-size:32px;
+    font-weight:bold;
+    display:block;
+}
+
+.time-box small{
+    font-size:14px;
+    letter-spacing:1px;
+}
+
+/* Sections */
 .section{
     background: rgba(255,255,255,0.15);
     padding:20px;
     border-radius:20px;
     margin:20px auto;
     width:90%;
-    max-width:600px;
+    max-width:650px;
 }
 
 textarea{
@@ -72,16 +96,40 @@ button{
 
 <h1 id="typing"></h1>
 
-<div class="countdown" id="countdown"></div>
+<!-- Countdown Frames -->
+<div class="countdown">
+    <div class="time-box">
+        <span id="days"></span>
+        <small>DAYS</small>
+    </div>
+    <div class="time-box">
+        <span id="hours"></span>
+        <small>HOURS</small>
+    </div>
+    <div class="time-box">
+        <span id="minutes"></span>
+        <small>MINUTES</small>
+    </div>
+    <div class="time-box">
+        <span id="seconds"></span>
+        <small>SECONDS</small>
+    </div>
+</div>
 
+<!-- Love Letter -->
 <div class="section">
-<h2>💌 Love Letter - 2 Days To Go</h2>
+<h2>💌 2 Days To Your 21st</h2>
 <p id="loveLetter"></p>
 </div>
 
+<!-- 21 Before 22 -->
 <div class="section">
 <h2>💫 21 Before 22</h2>
-<p>Write 21 things you want to have, experience, feel, or achieve before turning 22 ❤️</p>
+<p>
+My love, write down 21 beautiful things your heart desires —  
+things you want to have, experience, feel, or achieve before you turn 22 ❤️  
+Dream freely. Think boldly. This is your new era speaking.
+</p>
 
 <textarea id="wishList" placeholder="Write each wish on a new line..."></textarea>
 
@@ -93,8 +141,8 @@ button{
 
 <script>
 
-// Typing Effect Header
-const headerText = "2 Days Until You Turn 21 My Pink Heart 💖";
+// Typing Header
+const headerText = "2 Days Until You Turn 21 My Queen 👑💖";
 let h = 0;
 function typeHeader(){
     if(h < headerText.length){
@@ -106,7 +154,7 @@ function typeHeader(){
 typeHeader();
 
 
-// Countdown
+// Countdown Logic
 const birthday = new Date("March 6, 2026 00:00:00").getTime();
 setInterval(function(){
     const now = new Date().getTime();
@@ -117,13 +165,15 @@ setInterval(function(){
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    document.getElementById("countdown").innerHTML =
-        days + " Days " + hours + " Hours " + minutes + " Minutes " + seconds + " Seconds";
+    document.getElementById("days").innerHTML = days;
+    document.getElementById("hours").innerHTML = hours;
+    document.getElementById("minutes").innerHTML = minutes;
+    document.getElementById("seconds").innerHTML = seconds;
 },1000);
 
 
-// Love Letter Typing Effect
-const letterText = "My Love ❤️\n\nOnly 2 days left until you turn 21. I wish I could hold your hand at midnight and watch your face light up. Even though we are 1,867km apart, nothing feels distant about my love for you.\n\nI am so proud of the woman you are becoming. 21 looks powerful on you already. I can't wait to celebrate you properly, spoil you, and make memories that will make 21 unforgettable.\n\nTwo more sleeps… and my queen enters her new era 👑💕";
+// Love Letter Typing
+const letterText = "My beautiful love ❤️\n\nIn just 2 days, you step into 21 — a new chapter, a new glow, a new level of you. I wish I could be there at midnight, holding you close and whispering how proud I am of the woman you are becoming.\n\nEven though 1,867km separates us right now, nothing could ever separate my heart from yours. Your 21st birthday isn’t just about turning a year older… it’s about celebrating your strength, your softness, your dreams, and everything that makes you you.\n\nTwo more days, my love. And your new era begins ✨";
 let l = 0;
 function typeLetter(){
     if(l < letterText.length){
@@ -152,8 +202,8 @@ function pickFive(){
         output += (index+1) + ". " + wish + "<br>";
     });
 
-    output += "<br><br>📸 Screenshot this and send it to him 😉";
-    output += "<br>He officially promises to fulfill these before you turn 22 💍";
+    output += "<br><br>📸 Screenshot this and send it to me 😉";
+    output += "<br>I officially promise to fulfill these before you turn 22 💍";
 
     document.getElementById("result").innerHTML = output;
 }
