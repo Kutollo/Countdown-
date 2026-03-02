@@ -1,329 +1,197 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MyPinkHeart Turns 21 💖</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
-
+<title>MyPinkHeart 💕</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-
 body{
-min-height:100vh;
-display:flex;
-justify-content:center;
-align-items:flex-start;
-text-align:center;
-color:white;
-background:url("https://images.unsplash.com/photo-1502780402662-acc01917a918") no-repeat center center/cover;
-padding:20px 0;
-overflow-x:hidden;
-}
-
-.overlay{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:linear-gradient(135deg, rgba(255,105,180,0.85), rgba(255,20,147,0.85));
-z-index:0;
-}
-
-.container{
-position:relative;
-z-index:1;
-background:rgba(255,255,255,0.15);
-backdrop-filter:blur(10px);
-padding:25px;
-border-radius:25px;
-box-shadow:0 15px 35px rgba(0,0,0,0.3);
-max-width:600px;
-width:95%;
-margin-top:40px;
+  margin:0;
+  padding:0;
+  font-family: 'Segoe UI', cursive;
+  background: linear-gradient(to right, #ffb6c1, #ff69b4);
+  color:white;
+  text-align:center;
+  overflow-x:hidden;
 }
 
 h1{
-font-family:'Great Vibes',cursive;
-font-size:38px;
-}
-
-h2{
-font-weight:300;
-margin-bottom:20px;
-font-size:18px;
+  margin-top:30px;
+  font-size:40px;
 }
 
 .countdown{
-display:flex;
-justify-content:space-between;
-flex-wrap:wrap;
-gap:10px;
-margin-top:20px;
-}
-
-.time-box{
-flex:1 1 70px;
-background:rgba(255,255,255,0.25);
-padding:12px;
-border-radius:15px;
-}
-
-.time-box span{
-display:block;
-font-size:24px;
-font-weight:bold;
+  font-size:28px;
+  margin:20px 0;
 }
 
 .message{
-margin-top:20px;
-font-size:14px;
-line-height:1.6;
-min-height:80px;
+  width:80%;
+  margin:auto;
+  font-size:20px;
+  line-height:1.6;
+  min-height:120px;
 }
 
 button{
-margin-top:15px;
-padding:12px 20px;
-border:none;
-border-radius:25px;
-background:#ff69b4;
-color:white;
-cursor:pointer;
-font-weight:bold;
-width:100%;
-transition:0.3s;
+  padding:12px 20px;
+  border:none;
+  border-radius:25px;
+  background:white;
+  color:#ff1493;
+  font-weight:bold;
+  margin:10px;
+  cursor:pointer;
+  transition:0.3s;
 }
 
 button:hover{
-background:#ff1493;
+  background:#ff1493;
+  color:white;
 }
 
-.photo{
-margin-top:20px;
-width:100%;
-border-radius:20px;
-box-shadow:0 10px 20px rgba(0,0,0,0.3);
-}
-
-.popup{
-position:fixed;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%) scale(0);
-background:white;
-color:#ff1493;
-padding:25px;
-border-radius:20px;
-width:90%;
-max-width:400px;
-box-shadow:0 20px 40px rgba(0,0,0,0.4);
-transition:0.4s ease;
-z-index:10;
-max-height:80vh;
-overflow-y:auto;
-}
-
-.popup.active{
-transform:translate(-50%,-50%) scale(1);
+img{
+  width:250px;
+  border-radius:20px;
+  margin-top:20px;
+  box-shadow:0 0 20px rgba(255,255,255,0.7);
 }
 
 .heart{
-position:absolute;
-color:white;
-font-size:20px;
-animation:float 6s infinite ease-in;
-opacity:0.7;
+  position:fixed;
+  top:-10px;
+  font-size:20px;
+  animation:fall linear infinite;
 }
 
-@keyframes float{
-0%{transform:translateY(100vh);opacity:0;}
-50%{opacity:1;}
-100%{transform:translateY(-10vh);opacity:0;}
+@keyframes fall{
+  to{
+    transform:translateY(100vh);
+  }
 }
 
-.firework{
-position:absolute;
-width:5px;
-height:5px;
-background:white;
-border-radius:50%;
-animation:explode 1s ease-out forwards;
-}
-
-@keyframes explode{
-to{
-transform:translate(var(--x), var(--y));
-opacity:0;
-}
-}
-
-.cursor{
-display:inline-block;
-width:2px;
-background:#ff1493;
-animation:blink 1s infinite;
-margin-left:3px;
-}
-
-@keyframes blink{
-0%,50%,100%{opacity:1;}
-25%,75%{opacity:0;}
-}
-
-@media(max-width:400px){
-h1{font-size:30px;}
-.time-box span{font-size:20px;}
+.categories{
+  margin-top:20px;
 }
 </style>
 </head>
 <body>
 
-<div class="overlay"></div>
+<h1>Tiisetso’s 21st Countdown 💕</h1>
 
-<div class="container">
-<h1>MyPinkHeart 💖</h1>
-<h2>Countdown to Your 21st Birthday 🎂</h2>
+<img src="ourphoto.jpg" alt="Our Photo">
 
-<div class="countdown">
-<div class="time-box"><span id="days">0</span><small>Days</small></div>
-<div class="time-box"><span id="hours">0</span><small>Hours</small></div>
-<div class="time-box"><span id="minutes">0</span><small>Minutes</small></div>
-<div class="time-box"><span id="seconds">0</span><small>Seconds</small></div>
-</div>
+<div class="countdown" id="countdown"></div>
 
-<div class="message" id="countdownMessage"></div>
+<div class="message" id="mainMessage"></div>
 
-<img src="ourphoto.jpg" class="photo" alt="Our Love">
+<button onclick="openLetter()">Open My Heart 💌</button>
 
-<button onclick="openLetter()">Open 4-Day Countdown Letter 💌</button>
-<button onclick="showExcitement()">I Can’t Wait! 😍💖</button>
-</div>
-
-<div class="popup" id="letter">
-<h3 style="font-family:'Great Vibes',cursive;font-size:26px;">Counting Down the Magic ✨</h3>
-<p id="typingText" style="margin-top:10px; line-height:1.7;"></p>
-<span class="cursor"></span>
-<button onclick="closeLetter()">Close 💕</button>
+<div class="categories">
+  <p>Choose ONE category to answer 😏👇</p>
+  <button onclick="showQuestion('romantic')">Romantic 💖</button>
+  <button onclick="showQuestion('birthday')">Birthday 🎂</button>
+  <button onclick="showQuestion('funny')">Funny 😂</button>
+  <button onclick="showQuestion('naughty')">Naughty 😈</button>
+  <button onclick="showQuestion('didyouknow')">Did You Know? 🤔</button>
 </div>
 
 <script>
-// Birthday countdown date
-const birthday=new Date("March 6, 2026 00:00:00").getTime();
+// Countdown to 6 March 2026
+const birthday = new Date("March 6, 2026 00:00:00").getTime();
 
-// Update countdown every second
-setInterval(()=>{
-const now=new Date().getTime();
-const distance=birthday-now;
+setInterval(function(){
+  const now = new Date().getTime();
+  const gap = birthday - now;
 
-if(distance<0){
-document.querySelector(".container").innerHTML=
-"<h1>Happy 21st Birthday Tiisetso Desiree Mnisi 💖🎉</h1><p>The big day is here! I can’t wait to see you in May/June and celebrate all your amazing 21 years together! 💕✨</p>";
-launchFireworks();
-return;
-}
+  const days = Math.floor(gap / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 
-document.getElementById("days").innerText=Math.floor(distance/(1000*60*60*24));
-document.getElementById("hours").innerText=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
-document.getElementById("minutes").innerText=Math.floor((distance%(1000*60*60))/(1000*60));
-document.getElementById("seconds").innerText=Math.floor((distance%(1000*60))/1000);
+  document.getElementById("countdown").innerHTML =
+  "Only " + days + " days and " + hours + " hours left until you turn 21 🎉💖";
 },1000);
 
-// Floating hearts
-function createHeart(){
-const heart=document.createElement("div");
-heart.classList.add("heart");
-heart.innerHTML="💖";
-heart.style.left=Math.random()*100+"vw";
-heart.style.fontSize=Math.random()*20+10+"px";
-heart.style.animationDuration=Math.random()*3+3+"s";
-document.body.appendChild(heart);
-setTimeout(()=>{heart.remove();},6000);
-}
-setInterval(createHeart,800);
+// Typing effect main message
+const mainText = `3 DAYS TO GO 😍💖
 
-// Open/Close letter popup
-function openLetter(){
-document.getElementById("letter").classList.add("active");
-startTypingLetter();
-}
+My beautiful Tiisetso Desiree Mnisi...
 
-function closeLetter(){
-document.getElementById("letter").classList.remove("active");
-document.getElementById("typingText").innerHTML="";
-}
+In just 3 days, the world celebrates 21 years of the most breathtaking, kind, sweet, and unforgettable woman.  
 
-// Excitement button alert
-function showExcitement(){
-alert("Only 4 days left!! 🎉💖 I’m imagining your smile, your laugh, and our time together in May/June… Tiisetso, you’re my favorite part of every day! 😍✨");
-}
+Even though we are miles apart right now, my heart feels closer to you than ever.  
+Every second that passes is one second closer to your 21st… and one second closer to more memories with you.  
 
-// Typing effect for 4-day countdown message
-const countdownMsg = `Only 4 days to go until my favorite human turns 21 🎉💖!
-Even though miles separate us right now, I can already feel the excitement building…
-I’m counting down every second until I can finally hug you tight in May/June 😏💞
-Tiisetso, get ready… your 21st is going to be legendary, and I’ll be there in spirit (and soon enough in person!) 💕✨`;
-
-let j = 0;
-function typeCountdown() {
-  const el = document.getElementById("countdownMessage");
-  el.innerHTML = "";
-  j = 0;
-  function typeLetter(){
-    if(j < countdownMsg.length){
-      el.innerHTML += countdownMsg.charAt(j);
-      j++;
-      setTimeout(typeLetter, 35);
-    }
-  }
-  typeLetter();
-}
-typeCountdown(); // Start on page load
-
-// Typing effect for popup letter
-const letterMsg = `Tiisetso Desiree Mnisi 💖
-
-Just 4 days left until your 21st… and I’m already bursting with excitement!  
-
-Being apart is tough, but thinking about seeing you in May and June keeps me going 😍  
-Every laugh, every smile, every memory we share feels even more precious now.  
-
-I can’t wait to celebrate YOU — your beauty, your heart, your 21 amazing years.  
-Get ready for endless hugs, kisses, and all the love I’ve been saving for you 💕✨  
-
-Until then, know that every second apart makes me love you more. 💖`;
+Your birthday isn’t just a day… it’s a reminder that heaven really did send me someone special. 💕✨`;
 
 let i = 0;
-function startTypingLetter(){
-const typingElement = document.getElementById("typingText");
-typingElement.innerHTML="";
-i = 0;
-function type(){
-if(i < letterMsg.length){
-typingElement.innerHTML += letterMsg.charAt(i);
-i++;
-setTimeout(type, 35);
+function typeMain(){
+  if(i < mainText.length){
+    document.getElementById("mainMessage").innerHTML += mainText.charAt(i);
+    i++;
+    setTimeout(typeMain, 35);
+  }
 }
-}
-type();
+typeMain();
+
+// Romantic Letter
+function openLetter(){
+  alert(`My Love 💌
+
+Three days… just three days until you turn 21.
+
+I wish I could hold your face in my hands at midnight and whisper how proud I am of the woman you’re becoming.
+
+You are soft yet strong.  
+Sweet yet powerful.  
+Calm yet unforgettable.
+
+Your smile alone could fix my worst day.  
+Your voice alone can calm my storm.  
+
+Being in love with you feels like winning every single day.
+
+Happy almost 21st to the woman who owns my heart completely. 💖`);
 }
 
-// Fireworks on birthday
-function launchFireworks(){
-for(let i=0;i<100;i++){
-let fw=document.createElement("div");
-fw.classList.add("firework");
-fw.style.left="50%";
-fw.style.top="50%";
-fw.style.setProperty('--x',(Math.random()-0.5)*500+"px");
-fw.style.setProperty('--y',(Math.random()-0.5)*500+"px");
-document.body.appendChild(fw);
-setTimeout(()=>{fw.remove();},1000);
+// Category Questions
+function showQuestion(type){
+  let question = "";
+
+  if(type === "romantic"){
+    question = "Romantic 💖: What is the one moment with me that makes your heart feel the safest?";
+  }
+
+  if(type === "birthday"){
+    question = "Birthday 🎂: On your 21st, what’s the one wish you secretly hope comes true?";
+  }
+
+  if(type === "funny"){
+    question = "Funny 😂: If I tried to bake your 21st birthday cake, would you eat it… or call the fire department?";
+  }
+
+  if(type === "naughty"){
+    question = "Naughty 😈: If we had one night with no rules and no interruptions… what’s the very first thing you’d do to me?";
+  }
+
+  if(type === "didyouknow"){
+    question = "Did You Know? 🤔: Did you know that your name lights up my phone… but it also lights up my entire mood instantly?";
+  }
+
+  alert(question);
 }
-}
+
+// Floating hearts
+setInterval(function(){
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "💖";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (Math.random()*3+2) + "s";
+  document.body.appendChild(heart);
+
+  setTimeout(()=>{
+    heart.remove();
+  },5000);
+},300);
 </script>
 
 </body>
-  </html>
+</html>
