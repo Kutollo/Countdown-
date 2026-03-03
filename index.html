@@ -15,66 +15,69 @@ body{
     color:white;
     text-align:center;
     padding:20px;
+    overflow-x:hidden;
 }
 
 /* Header */
-h1{ font-size:30px; margin-top:20px; }
+h1{ font-size:28px; margin-top:20px; }
 
 /* Countdown Frames */
 .countdown{
     display:flex;
     justify-content:center;
-    gap:15px;
-    margin:30px 0;
+    gap:10px;
+    margin:20px 0;
     flex-wrap:wrap;
 }
 
 .time-box{
     background:rgba(255,255,255,0.15);
-    padding:20px;
-    border-radius:20px;
-    min-width:90px;
+    padding:15px;
+    border-radius:15px;
+    min-width:70px;
     border:2px solid white;
 }
 
 .time-box span{
-    font-size:32px;
+    font-size:26px;
     font-weight:bold;
     display:block;
 }
 
 .time-box small{
-    font-size:14px;
+    font-size:12px;
     letter-spacing:1px;
 }
 
 /* Love Letter */
 .section{
     background: rgba(255,255,255,0.15);
-    padding:20px;
-    border-radius:20px;
-    margin:20px auto;
-    width:90%;
+    padding:15px;
+    border-radius:15px;
+    margin:15px auto;
+    width:95%;
     max-width:650px;
+    text-align:left;
 }
 
-#loveLetter{ text-align:left; white-space:pre-wrap; }
+#loveLetter{ white-space:pre-wrap; }
 
 /* Spin Section */
 .spin-section{
-    margin-top:20px;
+    margin-top:15px;
     background: rgba(255,255,255,0.15);
     padding:15px;
-    border-radius:20px;
-    width:90%;
+    border-radius:15px;
+    width:95%;
     max-width:600px;
     margin-left:auto;
     margin-right:auto;
+    text-align:center;
 }
 
 .spin-btn{
-    margin:10px;
-    padding:12px 25px;
+    margin:8px;
+    padding:12px 20px;
     font-size:16px;
     border:none;
     border-radius:25px;
@@ -84,16 +87,18 @@ h1{ font-size:30px; margin-top:20px; }
     font-weight:bold;
 }
 
-#instructions{ display:none; margin-top:15px; text-align:left; background:rgba(255,255,255,0.15); padding:15px; border-radius:15px;}
+#instructions{ display:none; margin-top:10px; text-align:left; background:rgba(255,255,255,0.15); padding:10px; border-radius:10px; font-size:14px;}
 
-#result{ margin-top:15px; font-size:16px; font-weight:bold; color:#ff69b4; white-space:pre-wrap; text-align:left; }
+#result{ margin-top:10px; font-size:16px; font-weight:bold; color:#ff69b4; white-space:pre-wrap; text-align:left; }
+
+#summary{ margin-top:15px; font-size:16px; color:#ff69b4; white-space:pre-wrap; text-align:left; }
 </style>
 </head>
 <body>
 
 <h1 id="typing"></h1>
 
-<!-- Countdown Frames -->
+<!-- Countdown -->
 <div class="countdown">
     <div class="time-box"><span id="days"></span><small>DAYS</small></div>
     <div class="time-box"><span id="hours"></span><small>HOURS</small></div>
@@ -115,15 +120,17 @@ h1{ font-size:30px; margin-top:20px; }
 2️⃣ Each spin will randomly select **1 outcome** from that category.<br>
 3️⃣ Spin lasts 10 seconds with suspense animation.<br>
 4️⃣ Screenshot each revealed outcome and send it to me 😉<br>
-5️⃣ Button disappears after spinning to prevent cheating.
+5️⃣ Button disappears after spinning to prevent cheating.<br>
+6️⃣ After spinning all categories, your fate summary appears below.
 </div>
 </div>
 
 <!-- Spin Categories -->
-<div class="spin-section" id="spinSection">
+<div class="spin-section">
 <h2>🎲 Spin Your Fate</h2>
 <div id="spinButtons"></div>
 <div id="result"></div>
+<div id="summary"></div>
 </div>
 
 <script>
@@ -203,7 +210,10 @@ const categories = {
     ]
 };
 
-// Create buttons for each category
+// Track selected outcomes
+const selectedOutcomes = {};
+
+// Create buttons
 const spinButtonsDiv = document.getElementById('spinButtons');
 for(const cat in categories){
     const btn = document.createElement('button');
@@ -213,7 +223,7 @@ for(const cat in categories){
     spinButtonsDiv.appendChild(btn);
 }
 
-// Spin function for single category
+// Spin function
 function spinCategory(category, btn){
     btn.disabled = true;
     btn.style.display = 'none';
@@ -222,7 +232,7 @@ function spinCategory(category, btn){
     const resultDiv = document.getElementById('result');
     resultDiv.innerText = `${category}: Spinning... 🎡`;
 
-    let totalSteps = 50; // 10s approx with 200ms interval
+    let totalSteps = 50; // approx 10s
     let currentStep = 0;
 
     const spinInterval = setInterval(()=>{
@@ -231,9 +241,18 @@ function spinCategory(category, btn){
         currentStep++;
         if(currentStep >= totalSteps){
             clearInterval(spinInterval);
-            // Final choice
             const finalChoice = arr[Math.floor(Math.random()*arr.length)];
             resultDiv.innerText = `${category}: ${finalChoice} ✅`;
+            selectedOutcomes[category] = finalChoice;
+
+            // If last category spun, show summary
+            if(Object.keys(selectedOutcomes).length === Object.keys(categories).length){
+                let summaryText = "🎉 Your Fate Summary:\n\n";
+                for(const cat in selectedOutcomes){
+                    summaryText += `${cat}: ${selectedOutcomes[cat]}\n`;
+                }
+                document.getElementById('summary').innerText = summaryText;
+            }
         }
     }, 200);
 }
