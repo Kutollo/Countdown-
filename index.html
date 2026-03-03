@@ -3,27 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>1 Day To 21 ❤️</title>
-
+<title>1 Day To 21 🎲</title>
 <style>
 body{
     margin:0;
-    font-family:'Poppins',sans-serif;
+    font-family: 'Poppins', sans-serif;
     background: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
                 url("ourphoto.jpg");
-    background-size:cover;
-    background-position:center;
-    background-attachment:fixed;
+    background-size: cover;
+    background-position: center;
     color:white;
     text-align:center;
     padding:20px;
 }
 
-h1{
-    font-size:30px;
-    margin-top:20px;
-}
+/* Header */
+h1{ font-size:30px; margin-top:20px; }
 
+/* Countdown Frames */
 .countdown{
     display:flex;
     justify-content:center;
@@ -51,6 +48,7 @@ h1{
     letter-spacing:1px;
 }
 
+/* Love Letter */
 .section{
     background: rgba(255,255,255,0.15);
     padding:20px;
@@ -60,7 +58,54 @@ h1{
     max-width:650px;
 }
 
-button{
+#loveLetter{ text-align:left; white-space:pre-wrap; }
+
+/* Spin Wheel */
+#wheelContainer{
+    margin-top:20px;
+    position:relative;
+    width:300px;
+    height:300px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#wheel{
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    border:10px solid #fff;
+    overflow:hidden;
+    position:relative;
+    transform: rotate(0deg);
+    transition: transform 5s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.slice{
+    position:absolute;
+    width:50%;
+    height:50%;
+    top:50%;
+    left:50%;
+    transform-origin:0% 0%;
+    text-align:left;
+    padding-left:10px;
+    font-size:14px;
+}
+
+/* Spin Pointer */
+#pointer{
+    width:0; height:0; 
+    border-left:15px solid transparent;
+    border-right:15px solid transparent;
+    border-bottom:30px solid #ff4fa3;
+    margin:0 auto;
+    position:relative;
+    top:-15px;
+}
+
+/* Spin Button */
+#spinBtn, #instructionsBtn{
     margin-top:20px;
     padding:15px 30px;
     border:none;
@@ -72,36 +117,28 @@ button{
     font-weight:bold;
 }
 
-.promise{
-    margin-top:15px;
+/* Selected Outcome */
+#result{
+    margin-top:20px;
     font-size:16px;
-    display:none;
+    font-weight:bold;
+    color:#ff69b4;
 }
+
+/* Instructions */
+#instructions{ display:none; margin-top:15px; text-align:left; background:rgba(255,255,255,0.15); padding:15px; border-radius:15px;}
 </style>
 </head>
-
 <body>
 
 <h1 id="typing"></h1>
 
-<!-- Countdown -->
+<!-- Countdown Frames -->
 <div class="countdown">
-    <div class="time-box">
-        <span id="days"></span>
-        <small>DAYS</small>
-    </div>
-    <div class="time-box">
-        <span id="hours"></span>
-        <small>HOURS</small>
-    </div>
-    <div class="time-box">
-        <span id="minutes"></span>
-        <small>MINUTES</small>
-    </div>
-    <div class="time-box">
-        <span id="seconds"></span>
-        <small>SECONDS</small>
-    </div>
+    <div class="time-box"><span id="days"></span><small>DAYS</small></div>
+    <div class="time-box"><span id="hours"></span><small>HOURS</small></div>
+    <div class="time-box"><span id="minutes"></span><small>MINUTES</small></div>
+    <div class="time-box"><span id="seconds"></span><small>SECONDS</small></div>
 </div>
 
 <!-- Love Letter -->
@@ -110,25 +147,31 @@ button{
 <p id="loveLetter"></p>
 </div>
 
-<!-- Promise Vault -->
+<!-- Spin the 21 Fate -->
 <div class="section">
-<h2>💎 Boyfriend Promise Vault</h2>
-<p>These promises are sealed for your 21st year.  
-Tap below to unlock them 👑</p>
+<h2>🎲 Spin the 21 Fate</h2>
+<p>Tap the button and let fate choose one romantic, funny, naughty, adventurous, and physical moment ❤️</p>
 
-<button id="vaultBtn" onclick="openVault()">Unlock My Promises 💖</button>
+<button id="instructionsBtn" onclick="toggleInstructions()">Tap For Instructions ℹ️</button>
+<div id="instructions">
+1️⃣ Press “Spin My Fate” once.  
+2️⃣ The system will randomly select **1 outcome from each category**.  
+3️⃣ The spin animation adds suspense.  
+4️⃣ Screenshot and send it to me 😉  
+5️⃣ Button disappears after spinning so you can’t cheat.
+</div>
 
-<div class="promise" id="p1">1️⃣ I promise to support every dream you chase this year, no matter how big it feels.</div>
-<div class="promise" id="p2">2️⃣ I promise to remind you how powerful and beautiful you are, especially on days you forget.</div>
-<div class="promise" id="p3">3️⃣ I promise to celebrate your wins loudly and stand beside you quietly when you need strength.</div>
-<div class="promise" id="p4">4️⃣ I promise to create unforgettable memories with you during your 21st year.</div>
-<div class="promise" id="p5">5️⃣ I promise to love you intentionally, consistently, and wholeheartedly in this new era of your life.</div>
+<div id="wheelContainer">
+    <div id="wheel"></div>
+    <div id="pointer"></div>
+</div>
 
+<button id="spinBtn" onclick="spinWheel()">Spin My Fate 🎉</button>
+<div id="result"></div>
 </div>
 
 <script>
-
-// Header Typing
+// Typing Header
 const headerText = "1 Day Until You Turn 21 My Queen 👑💖";
 let h = 0;
 function typeHeader(){
@@ -140,27 +183,19 @@ function typeHeader(){
 }
 typeHeader();
 
-
 // Countdown
 const birthday = new Date("March 6, 2026 00:00:00").getTime();
 setInterval(function(){
     const now = new Date().getTime();
     const distance = birthday - now;
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    document.getElementById("days").innerHTML = days;
-    document.getElementById("hours").innerHTML = hours;
-    document.getElementById("minutes").innerHTML = minutes;
-    document.getElementById("seconds").innerHTML = seconds;
+    document.getElementById("days").innerHTML = Math.floor(distance / (1000 * 60 * 60 * 24));
+    document.getElementById("hours").innerHTML = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    document.getElementById("minutes").innerHTML = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    document.getElementById("seconds").innerHTML = Math.floor((distance % (1000 * 60)) / 1000);
 },1000);
 
-
-// Love Letter (1 Day Version)
-const letterText = "My love ❤️\n\nTomorrow, you officially step into 21 — a year of elevation, glow, growth, and greatness. I admire the way you carry yourself, the dreams you hold, and the fire inside you.\n\n21 isn’t just another birthday. It’s your next level. And I’m so excited to watch you step into it with confidence and grace.\n\nOne more sleep… and the world celebrates you 👑✨";
+// Love Letter
+const letterText = "My dearest love ❤️\n\nTomorrow you turn 21 — a powerful, radiant new chapter. Get ready to sparkle, laugh, explore, and enjoy every moment. Today, celebrate YOU, your charm, your glow, and your unstoppable spirit ✨";
 let l = 0;
 function typeLetter(){
     if(l < letterText.length){
@@ -171,19 +206,76 @@ function typeLetter(){
 }
 typeLetter();
 
-
-// Open Vault (cannot reopen)
-function openVault(){
-    document.getElementById("vaultBtn").style.display = "none";
-
-    let promises = ["p1","p2","p3","p4","p5"];
-    promises.forEach((id,index)=>{
-        setTimeout(()=>{
-            document.getElementById(id).style.display="block";
-        }, index*800);
-    });
+// Toggle Instructions
+function toggleInstructions(){
+    const box = document.getElementById("instructions");
+    box.style.display = box.style.display === "none" ? "block" : "none";
 }
 
+// Outcomes by category
+const categories = {
+    Romantic: [
+        "Slow dance together 💃",
+        "Handwritten love letter 💌",
+        "Surprise picnic 🧺",
+        "10-min hug challenge 🤗",
+        "Recreate first deep conversation ❤️"
+    ],
+    Funny: [
+        "Flirt like first meeting 😏",
+        "Answer 3 ridiculous questions 😂",
+        "Recreate cringey TikTok trend 🎥"
+    ],
+    Naughty: [
+        "Whisper a secret fantasy 😉",
+        "5-min kiss challenge 😘",
+        "Blindfold playful game 😏",
+        "Voice note about body love 🔥",
+        "She chooses your outfit 😌"
+    ],
+    Adventurous: [
+        "Mini road trip 🚗",
+        "Try a new activity together 🧗",
+        "Go somewhere new 🌍",
+        "Say yes to one bold idea ✔️"
+    ],
+    Physical: [
+        "20 forehead kisses 😚",
+        "Carry her for 21 steps 💪",
+        "21-sec hug from behind 🤗",
+        "Hold hands during a walk ✨"
+    ]
+};
+
+function spinWheel(){
+    const spinBtn = document.getElementById('spinBtn');
+    spinBtn.disabled = true;
+    spinBtn.style.display = 'none';
+
+    // Randomly select 1 from each category
+    const selected = [];
+    for(const cat in categories){
+        const arr = categories[cat];
+        selected.push(arr[Math.floor(Math.random()*arr.length)]);
+    }
+
+    // Fake spin animation
+    const wheel = document.getElementById('wheel');
+    const rotations = 8; // full rotations
+    const finalDeg = rotations*360 + Math.floor(Math.random()*360);
+    wheel.style.transform = `rotate(${finalDeg}deg)`;
+
+    // Show result after animation
+    setTimeout(()=>{
+        let output = "🎉 Fate chose for you:\n";
+        const cats = Object.keys(categories);
+        selected.forEach((item,i)=>{
+            output += `\n${cats[i]}: ${item}`;
+        });
+        output += "\n\n📸 Screenshot and send it to me 😉";
+        document.getElementById('result').innerText = output;
+    },5200);
+}
 </script>
 
 </body>
