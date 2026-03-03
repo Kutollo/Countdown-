@@ -60,82 +60,33 @@ h1{ font-size:30px; margin-top:20px; }
 
 #loveLetter{ text-align:left; white-space:pre-wrap; }
 
-/* Spin Wheel */
-#wheelContainer{
+/* Spin Section */
+.spin-section{
     margin-top:20px;
-    position:relative;
-    width:350px;
-    height:350px;
+    background: rgba(255,255,255,0.15);
+    padding:15px;
+    border-radius:20px;
+    width:90%;
+    max-width:600px;
     margin-left:auto;
     margin-right:auto;
 }
 
-#wheel{
-    width:100%;
-    height:100%;
-    border-radius:50%;
-    border:10px solid #fff;
-    overflow:hidden;
-    position:relative;
-    transform: rotate(0deg);
-    transition: transform 10s cubic-bezier(0.33, 1, 0.68, 1);
-}
-
-.slice{
-    position:absolute;
-    width:50%;
-    height:50%;
-    top:50%;
-    left:50%;
-    transform-origin:0% 0%;
-    text-align:left;
-    padding-left:5px;
-    font-size:12px;
-    font-weight:bold;
-    color:#fff;
-}
-
-/* Category colors */
-.Romantic{background:#ff69b4; border-radius:0 100% 0 0;}
-.Funny{background:#f7b32b; border-radius:0 100% 0 0;}
-.Naughty{background:#d62828; border-radius:0 100% 0 0;}
-.Adventurous{background:#3a86ff; border-radius:0 100% 0 0;}
-.Physical{background:#6a4c93; border-radius:0 100% 0 0;}
-
-/* Spin Pointer */
-#pointer{
-    width:0; height:0; 
-    border-left:15px solid transparent;
-    border-right:15px solid transparent;
-    border-bottom:30px solid #ff4fa3;
-    margin:0 auto;
-    position:relative;
-    top:-15px;
-}
-
-/* Spin Button */
-#spinBtn, #instructionsBtn{
-    margin-top:20px;
-    padding:15px 30px;
+.spin-btn{
+    margin:10px;
+    padding:12px 25px;
+    font-size:16px;
     border:none;
-    border-radius:30px;
-    font-size:18px;
+    border-radius:25px;
     background:white;
     color:#ff4fa3;
     cursor:pointer;
     font-weight:bold;
 }
 
-/* Selected Outcome */
-#result{
-    margin-top:20px;
-    font-size:16px;
-    font-weight:bold;
-    color:#ff69b4;
-}
-
-/* Instructions */
 #instructions{ display:none; margin-top:15px; text-align:left; background:rgba(255,255,255,0.15); padding:15px; border-radius:15px;}
+
+#result{ margin-top:15px; font-size:16px; font-weight:bold; color:#ff69b4; white-space:pre-wrap; text-align:left; }
 </style>
 </head>
 <body>
@@ -156,26 +107,22 @@ h1{ font-size:30px; margin-top:20px; }
 <p id="loveLetter"></p>
 </div>
 
-<!-- Spin the 21 Fate -->
+<!-- Spin Instructions -->
 <div class="section">
-<h2>🎲 Spin the 21 Fate</h2>
-<p>Tap the button and let fate choose one romantic, funny, naughty, adventurous, and physical moment ❤️</p>
-
-<button id="instructionsBtn" onclick="toggleInstructions()">Tap For Instructions ℹ️</button>
+<button onclick="toggleInstructions()" class="spin-btn">Tap For Instructions ℹ️</button>
 <div id="instructions">
-1️⃣ Press “Spin My Fate” once.  
-2️⃣ The system will randomly select **1 outcome from each category**.  
-3️⃣ The spin wheel spins for 10 seconds with suspense.  
-4️⃣ Screenshot and send it to me 😉  
-5️⃣ Button disappears after spinning so you can’t cheat.
+1️⃣ Press the button for each category one by one.<br>
+2️⃣ Each spin will randomly select **1 outcome** from that category.<br>
+3️⃣ Spin lasts 10 seconds with suspense animation.<br>
+4️⃣ Screenshot each revealed outcome and send it to me 😉<br>
+5️⃣ Button disappears after spinning to prevent cheating.
+</div>
 </div>
 
-<div id="wheelContainer">
-    <div id="wheel"></div>
-    <div id="pointer"></div>
-</div>
-
-<button id="spinBtn" onclick="spinWheel()">Spin My Fate 🎉</button>
+<!-- Spin Categories -->
+<div class="spin-section" id="spinSection">
+<h2>🎲 Spin Your Fate</h2>
+<div id="spinButtons"></div>
 <div id="result"></div>
 </div>
 
@@ -221,7 +168,7 @@ function toggleInstructions(){
     box.style.display = box.style.display === "none" ? "block" : "none";
 }
 
-// Outcomes by category
+// Categories & Outcomes
 const categories = {
     Romantic: [
         "Slow dance together 💃",
@@ -256,60 +203,36 @@ const categories = {
     ]
 };
 
-// Create wheel slices
-const wheel = document.getElementById('wheel');
-let allOutcomes = [];
+// Create buttons for each category
+const spinButtonsDiv = document.getElementById('spinButtons');
 for(const cat in categories){
-    categories[cat].forEach(o=>{
-        allOutcomes.push({text:o, category:cat});
-    });
+    const btn = document.createElement('button');
+    btn.className = 'spin-btn';
+    btn.innerText = `Spin ${cat}`;
+    btn.onclick = ()=>spinCategory(cat, btn);
+    spinButtonsDiv.appendChild(btn);
 }
 
-allOutcomes.forEach((item,index)=>{
-    const slice = document.createElement('div');
-    slice.className = 'slice ' + item.category;
-    slice.style.transform = `rotate(${index*(360/allOutcomes.length)}deg)`;
-    slice.innerText = item.text;
-    wheel.appendChild(slice);
-});
+// Spin function for single category
+function spinCategory(category, btn){
+    btn.disabled = true;
+    btn.style.display = 'none';
 
-// Spin function
-function spinWheel(){
-    const spinBtn = document.getElementById('spinBtn');
-    spinBtn.disabled = true;
-    spinBtn.style.display = 'none';
-
-    // Random selection for each category
-    const selected = [];
-    for(const cat in categories){
-        const arr = categories[cat];
-        selected.push({cat:cat, text:arr[Math.floor(Math.random()*arr.length)]});
-    }
-
-    // Animate rotation for 10s
-    let start = null;
-    const duration = 10000;
-    const rotations = 10*360; // 10 full spins
-    function animate(timestamp){
-        if(!start) start = timestamp;
-        const elapsed = timestamp - start;
-        const progress = Math.min(elapsed/duration,1);
-        // ease out cubic
-        const deg = rotations*(1 - Math.pow(1-progress,3)) + Math.random()*20;
-        wheel.style.transform = `rotate(${deg}deg)`;
-        if(progress<1){
-            requestAnimationFrame(animate);
-        } else{
-            // Show result
-            let output = "🎉 Fate chose for you:\n";
-            selected.forEach(s=>{
-                output += `\n${s.cat}: ${s.text}`;
-            });
-            output += "\n\n📸 Screenshot and send it to me 😉";
-            document.getElementById('result').innerText = output;
+    const arr = categories[category];
+    let steps = 100; // steps for animation
+    let current = 0;
+    const interval = 100;
+    const spinInterval = setInterval(()=>{
+        const temp = arr[Math.floor(Math.random()*arr.length)];
+        document.getElementById('result').innerText = `${category}: ${temp}\n` + document.getElementById('result').innerText;
+        current++;
+        if(current>=steps){
+            clearInterval(spinInterval);
+            // Reveal final choice
+            const finalChoice = arr[Math.floor(Math.random()*arr.length)];
+            document.getElementById('result').innerText = `${category}: ${finalChoice}\n` + document.getElementById('result').innerText;
         }
-    }
-    requestAnimationFrame(animate);
+    }, interval);
 }
 </script>
 </body>
