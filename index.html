@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>2 Days To 21 ❤️</title>
+<title>1 Day To 21 ❤️</title>
 
 <style>
 body{
     margin:0;
-    font-family: 'Poppins', sans-serif;
+    font-family:'Poppins',sans-serif;
     background: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
                 url("ourphoto.jpg");
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
     color:white;
     text-align:center;
     padding:20px;
@@ -60,16 +60,6 @@ h1{
     max-width:650px;
 }
 
-textarea{
-    width:95%;
-    height:200px;
-    border-radius:15px;
-    padding:15px;
-    border:none;
-    font-size:14px;
-    margin-top:15px;
-}
-
 button{
     margin-top:20px;
     padding:15px 30px;
@@ -82,15 +72,10 @@ button{
     font-weight:bold;
 }
 
-.result{
-    margin-top:20px;
-    font-size:16px;
-}
-
-.instructions{
-    display:none;
+.promise{
     margin-top:15px;
-    text-align:left;
+    font-size:16px;
+    display:none;
 }
 </style>
 </head>
@@ -99,7 +84,7 @@ button{
 
 <h1 id="typing"></h1>
 
-<!-- Countdown Frames -->
+<!-- Countdown -->
 <div class="countdown">
     <div class="time-box">
         <span id="days"></span>
@@ -121,46 +106,30 @@ button{
 
 <!-- Love Letter -->
 <div class="section">
-<h2>💌 2 Days To 21</h2>
+<h2>💌 1 Day To 21</h2>
 <p id="loveLetter"></p>
 </div>
 
-<!-- 21 Before 22 -->
+<!-- Promise Vault -->
 <div class="section">
-<h2>💫 21 Before 22</h2>
+<h2>💎 Boyfriend Promise Vault</h2>
+<p>These promises are sealed for your 21st year.  
+Tap below to unlock them 👑</p>
 
-<button onclick="toggleInstructions()">Tap To See Challenge Instructions 💖</button>
+<button id="vaultBtn" onclick="openVault()">Unlock My Promises 💖</button>
 
-<div class="instructions" id="instructions">
-<p>
-This is your 21 Before 22 challenge ✨
-<br><br>
-1️⃣ Write 21 things your heart truly desires before you turn 22.
-<br>
-They can be things you want to have, experience, feel, achieve, or become.
-<br><br>
-2️⃣ When you're done, press “Choose My 5”.
-<br><br>
-3️⃣ The system will randomly select 5 for you.
-<br><br>
-4️⃣ Screenshot the results and send them to me 😉
-<br><br>
-5️⃣ I officially commit to making those 5 happen before you turn 22.
-</p>
-</div>
+<div class="promise" id="p1">1️⃣ I promise to support every dream you chase this year, no matter how big it feels.</div>
+<div class="promise" id="p2">2️⃣ I promise to remind you how powerful and beautiful you are, especially on days you forget.</div>
+<div class="promise" id="p3">3️⃣ I promise to celebrate your wins loudly and stand beside you quietly when you need strength.</div>
+<div class="promise" id="p4">4️⃣ I promise to create unforgettable memories with you during your 21st year.</div>
+<div class="promise" id="p5">5️⃣ I promise to love you intentionally, consistently, and wholeheartedly in this new era of your life.</div>
 
-<textarea id="wishList" placeholder="Write each wish on a new line..."></textarea>
-
-<br>
-<button id="pickBtn" onclick="pickFive()">Choose My 5 💕</button>
-
-<div class="result" id="result"></div>
 </div>
 
 <script>
 
 // Header Typing
-const headerText = "2 Days Until You Turn 21 My Queen 👑💖";
+const headerText = "1 Day Until You Turn 21 My Queen 👑💖";
 let h = 0;
 function typeHeader(){
     if(h < headerText.length){
@@ -190,8 +159,8 @@ setInterval(function(){
 },1000);
 
 
-// Love Letter (Focused on her growth & glow)
-const letterText = "My dearest love ❤️\n\nIn just 2 days, you will shine brighter than ever as you turn 21. This year is yours — a time to explore, laugh, dream bigger,live big and step boldly into every opportunity that excites you. 21 isn’t just a number, it’s a celebration of a milestone, Officially conquered teenage pregnancy.\n\nTwo days away… get ready to conquer, to sparkle and to make this year unforgettable ✨I love you endlessly baby💓";
+// Love Letter (1 Day Version)
+const letterText = "My love ❤️\n\nTomorrow, you officially step into 21 — a year of elevation, glow, growth, and greatness. I admire the way you carry yourself, the dreams you hold, and the fire inside you.\n\n21 isn’t just another birthday. It’s your next level. And I’m so excited to watch you step into it with confidence and grace.\n\nOne more sleep… and the world celebrates you 👑✨";
 let l = 0;
 function typeLetter(){
     if(l < letterText.length){
@@ -203,41 +172,16 @@ function typeLetter(){
 typeLetter();
 
 
-// Toggle Instructions
-function toggleInstructions(){
-    const box = document.getElementById("instructions");
-    if(box.style.display === "none"){
-        box.style.display = "block";
-    } else {
-        box.style.display = "none";
-    }
-}
+// Open Vault (cannot reopen)
+function openVault(){
+    document.getElementById("vaultBtn").style.display = "none";
 
-
-// Random Picker
-function pickFive(){
-    let wishes = document.getElementById("wishList").value.split("\n").filter(w => w.trim() !== "");
-    
-    if(wishes.length < 5){
-        alert("You need at least 5 wishes 😌");
-        return;
-    }
-
-    let shuffled = wishes.sort(() => 0.5 - Math.random());
-    let selected = shuffled.slice(0,5);
-
-    let output = "<h3>Your 5 Selected 💖</h3>";
-    selected.forEach((wish,index)=>{
-        output += (index+1) + ". " + wish + "<br>";
+    let promises = ["p1","p2","p3","p4","p5"];
+    promises.forEach((id,index)=>{
+        setTimeout(()=>{
+            document.getElementById(id).style.display="block";
+        }, index*800);
     });
-
-    output += "<br><br>📸 Screenshot this and send it to me 😉";
-    output += "<br>I officially promise to fulfill these before you turn 22 💍";
-
-    document.getElementById("result").innerHTML = output;
-
-    // Hide button to prevent cheating
-    document.getElementById("pickBtn").style.display = "none";
 }
 
 </script>
