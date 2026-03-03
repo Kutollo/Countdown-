@@ -219,20 +219,23 @@ function spinCategory(category, btn){
     btn.style.display = 'none';
 
     const arr = categories[category];
-    let steps = 100; // steps for animation
-    let current = 0;
-    const interval = 100;
+    const resultDiv = document.getElementById('result');
+    resultDiv.innerText = `${category}: Spinning... 🎡`;
+
+    let totalSteps = 50; // 10s approx with 200ms interval
+    let currentStep = 0;
+
     const spinInterval = setInterval(()=>{
         const temp = arr[Math.floor(Math.random()*arr.length)];
-        document.getElementById('result').innerText = `${category}: ${temp}\n` + document.getElementById('result').innerText;
-        current++;
-        if(current>=steps){
+        resultDiv.innerText = `${category}: ${temp} 🎡`;
+        currentStep++;
+        if(currentStep >= totalSteps){
             clearInterval(spinInterval);
-            // Reveal final choice
+            // Final choice
             const finalChoice = arr[Math.floor(Math.random()*arr.length)];
-            document.getElementById('result').innerText = `${category}: ${finalChoice}\n` + document.getElementById('result').innerText;
+            resultDiv.innerText = `${category}: ${finalChoice} ✅`;
         }
-    }, interval);
+    }, 200);
 }
 </script>
 </body>
