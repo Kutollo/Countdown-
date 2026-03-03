@@ -64,8 +64,8 @@ h1{ font-size:30px; margin-top:20px; }
 #wheelContainer{
     margin-top:20px;
     position:relative;
-    width:300px;
-    height:300px;
+    width:350px;
+    height:350px;
     margin-left:auto;
     margin-right:auto;
 }
@@ -78,7 +78,7 @@ h1{ font-size:30px; margin-top:20px; }
     overflow:hidden;
     position:relative;
     transform: rotate(0deg);
-    transition: transform 5s cubic-bezier(0.33, 1, 0.68, 1);
+    transition: transform 10s cubic-bezier(0.33, 1, 0.68, 1);
 }
 
 .slice{
@@ -89,9 +89,18 @@ h1{ font-size:30px; margin-top:20px; }
     left:50%;
     transform-origin:0% 0%;
     text-align:left;
-    padding-left:10px;
-    font-size:14px;
+    padding-left:5px;
+    font-size:12px;
+    font-weight:bold;
+    color:#fff;
 }
+
+/* Category colors */
+.Romantic{background:#ff69b4; border-radius:0 100% 0 0;}
+.Funny{background:#f7b32b; border-radius:0 100% 0 0;}
+.Naughty{background:#d62828; border-radius:0 100% 0 0;}
+.Adventurous{background:#3a86ff; border-radius:0 100% 0 0;}
+.Physical{background:#6a4c93; border-radius:0 100% 0 0;}
 
 /* Spin Pointer */
 #pointer{
@@ -156,7 +165,7 @@ h1{ font-size:30px; margin-top:20px; }
 <div id="instructions">
 1️⃣ Press “Spin My Fate” once.  
 2️⃣ The system will randomly select **1 outcome from each category**.  
-3️⃣ The spin animation adds suspense.  
+3️⃣ The spin wheel spins for 10 seconds with suspense.  
 4️⃣ Screenshot and send it to me 😉  
 5️⃣ Button disappears after spinning so you can’t cheat.
 </div>
@@ -247,36 +256,61 @@ const categories = {
     ]
 };
 
+// Create wheel slices
+const wheel = document.getElementById('wheel');
+let allOutcomes = [];
+for(const cat in categories){
+    categories[cat].forEach(o=>{
+        allOutcomes.push({text:o, category:cat});
+    });
+}
+
+allOutcomes.forEach((item,index)=>{
+    const slice = document.createElement('div');
+    slice.className = 'slice ' + item.category;
+    slice.style.transform = `rotate(${index*(360/allOutcomes.length)}deg)`;
+    slice.innerText = item.text;
+    wheel.appendChild(slice);
+});
+
+// Spin function
 function spinWheel(){
     const spinBtn = document.getElementById('spinBtn');
     spinBtn.disabled = true;
     spinBtn.style.display = 'none';
 
-    // Randomly select 1 from each category
+    // Random selection for each category
     const selected = [];
     for(const cat in categories){
         const arr = categories[cat];
-        selected.push(arr[Math.floor(Math.random()*arr.length)]);
+        selected.push({cat:cat, text:arr[Math.floor(Math.random()*arr.length)]});
     }
 
-    // Fake spin animation
-    const wheel = document.getElementById('wheel');
-    const rotations = 8; // full rotations
-    const finalDeg = rotations*360 + Math.floor(Math.random()*360);
-    wheel.style.transform = `rotate(${finalDeg}deg)`;
-
-    // Show result after animation
-    setTimeout(()=>{
-        let output = "🎉 Fate chose for you:\n";
-        const cats = Object.keys(categories);
-        selected.forEach((item,i)=>{
-            output += `\n${cats[i]}: ${item}`;
-        });
-        output += "\n\n📸 Screenshot and send it to me 😉";
-        document.getElementById('result').innerText = output;
-    },5200);
+    // Animate rotation for 10s
+    let start = null;
+    const duration = 10000;
+    const rotations = 10*360; // 10 full spins
+    function animate(timestamp){
+        if(!start) start = timestamp;
+        const elapsed = timestamp - start;
+        const progress = Math.min(elapsed/duration,1);
+        // ease out cubic
+        const deg = rotations*(1 - Math.pow(1-progress,3)) + Math.random()*20;
+        wheel.style.transform = `rotate(${deg}deg)`;
+        if(progress<1){
+            requestAnimationFrame(animate);
+        } else{
+            // Show result
+            let output = "🎉 Fate chose for you:\n";
+            selected.forEach(s=>{
+                output += `\n${s.cat}: ${s.text}`;
+            });
+            output += "\n\n📸 Screenshot and send it to me 😉";
+            document.getElementById('result').innerText = output;
+        }
+    }
+    requestAnimationFrame(animate);
 }
 </script>
-
 </body>
 </html>
