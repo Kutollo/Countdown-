@@ -3,82 +3,65 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>1 Day To 21 🎲</title>
+<title>Spin The Birthday Fate 🎂🎲</title>
+
 <style>
 body{
     margin:0;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
-                url("ourphoto.jpg");
-    background-size: cover;
-    background-position: center;
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+               url("ourphoto.jpg");
+    background-size:cover;
+    background-position:center;
     color:white;
     text-align:center;
     padding:20px;
-    overflow-x:hidden;
 }
 
-/* Header */
-h1{ font-size:28px; margin-top:20px; }
+h1{
+    font-size:24px;
+    margin-top:10px;
+}
 
-/* Countdown Frames */
+/* Countdown */
 .countdown{
     display:flex;
     justify-content:center;
     gap:10px;
-    margin:20px 0;
     flex-wrap:wrap;
+    margin:20px 0;
 }
 
 .time-box{
     background:rgba(255,255,255,0.15);
-    padding:15px;
+    padding:12px;
     border-radius:15px;
     min-width:70px;
     border:2px solid white;
 }
 
 .time-box span{
-    font-size:26px;
+    font-size:22px;
     font-weight:bold;
     display:block;
 }
 
-.time-box small{
-    font-size:12px;
-    letter-spacing:1px;
-}
-
-/* Love Letter */
+/* Sections */
 .section{
-    background: rgba(255,255,255,0.15);
+    background:rgba(255,255,255,0.15);
     padding:15px;
     border-radius:15px;
     margin:15px auto;
     width:95%;
-    max-width:650px;
+    max-width:600px;
     text-align:left;
 }
 
-#loveLetter{ white-space:pre-wrap; }
-
-/* Spin Section */
-.spin-section{
-    margin-top:15px;
-    background: rgba(255,255,255,0.15);
-    padding:15px;
-    border-radius:15px;
-    width:95%;
-    max-width:600px;
-    margin-left:auto;
-    margin-right:auto;
-    text-align:center;
-}
-
+/* Buttons */
 .spin-btn{
     margin:8px;
     padding:12px 20px;
-    font-size:16px;
+    font-size:15px;
     border:none;
     border-radius:25px;
     background:white;
@@ -87,175 +70,184 @@ h1{ font-size:28px; margin-top:20px; }
     font-weight:bold;
 }
 
-#instructions{ display:none; margin-top:10px; text-align:left; background:rgba(255,255,255,0.15); padding:10px; border-radius:10px; font-size:14px;}
+.spin-btn:hover{
+    transform:scale(1.05);
+}
 
-#result{ margin-top:10px; font-size:16px; font-weight:bold; color:#ff69b4; white-space:pre-wrap; text-align:left; }
-
-#summary{ margin-top:15px; font-size:16px; color:#ff69b4; white-space:pre-wrap; text-align:left; }
+/* Results */
+#result,#summary{
+    margin-top:15px;
+    font-size:15px;
+    color:#ff69b4;
+    white-space:pre-wrap;
+    text-align:left;
+}
 </style>
 </head>
 <body>
 
-<h1 id="typing"></h1>
+<h1>🎂 1 Day Until 21 My Queen 👑</h1>
 
 <!-- Countdown -->
 <div class="countdown">
-    <div class="time-box"><span id="days"></span><small>DAYS</small></div>
-    <div class="time-box"><span id="hours"></span><small>HOURS</small></div>
-    <div class="time-box"><span id="minutes"></span><small>MINUTES</small></div>
-    <div class="time-box"><span id="seconds"></span><small>SECONDS</small></div>
+    <div class="time-box"><span id="days"></span>DAYS</div>
+    <div class="time-box"><span id="hours"></span>HOURS</div>
+    <div class="time-box"><span id="minutes"></span>MINUTES</div>
+    <div class="time-box"><span id="seconds"></span>SECONDS</div>
 </div>
 
 <!-- Love Letter -->
 <div class="section">
-<h2>💌 1 Day To 21</h2>
+<h2>💌 A Note For You</h2>
 <p id="loveLetter"></p>
 </div>
 
-<!-- Spin Instructions -->
+<!-- Spin Section -->
 <div class="section">
-<button onclick="toggleInstructions()" class="spin-btn">Tap For Instructions ℹ️</button>
-<div id="instructions">
-1️⃣ Press the button for each category one by one.<br>
-2️⃣ Each spin will randomly select **1 outcome** from that category.<br>
-3️⃣ Spin lasts 10 seconds with suspense animation.<br>
-4️⃣ Screenshot each revealed outcome and send it to me 😉<br>
-5️⃣ Button disappears after spinning to prevent cheating.<br>
-6️⃣ After spinning all categories, your fate summary appears below.
-</div>
-</div>
-
-<!-- Spin Categories -->
-<div class="spin-section">
-<h2>🎲 Spin Your Fate</h2>
+<h2>🎲 Spin Your Birthday Fate</h2>
 <div id="spinButtons"></div>
 <div id="result"></div>
 <div id="summary"></div>
 </div>
 
 <script>
-// Typing Header
-const headerText = "1 Day Until You Turn 21 My Queen 👑💖";
-let h = 0;
-function typeHeader(){
-    if(h < headerText.length){
-        document.getElementById("typing").innerHTML += headerText.charAt(h);
-        h++;
-        setTimeout(typeHeader, 60);
-    }
-}
-typeHeader();
 
-// Countdown
+// Countdown to March 6 2026
 const birthday = new Date("March 6, 2026 00:00:00").getTime();
+
 setInterval(function(){
     const now = new Date().getTime();
     const distance = birthday - now;
-    document.getElementById("days").innerHTML = Math.floor(distance / (1000 * 60 * 60 * 24));
-    document.getElementById("hours").innerHTML = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    document.getElementById("minutes").innerHTML = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    document.getElementById("seconds").innerHTML = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("days").innerHTML =
+        Math.floor(distance / (1000 * 60 * 60 * 24));
+    document.getElementById("hours").innerHTML =
+        Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    document.getElementById("minutes").innerHTML =
+        Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    document.getElementById("seconds").innerHTML =
+        Math.floor((distance % (1000 * 60)) / 1000);
 },1000);
 
-// Love Letter
-const letterText = "My dearest love ❤️\n\nTomorrow you turn 21 — a powerful, radiant new chapter. Get ready to sparkle, laugh, explore, and enjoy every moment. Today, celebrate YOU, your charm, your glow, and your unstoppable spirit ✨";
-let l = 0;
+
+// Love Letter Typing Effect
+const letterText = 
+"My birthday queen 👑❤️\n\nTomorrow you turn 21… and I swear the world is not ready for this version of you.\n\nYou are beauty, softness, fire, and magic all in one body. Watching you grow, glow, and evolve is one of my favorite things in this life.\n\nThis year isn’t just another birthday — it’s your powerful era. Your confident era. Your unstoppable era.\n\nAnd here’s the rule… every spin you make below? I’m the one doing it for you.\n\nBecause this day belongs to you. Always.\n\nNow spin your fate, my love 🎲🔥";
+
+let i = 0;
 function typeLetter(){
-    if(l < letterText.length){
-        document.getElementById("loveLetter").innerHTML += letterText.charAt(l);
-        l++;
-        setTimeout(typeLetter, 25);
+    if(i < letterText.length){
+        document.getElementById("loveLetter").innerHTML += letterText.charAt(i);
+        i++;
+        setTimeout(typeLetter,25);
     }
 }
 typeLetter();
 
-// Toggle Instructions
-function toggleInstructions(){
-    const box = document.getElementById("instructions");
-    box.style.display = box.style.display === "none" ? "block" : "none";
-}
 
-// Categories & Outcomes
+// Categories (YOU do these for HER)
 const categories = {
-    Romantic: [
-        "Slow dance together 💃",
-        "Handwritten love letter 💌",
-        "Surprise picnic 🧺",
-        "10-min hug challenge 🤗",
-        "Recreate first deep conversation ❤️"
-    ],
-    Funny: [
-        "Flirt like first meeting 😏",
-        "Answer 3 ridiculous questions 😂",
-        "Recreate cringey TikTok trend 🎥"
-    ],
-    Naughty: [
-        "Whisper a secret fantasy 😉",
-        "5-min kiss challenge 😘",
-        "Blindfold playful game 😏",
-        "Voice note about body love 🔥",
-        "She chooses your outfit 😌"
-    ],
-    Adventurous: [
-        "Mini road trip 🚗",
-        "Try a new activity together 🧗",
-        "Go somewhere new 🌍",
-        "Say yes to one bold idea ✔️"
-    ],
-    Physical: [
-        "20 forehead kisses 😚",
-        "Carry her for 21 steps 💪",
-        "21-sec hug from behind 🤗",
-        "Hold hands during a walk ✨"
-    ]
+
+Romantic:[
+"Handwrite 21 love notes for you 💌",
+"Write you a poem about our love ✍️",
+"Send you your favorite flowers 🌹",
+"Write 10 things I love about you ❤️",
+"Send you a heartfelt email 💌",
+"Recreate a romantic movie scene for you 🎬"
+],
+
+Funny:[
+"Recreate any couple TikTok video with you 🎥",
+"Say 'Yes' to anything you ask for 21 hours 😌",
+"Recreate a meme with you 🖼️",
+"Let you choose my nickname for 21 hours 🤭",
+"Do a silly face photo challenge with you 🤪"
+],
+
+Naughty:[
+"Send you a flirty voice message describing our first kiss 😉",
+"Play adult truth or dare with you 🔥",
+"Send you a teasing flirty photo 📸",
+"Create a sexy challenge for when we meet 💋",
+"Describe 3 things I’d do to you when we’re together 😏",
+"Send you a naughty 30-second audio note 🎙️",
+"Start a playful kiss challenge 💋",
+"Send a voice note asking you a naughty question 🔥"
+],
+
+Adventurous:[
+"Plan something new for us to try together",
+"Take you somewhere new to explore",
+"Choose a couple challenge trend for us",
+"Decide one fearless thing we’ll both do this year",
+"Take you on a game drive or quad biking adventure"
+],
+
+Physical:[
+"Give you a 21-second tight hug 🤗",
+"Give you 20 forehead kisses 😚",
+"Give you a 5-minute massage 💆",
+"Start a pillow fight with you 😌",
+"Hold your hands for an entire walk ✨"
+]
+
 };
 
-// Track selected outcomes
-const selectedOutcomes = {};
 
-// Create buttons
-const spinButtonsDiv = document.getElementById('spinButtons');
+// Spin Logic
+const selectedOutcomes = {};
+const spinButtonsDiv = document.getElementById("spinButtons");
+
 for(const cat in categories){
-    const btn = document.createElement('button');
-    btn.className = 'spin-btn';
-    btn.innerText = `Spin ${cat}`;
-    btn.onclick = ()=>spinCategory(cat, btn);
+    const btn = document.createElement("button");
+    btn.className="spin-btn";
+    btn.innerText=`Spin ${cat}`;
+    btn.onclick=()=>spinCategory(cat,btn);
     spinButtonsDiv.appendChild(btn);
 }
 
-// Spin function
-function spinCategory(category, btn){
-    btn.disabled = true;
-    btn.style.display = 'none';
+function spinCategory(category,btn){
 
-    const arr = categories[category];
-    const resultDiv = document.getElementById('result');
-    resultDiv.innerText = `${category}: Spinning... 🎡`;
+    btn.disabled=true;
+    btn.style.display="none";
 
-    let totalSteps = 50; // approx 10s
-    let currentStep = 0;
+    const arr=categories[category];
+    const resultDiv=document.getElementById("result");
 
-    const spinInterval = setInterval(()=>{
-        const temp = arr[Math.floor(Math.random()*arr.length)];
-        resultDiv.innerText = `${category}: ${temp} 🎡`;
-        currentStep++;
-        if(currentStep >= totalSteps){
+    let steps=50; // 10 seconds
+    let current=0;
+
+    const spinInterval=setInterval(()=>{
+        const temp=arr[Math.floor(Math.random()*arr.length)];
+        resultDiv.innerText=`${category}: ${temp} 🎡`;
+        current++;
+
+        if(current>=steps){
             clearInterval(spinInterval);
-            const finalChoice = arr[Math.floor(Math.random()*arr.length)];
-            resultDiv.innerText = `${category}: ${finalChoice} ✅`;
-            selectedOutcomes[category] = finalChoice;
 
-            // If last category spun, show summary
-            if(Object.keys(selectedOutcomes).length === Object.keys(categories).length){
-                let summaryText = "🎉 Your Fate Summary:\n\n";
+            const finalChoice=arr[Math.floor(Math.random()*arr.length)];
+            resultDiv.innerText=`${category}: ${finalChoice} ✅`;
+            selectedOutcomes[category]=finalChoice;
+
+            // When all categories done
+            if(Object.keys(selectedOutcomes).length===Object.keys(categories).length){
+
+                let summary="🎉 YOUR BIRTHDAY FATE 🎉\n\n";
+
                 for(const cat in selectedOutcomes){
-                    summaryText += `${cat}: ${selectedOutcomes[cat]}\n`;
+                    summary+=`${cat}: ${selectedOutcomes[cat]}\n\n`;
                 }
-                document.getElementById('summary').innerText = summaryText;
+
+                summary+="\nI officially owe you all of this 😌🔥";
+
+                document.getElementById("summary").innerText=summary;
             }
         }
-    }, 200);
+
+    },200);
 }
+
 </script>
 </body>
 </html>
