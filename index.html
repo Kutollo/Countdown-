@@ -23,7 +23,6 @@ h1{
     margin-top:10px;
 }
 
-/* Countdown */
 .countdown{
     display:flex;
     justify-content:center;
@@ -46,7 +45,6 @@ h1{
     display:block;
 }
 
-/* Sections */
 .section{
     background:rgba(255,255,255,0.15);
     padding:15px;
@@ -57,7 +55,6 @@ h1{
     text-align:left;
 }
 
-/* Buttons */
 .spin-btn{
     margin:8px;
     padding:12px 20px;
@@ -74,7 +71,6 @@ h1{
     transform:scale(1.05);
 }
 
-/* Results */
 #result,#summary{
     margin-top:15px;
     font-size:15px;
@@ -86,9 +82,8 @@ h1{
 </head>
 <body>
 
-<h1>🎂 1 Day Until 21 My Queen 👑</h1>
+<h1>🎂 1 Day and Hours Until 21 My Princess 👑</h1>
 
-<!-- Countdown -->
 <div class="countdown">
     <div class="time-box"><span id="days"></span>DAYS</div>
     <div class="time-box"><span id="hours"></span>HOURS</div>
@@ -96,13 +91,11 @@ h1{
     <div class="time-box"><span id="seconds"></span>SECONDS</div>
 </div>
 
-<!-- Love Letter -->
 <div class="section">
 <h2>💌 A Note For You</h2>
 <p id="loveLetter"></p>
 </div>
 
-<!-- Spin Section -->
 <div class="section">
 <h2>🎲 Spin Your Birthday Fate</h2>
 <div id="spinButtons"></div>
@@ -112,7 +105,7 @@ h1{
 
 <script>
 
-// Countdown to March 6 2026
+// Countdown
 const birthday = new Date("March 6, 2026 00:00:00").getTime();
 
 setInterval(function(){
@@ -132,7 +125,7 @@ setInterval(function(){
 
 // Love Letter Typing Effect
 const letterText = 
-"My birthday queen 👑❤️\n\nTomorrow you turn 21… and I swear the world is not ready for this version of you.\n\nYou are beauty, softness, fire, and magic all in one body. Watching you grow, glow, and evolve is one of my favorite things in this life.\n\nThis year isn’t just another birthday — it’s your powerful era. Your confident era. Your unstoppable era.\n\nAnd here’s the rule… every spin you make below? I’m the one doing it for you.\n\nBecause this day belongs to you. Always.\n\nNow spin your fate, my love 🎲🔥";
+"My birthday Sweetheart 👑❤️\n\nTomorrow you turn 21… and I swear the world is not ready for this version of you.\n\nYou are beauty, softness, fire, and magic all in one body. Watching you grow, glow, and evolve is one of my favorite things in this life.\n\nThis year isn’t just another birthday — it’s your powerful era. Your confident era. Your unstoppable era.\n\nEvery spin you make below? I’m the one doing it for you.\n\nBecause this day belongs to you. Always.\n\nNow spin your fate, my love 🎲🔥";
 
 let i = 0;
 function typeLetter(){
@@ -145,16 +138,16 @@ function typeLetter(){
 typeLetter();
 
 
-// Categories (YOU do these for HER)
+// Categories (No Naughty)
 const categories = {
 
 Romantic:[
 "Handwrite 21 love notes for you 💌",
 "Write you a poem about our love ✍️",
-"Send you your favorite flowers 🌹",
+"Buy you your favorite flowers when we go on a date🌹",
 "Write 10 things I love about you ❤️",
 "Send you a heartfelt email 💌",
-"Recreate a romantic movie scene for you 🎬"
+"Recreate a romantic movie scene together 🎬"
 ],
 
 Funny:[
@@ -165,31 +158,20 @@ Funny:[
 "Do a silly face photo challenge with you 🤪"
 ],
 
-Naughty:[
-"Send you a flirty voice message describing our first kiss 😉",
-"Play adult truth or dare with you 🔥",
-"Send you a teasing flirty photo 📸",
-"Create a sexy challenge for when we meet 💋",
-"Describe 3 things I’d do to you when we’re together 😏",
-"Send you a naughty 30-second audio note 🎙️",
-"Start a playful kiss challenge 💋",
-"Send a voice note asking you a naughty question 🔥"
-],
-
 Adventurous:[
 "Plan something new for us to try together",
-"Take you somewhere new to explore",
-"Choose a couple challenge trend for us",
+"We go somewhere new to explore",
+"Choose a couple challenge trend for us to try",
 "Decide one fearless thing we’ll both do this year",
-"Take you on a game drive or quad biking adventure"
+"We plan game drive or quad biking adventure"
 ],
 
 Physical:[
 "Give you a 21-second tight hug 🤗",
-"Give you 20 forehead kisses 😚",
-"Give you a 5-minute massage 💆",
-"Start a pillow fight with you 😌",
-"Hold your hands for an entire walk ✨"
+"Give you 21 forehead kisses 😚",
+"Give you a 21-minute massage 💆",
+"Play a pillow fight with you 😌",
+"Hold your hands for an entire day in public ✨"
 ]
 
 };
@@ -230,7 +212,6 @@ function spinCategory(category,btn){
             resultDiv.innerText=`${category}: ${finalChoice} ✅`;
             selectedOutcomes[category]=finalChoice;
 
-            // When all categories done
             if(Object.keys(selectedOutcomes).length===Object.keys(categories).length){
 
                 let summary="🎉 YOUR BIRTHDAY FATE 🎉\n\n";
@@ -239,7 +220,7 @@ function spinCategory(category,btn){
                     summary+=`${cat}: ${selectedOutcomes[cat]}\n\n`;
                 }
 
-                summary+="\nI officially owe you all of this 😌🔥";
+                summary+="\nI officially owe you all of this 😌❤️";
 
                 document.getElementById("summary").innerText=summary;
             }
