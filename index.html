@@ -3,232 +3,314 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Spin The Birthday Fate 🎂🎲</title>
+
+<title>MyPinkHeart Turns 21 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
 body{
-    margin:0;
-    font-family:'Poppins',sans-serif;
-    background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
-               url("ourphoto.jpg");
-    background-size:cover;
-    background-position:center;
-    color:white;
-    text-align:center;
-    padding:20px;
+background:linear-gradient(135deg,#ff9ecf,#ff4da6);
+color:white;
+text-align:center;
+padding:20px;
+}
+
+.container{
+max-width:500px;
+margin:auto;
 }
 
 h1{
-    font-size:24px;
-    margin-top:10px;
+font-family:'Great Vibes',cursive;
+font-size:42px;
+margin-bottom:10px;
+}
+
+.subtitle{
+font-size:16px;
+margin-bottom:25px;
 }
 
 .countdown{
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    flex-wrap:wrap;
-    margin:20px 0;
+display:flex;
+justify-content:center;
+margin-bottom:30px;
 }
 
 .time-box{
-    background:rgba(255,255,255,0.15);
-    padding:12px;
-    border-radius:15px;
-    min-width:70px;
-    border:2px solid white;
+background:white;
+color:#ff1493;
+padding:25px;
+border-radius:20px;
+font-size:40px;
+font-weight:bold;
+box-shadow:0 8px 20px rgba(0,0,0,0.2);
 }
 
-.time-box span{
-    font-size:22px;
-    font-weight:bold;
-    display:block;
+.small{
+font-size:14px;
+margin-top:5px;
+display:block;
 }
 
 .section{
-    background:rgba(255,255,255,0.15);
-    padding:15px;
-    border-radius:15px;
-    margin:15px auto;
-    width:95%;
-    max-width:600px;
-    text-align:left;
+background:rgba(255,255,255,0.2);
+padding:20px;
+border-radius:20px;
+margin-bottom:25px;
+backdrop-filter:blur(10px);
 }
 
-.spin-btn{
-    margin:8px;
-    padding:12px 20px;
-    font-size:15px;
-    border:none;
-    border-radius:25px;
-    background:white;
-    color:#ff4fa3;
-    cursor:pointer;
-    font-weight:bold;
+.love-letter p{
+margin-bottom:12px;
+line-height:1.6;
 }
 
-.spin-btn:hover{
-    transform:scale(1.05);
+button{
+background:#ff1493;
+border:none;
+padding:12px 20px;
+border-radius:20px;
+color:white;
+font-weight:bold;
+cursor:pointer;
+margin-top:10px;
 }
 
-#result,#summary{
-    margin-top:15px;
-    font-size:15px;
-    color:#ff69b4;
-    white-space:pre-wrap;
-    text-align:left;
+button:hover{
+background:#ff0f8a;
 }
+
+.grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:10px;
+margin-top:20px;
+}
+
+.card{
+background:white;
+height:70px;
+border-radius:10px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+cursor:pointer;
+color:#ff1493;
+}
+
+.card.flipped{
+background:#ff1493;
+color:white;
+}
+
+.final-message{
+display:none;
+margin-top:20px;
+font-size:18px;
+font-weight:bold;
+}
+
 </style>
 </head>
+
 <body>
 
-<h1>🎂 1 Day and Hours Until 21 My Princess 👑</h1>
+<div class="container">
+
+<h1>MyPinkHeart 💖</h1>
+<div class="subtitle">Countdown to Your 21st Birthday 🎂</div>
 
 <div class="countdown">
-    <div class="time-box"><span id="days"></span>DAYS</div>
-    <div class="time-box"><span id="hours"></span>HOURS</div>
-    <div class="time-box"><span id="minutes"></span>MINUTES</div>
-    <div class="time-box"><span id="seconds"></span>SECONDS</div>
+<div class="time-box">
+<span id="hours">0</span>
+<span class="small">Hours Left</span>
+</div>
+</div>
+
+<div class="section love-letter">
+
+<h2>💌 Love Letter</h2>
+
+<p>
+My beautiful MyPinkHeart,
+</p>
+
+<p>
+In just a few hours the world will celebrate the day someone incredibly special was born.
+</p>
+
+<p>
+But for me, every day feels like a celebration because you exist in my life.
+</p>
+
+<p>
+You are the smile that brightens my days, the calm in my chaos, and the person who makes life feel a little more magical.
+</p>
+
+<p>
+Watching you grow into the amazing woman you are becoming is something that fills me with pride and admiration.
+</p>
+
+<p>
+You deserve happiness that is deep, pure, and endless.
+</p>
+
+<p>
+And no matter where life takes us, I will always be grateful that our paths crossed and that I get to love someone as beautiful, kind, and special as you.
+</p>
+
+<p>
+Happy almost 21st birthday, MyPinkHeart.  
+You are truly one of a kind. ❤️
+</p>
+
 </div>
 
 <div class="section">
-<h2>💌 A Note For You</h2>
-<p id="loveLetter"></p>
+
+<h2>🎮 Memory Match: Our Love Edition</h2>
+
+<p>Match the cards to reveal hidden love messages 💕</p>
+
+<div class="grid" id="gameBoard"></div>
+
+<div class="final-message" id="finalMessage">
+🎉 You matched every memory!  
+Happy 21st Birthday MyPinkHeart ❤️  
+You are my favorite person in this world.
 </div>
 
-<div class="section">
-<h2>🎲 Spin Your Birthday Fate</h2>
-<div id="spinButtons"></div>
-<div id="result"></div>
-<div id="summary"></div>
+</div>
+
 </div>
 
 <script>
 
-// Countdown
 const birthday = new Date("March 6, 2026 00:00:00").getTime();
 
-setInterval(function(){
-    const now = new Date().getTime();
-    const distance = birthday - now;
+setInterval(()=>{
 
-    document.getElementById("days").innerHTML =
-        Math.floor(distance / (1000 * 60 * 60 * 24));
-    document.getElementById("hours").innerHTML =
-        Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    document.getElementById("minutes").innerHTML =
-        Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    document.getElementById("seconds").innerHTML =
-        Math.floor((distance % (1000 * 60)) / 1000);
+let now = new Date().getTime();
+
+let distance = birthday - now;
+
+let hours = Math.floor(distance / (1000*60*60));
+
+document.getElementById("hours").innerText = hours;
+
 },1000);
 
 
-// Love Letter Typing Effect
-const letterText = 
-"My birthday Sweetheart 👑❤️\n\n Less than 48 hours till you turn 21… and I swear the world is not ready for this baddie version of you.😂\n\I cant wait to see the what a 21 year old version of you has for us... but for sure more beauty, softness, extra wife material and a princess who doesnt get mad anymore. Watching you grow, glow and evolve is one of my favorite things because I can tell a story about you from where you have been, where you are and where you are going.\n\nThis year isn’t just another birthday — it’s your powerful era. Your confident era. Your unstoppable era. I love you endlessly 💕";
+const messages = [
 
-let i = 0;
-function typeLetter(){
-    if(i < letterText.length){
-        document.getElementById("loveLetter").innerHTML += letterText.charAt(i);
-        i++;
-        setTimeout(typeLetter,25);
-    }
-}
-typeLetter();
+"Your smile is my favorite view ❤️",
+"You make my world brighter ✨",
+"You are my favorite notification 📱",
+"My heart feels at home with you 🏡",
+"You make life beautiful 🌹",
+"You are my greatest blessing 💕",
+"You make ordinary days magical 🌟",
+"I’m lucky to have you ❤️"
 
+];
 
-// Categories (No Naughty)
-const categories = {
+let cards = [...messages,...messages];
 
-Romantic:[
-"Handwrite 21 love notes for you 💌",
-"Write you a poem about our love ✍️",
-"Buy you your favorite flowers when we go on a date🌹",
-"Write 10 things I love about you ❤️",
-"Send you a heartfelt email 💌",
-"Recreate a romantic movie scene together 🎬"
-],
+cards.sort(()=>0.5-Math.random());
 
-Funny:[
-"Recreate any couple TikTok video with you 🎥",
-"Say 'Yes' to anything you ask for 21 hours 😌",
-"Recreate a meme with you 🖼️",
-"Let you choose my nickname for 21 hours 🤭",
-"Do a silly face photo challenge with you 🤪"
-],
+const board = document.getElementById("gameBoard");
 
-Adventurous:[
-"Plan something new for us to try together",
-"We go somewhere new to explore",
-"Choose a couple challenge trend for us to try",
-"Decide one fearless thing we’ll both do this year",
-"We plan game drive or quad biking adventure"
-],
+let first = null;
+let second = null;
+let lock = false;
+let matches = 0;
 
-Physical:[
-"Give you a 21-second tight hug 🤗",
-"Give you 21 forehead kisses 😚",
-"Give you a 21-minute massage 💆",
-"Play a pillow fight with you 😌",
-"Hold your hands for an entire day in public ✨"
-]
+cards.forEach(text=>{
 
-};
+let card = document.createElement("div");
+
+card.className="card";
+
+card.dataset.message=text;
+
+card.innerHTML="💗";
+
+card.onclick = () => flip(card);
+
+board.appendChild(card);
+
+});
 
 
-// Spin Logic
-const selectedOutcomes = {};
-const spinButtonsDiv = document.getElementById("spinButtons");
+function flip(card){
 
-for(const cat in categories){
-    const btn = document.createElement("button");
-    btn.className="spin-btn";
-    btn.innerText=`Spin ${cat}`;
-    btn.onclick=()=>spinCategory(cat,btn);
-    spinButtonsDiv.appendChild(btn);
+if(lock || card.classList.contains("flipped")) return;
+
+card.classList.add("flipped");
+
+card.innerText = card.dataset.message;
+
+if(!first){
+
+first = card;
+return;
+
 }
 
-function spinCategory(category,btn){
+second = card;
 
-    btn.disabled=true;
-    btn.style.display="none";
+lock = true;
 
-    const arr=categories[category];
-    const resultDiv=document.getElementById("result");
+if(first.dataset.message === second.dataset.message){
 
-    let steps=50; // 10 seconds
-    let current=0;
+matches++;
 
-    const spinInterval=setInterval(()=>{
-        const temp=arr[Math.floor(Math.random()*arr.length)];
-        resultDiv.innerText=`${category}: ${temp} 🎡`;
-        current++;
+reset();
 
-        if(current>=steps){
-            clearInterval(spinInterval);
+if(matches === messages.length){
 
-            const finalChoice=arr[Math.floor(Math.random()*arr.length)];
-            resultDiv.innerText=`${category}: ${finalChoice} ✅`;
-            selectedOutcomes[category]=finalChoice;
+document.getElementById("finalMessage").style.display="block";
 
-            if(Object.keys(selectedOutcomes).length===Object.keys(categories).length){
+}
 
-                let summary="🎉 YOUR BIRTHDAY FATE 🎉\n\n";
+}else{
 
-                for(const cat in selectedOutcomes){
-                    summary+=`${cat}: ${selectedOutcomes[cat]}\n\n`;
-                }
+setTimeout(()=>{
 
-                summary+="\nI officially owe you all of this 😌❤️";
+first.classList.remove("flipped");
+second.classList.remove("flipped");
 
-                document.getElementById("summary").innerText=summary;
-            }
-        }
+first.innerHTML="💗";
+second.innerHTML="💗";
 
-    },200);
+reset();
+
+},1000);
+
+}
+
+}
+
+function reset(){
+
+first=null;
+second=null;
+lock=false;
+
 }
 
 </script>
+
 </body>
 </html>
