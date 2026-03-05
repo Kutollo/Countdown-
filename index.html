@@ -3,121 +3,109 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MyPinkHeart Turns 21 in Few Hours 💖</title>
+<title>Happy 21st Birthday MyPinkHeart 💖</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
+
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Poppins',sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
 }
 
 body{
-  background:url("ourphoto.jpg") no-repeat center center/cover;
-  color:white;
-  text-align:center;
-  padding:20px;
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+background:url("ourphoto.jpg") no-repeat center center/cover;
+overflow:hidden;
 }
+
+/* Glass container */
 
 .container{
-  max-width:600px;
-  width:100%;
+background:rgba(255,255,255,0.18);
+backdrop-filter:blur(12px);
+padding:40px 30px;
+border-radius:25px;
+max-width:600px;
+box-shadow:0 10px 30px rgba(0,0,0,0.35);
+animation:fadeIn 2s ease;
 }
 
-/* Heading */
+/* Title */
+
 h1{
-  font-family:'Great Vibes',cursive;
-  font-size:42px;
-  margin-bottom:10px;
+font-family:'Great Vibes',cursive;
+font-size:48px;
+margin-bottom:10px;
 }
 
-.subtitle{
-  margin-bottom:25px;
+.age{
+font-size:26px;
+font-weight:600;
+margin-bottom:20px;
 }
 
-/* Countdown */
-.countdown{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:10px;
-  margin-bottom:30px;
+/* Message */
+
+.message{
+font-size:16px;
+line-height:1.7;
+margin-bottom:25px;
 }
 
-.time-box{
-  background: rgba(255,255,255,0.2);
-  backdrop-filter: blur(10px);
-  padding:12px;
-  border-radius:15px;
-  width:80px;
-  box-shadow:0 6px 15px rgba(0,0,0,0.3);
+/* Button */
+
+button{
+background:#ff4fa3;
+border:none;
+padding:12px 22px;
+border-radius:25px;
+color:white;
+font-size:14px;
+cursor:pointer;
+transition:0.3s;
 }
 
-.time-box span{
-  display:block;
-  font-size:18px;
-  font-weight:bold;
+button:hover{
+transform:scale(1.05);
+background:#ff2d8d;
 }
 
-.label{
-  font-size:11px;
+/* Hidden surprise */
+
+.surprise{
+display:none;
+margin-top:20px;
+font-size:18px;
+font-weight:500;
 }
 
-/* Sections */
-.section{
-  background: rgba(255,255,255,0.2);
-  padding:20px;
-  border-radius:20px;
-  margin-bottom:25px;
-  backdrop-filter: blur(10px);
+/* Floating hearts */
+
+.heart{
+position:absolute;
+bottom:-10px;
+font-size:20px;
+animation:float 6s linear infinite;
+opacity:0.8;
 }
 
-/* Love letter */
-.love-letter{
-  text-align:left;
-  white-space:pre-wrap;
-  line-height:1.6;
+@keyframes float{
+0%{transform:translateY(0) scale(1);}
+100%{transform:translateY(-110vh) scale(1.5);}
 }
 
-/* Memory game */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:8px;
-  margin-top:15px;
-}
-
-.card{
-  background:white;
-  height:90px;
-  border-radius:10px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:6px;
-  font-size:10px;
-  text-align:center;
-  color:#ff1493;
-  cursor:pointer;
-  box-shadow:0 4px 10px rgba(0,0,0,0.2);
-}
-
-.card.flipped{
-  background:#ff1493;
-  color:white;
-}
-
-.final-message{
-  display:none;
-  margin-top:15px;
-  font-weight:bold;
+@keyframes fadeIn{
+from{opacity:0; transform:translateY(30px);}
+to{opacity:1; transform:translateY(0);}
 }
 
 </style>
@@ -127,114 +115,55 @@ h1{
 
 <div class="container">
 
-<h1>MyPinkHeart 💖</h1>
-<div class="subtitle">Countdown to Your 21st Birthday 🎂</div>
+<h1>Happy Birthday</h1>
+<div class="age">Tiisetso Desiree Mnisi 💖</div>
+<div class="age">21 Years of Beautiful Magic ✨</div>
 
-<div class="countdown">
-  <div class="time-box"><span id="days"></span><div class="label">Days</div></div>
-  <div class="time-box"><span id="hours"></span><div class="label">Hours</div></div>
-  <div class="time-box"><span id="minutes"></span><div class="label">Minutes</div></div>
-  <div class="time-box"><span id="seconds"></span><div class="label">Seconds</div></div>
-  <div class="time-box"><span id="milliseconds"></span><div class="label">MS</div></div>
-</div>
+<p class="message">
+Today is not just another day… it’s the day the world was gifted with someone truly special.
 
-<div class="section">
-<h2>💌 A Note For You</h2>
-<p class="love-letter" id="loveLetter"></p>
-</div>
+Watching you grow, smile, dream and shine makes my heart the happiest place in the universe.
 
-<div class="section">
-<h2>🎮 Memory Match Game</h2>
-<p>Match the cards to reveal hidden love messages 💕</p>
-<div class="grid" id="gameBoard"></div>
-<div class="final-message" id="finalMessage">
-🎉 You matched all the memories!  
-I love you endlessly baby ❤️
-</div>
+You deserve love, happiness, success and every beautiful thing life can offer.
+
+And I promise to always celebrate you, support you and remind you how amazing you are.
+
+Happy 21st Birthday MyPinkHeart 🎂💖
+</p>
+
+<button onclick="showSurprise()">Open Your Surprise 🎁</button>
+
+<div class="surprise" id="surprise">
+I love you more than words can explain ❤️
 </div>
 
 </div>
 
 <script>
 
-/* COUNTDOWN */
-const birthday = new Date("March 6, 2026 00:00:00").getTime();
+/* Surprise */
+
+function showSurprise(){
+document.getElementById("surprise").style.display="block";
+}
+
+/* Floating hearts */
+
 setInterval(()=>{
-  const now = new Date().getTime();
-  const distance = birthday - now;
-  const days = Math.floor(distance / (1000*60*60*24));
-  const hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
-  const minutes = Math.floor((distance%(1000*60*60))/(1000*60));
-  const seconds = Math.floor((distance%(1000*60))/1000);
-  const milliseconds = distance % 1000;
-  document.getElementById("days").innerText = days;
-  document.getElementById("hours").innerText = hours;
-  document.getElementById("minutes").innerText = minutes;
-  document.getElementById("seconds").innerText = seconds;
-  document.getElementById("milliseconds").innerText = milliseconds;
-},10);
+const heart=document.createElement("div");
+heart.classList.add("heart");
+heart.innerHTML="💖";
 
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(Math.random()*20+10)+"px";
 
-/* LOVE LETTER TYPING */
-const letterText =
-"My birthday queen 👑❤️\n\nTomorrow you're turning 21st… and I'm so proud of you.\n\nSe ku on hinga sungula naku tsemelela ma carrots.\n\nNa homu ni tshemba se yile ndleleni 🤣.\n\nAm I the Mr Party? 😭because I was never asked to be one.\n\nYour teenage era is completely over.\n\nNow you are stepping into womanhood. Congratulations.\n\nHappy almost Birthday MyPinkHeart 🎂💖";
-let i=0;
-function typeLetter(){
-  if(i < letterText.length){
-    document.getElementById("loveLetter").innerHTML += letterText.charAt(i);
-    i++;
-    setTimeout(typeLetter,25);
-  }
-}
-typeLetter();
+document.body.appendChild(heart);
 
-/* MEMORY MATCH GAME */
-const messages=[
-"Your smile is my favorite view ❤️",
-"You make my world brighter ✨",
-"You are my favorite notification 📱",
-"My heart feels at home with you 🏡",
-"You make life beautiful 🌹",
-"You are my greatest blessing 💕",
-"You make ordinary days magical 🌟",
-"I'm lucky to have you ❤️"
-];
-let cards=[...messages,...messages];
-cards.sort(()=>0.5-Math.random());
-const board=document.getElementById("gameBoard");
-let first=null, second=null, lock=false, matches=0;
-cards.forEach(text=>{
-  const card=document.createElement("div");
-  card.className="card";
-  card.dataset.message=text;
-  card.innerHTML="💗";
-  card.onclick=()=>flip(card);
-  board.appendChild(card);
-});
-function flip(card){
-  if(lock || card.classList.contains("flipped")) return;
-  card.classList.add("flipped");
-  card.innerText=card.dataset.message;
-  if(!first){ first=card; return; }
-  second=card;
-  lock=true;
-  if(first.dataset.message===second.dataset.message){
-    matches++;
-    reset();
-    if(matches===messages.length){
-      document.getElementById("finalMessage").style.display="block";
-    }
-  }else{
-    setTimeout(()=>{
-      first.classList.remove("flipped");
-      second.classList.remove("flipped");
-      first.innerHTML="💗";
-      second.innerHTML="💗";
-      reset();
-    },1200);
-  }
-}
-function reset(){ first=null; second=null; lock=false; }
+setTimeout(()=>{
+heart.remove();
+},6000);
+
+},500);
 
 </script>
 
