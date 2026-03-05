@@ -9,7 +9,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
-
 *{
 margin:0;
 padding:0;
@@ -25,7 +24,7 @@ padding:20px;
 }
 
 .container{
-max-width:520px;
+max-width:600px;
 margin:auto;
 }
 
@@ -50,24 +49,24 @@ margin-bottom:30px;
 .time-box{
 background:white;
 color:#ff1493;
-padding:15px;
+padding:12px;
 border-radius:15px;
-width:90px;
+width:80px;
 box-shadow:0 6px 15px rgba(0,0,0,0.2);
 }
 
 .time-box span{
 display:block;
-font-size:20px;
+font-size:18px;
 font-weight:bold;
 }
 
-.time-label{
-font-size:12px;
+.label{
+font-size:11px;
 }
 
 .section{
-background:rgba(255,255,255,0.2);
+background:rgba(255,255,255,0.15);
 padding:20px;
 border-radius:20px;
 margin-bottom:25px;
@@ -77,35 +76,35 @@ backdrop-filter:blur(10px);
 .photo{
 width:100%;
 border-radius:15px;
-margin-top:15px;
+margin-top:10px;
 box-shadow:0 10px 20px rgba(0,0,0,0.3);
 }
 
-.love-letter p{
-margin-bottom:12px;
+.love-letter{
+text-align:left;
+white-space:pre-wrap;
 line-height:1.6;
 }
 
 .grid{
 display:grid;
 grid-template-columns:repeat(4,1fr);
-gap:10px;
-margin-top:20px;
+gap:8px;
+margin-top:15px;
 }
 
 .card{
 background:white;
 height:90px;
-border-radius:12px;
+border-radius:10px;
 display:flex;
 align-items:center;
 justify-content:center;
-cursor:pointer;
-padding:8px;
+padding:6px;
+font-size:10px;
 text-align:center;
-font-size:11px;
-font-weight:500;
 color:#ff1493;
+cursor:pointer;
 }
 
 .card.flipped{
@@ -115,9 +114,8 @@ color:white;
 
 .final-message{
 display:none;
-margin-top:20px;
+margin-top:15px;
 font-weight:bold;
-font-size:18px;
 }
 
 </style>
@@ -131,124 +129,70 @@ font-size:18px;
 <div class="subtitle">Countdown to Your 21st Birthday 🎂</div>
 
 <div class="countdown">
-
-<div class="time-box">
-<span id="days">0</span>
-<div class="time-label">Days</div>
-</div>
-
-<div class="time-box">
-<span id="hours">0</span>
-<div class="time-label">Hours</div>
-</div>
-
-<div class="time-box">
-<span id="minutes">0</span>
-<div class="time-label">Minutes</div>
-</div>
-
-<div class="time-box">
-<span id="seconds">0</span>
-<div class="time-label">Seconds</div>
-</div>
-
-<div class="time-box">
-<span id="milliseconds">0</span>
-<div class="time-label">MS</div>
-</div>
-
+<div class="time-box"><span id="days"></span><div class="label">Days</div></div>
+<div class="time-box"><span id="hours"></span><div class="label">Hours</div></div>
+<div class="time-box"><span id="minutes"></span><div class="label">Minutes</div></div>
+<div class="time-box"><span id="seconds"></span><div class="label">Seconds</div></div>
+<div class="time-box"><span id="milliseconds"></span><div class="label">MS</div></div>
 </div>
 
 <div class="section">
-
 <h2>📸 Our Memory</h2>
-
 <img src="ourphoto.jpg" class="photo">
-
-</div>
-
-<div class="section love-letter">
-
-<h2>💌 Love Letter</h2>
-
-<p>
-My beautiful MyPinkHeart,
-</p>
-
-<p>
-In just a short time, the world will celebrate the day someone truly special was born.
-</p>
-
-<p>
-21 years of your smile, your kindness, your laughter, and the beautiful soul that makes you who you are.
-</p>
-
-<p>
-Even though this website is small, the feelings behind it are huge. I wanted you to have something that reminds you how loved you are and how excited I am for your special day.
-</p>
-
-<p>
-You bring happiness into my life in a way that is impossible to explain.
-</p>
-
-<p>
-Your presence alone makes the world feel lighter, warmer, and more meaningful.
-</p>
-
-<p>
-As you step into 21, I hope this year brings you everything you deserve — happiness, adventures, growth, and unforgettable memories.
-</p>
-
-<p>
-Happy almost 21st birthday, MyPinkHeart. ❤️
-</p>
-
 </div>
 
 <div class="section">
+<h2>💌 A Note For You</h2>
+<p class="love-letter" id="loveLetter"></p>
+</div>
 
-<h2>🎮 Memory Match</h2>
-
+<div class="section">
+<h2>🎮 Memory Match Game</h2>
 <p>Match the cards to reveal hidden love messages 💕</p>
-
 <div class="grid" id="gameBoard"></div>
-
 <div class="final-message" id="finalMessage">
 🎉 You matched all the memories!  
 Happy 21st Birthday MyPinkHeart ❤️
 </div>
-
 </div>
 
 </div>
 
 <script>
 
+/* COUNTDOWN */
 const birthday = new Date("March 6, 2026 00:00:00").getTime();
-
 setInterval(()=>{
-
 let now = new Date().getTime();
-
 let distance = birthday - now;
-
 let days = Math.floor(distance / (1000*60*60*24));
-let hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
-let minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
-let seconds = Math.floor((distance % (1000*60)) / 1000);
+let hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+let minutes = Math.floor((distance%(1000*60*60))/(1000*60));
+let seconds = Math.floor((distance%(1000*60))/1000);
 let milliseconds = distance % 1000;
-
 document.getElementById("days").innerText = days;
 document.getElementById("hours").innerText = hours;
 document.getElementById("minutes").innerText = minutes;
 document.getElementById("seconds").innerText = seconds;
 document.getElementById("milliseconds").innerText = milliseconds;
-
 },10);
 
 
-const messages = [
+/* LOVE LETTER TYPING */
+const letterText =
+"My birthday queen 👑❤️\n\nTomorrow you turn 21… and I swear the world is not ready for this version of you.\n\nYou are beauty, softness, fire, and magic all in one body.\n\nWatching you grow, glow, and evolve is one of my favorite things in this life.\n\nThis year isn’t just another birthday — it’s your powerful era.\n\nYour confident era. Your unstoppable era.\n\nBecause this day belongs to you. Always.\n\nHappy Birthday MyPinkHeart 🎂💖";
+let i=0;
+function typeLetter(){
+if(i < letterText.length){
+document.getElementById("loveLetter").innerHTML += letterText.charAt(i);
+i++;
+setTimeout(typeLetter,25);
+}
+}
+typeLetter();
 
+/* MEMORY GAME */
+const messages=[
 "Your smile is my favorite view ❤️",
 "You make my world brighter ✨",
 "You are my favorite notification 📱",
@@ -256,94 +200,47 @@ const messages = [
 "You make life beautiful 🌹",
 "You are my greatest blessing 💕",
 "You make ordinary days magical 🌟",
-"I’m lucky to have you ❤️"
-
+"I'm lucky to have you ❤️"
 ];
 
-let cards = [...messages,...messages];
-
+let cards=[...messages,...messages];
 cards.sort(()=>0.5-Math.random());
-
-const board = document.getElementById("gameBoard");
-
-let first = null;
-let second = null;
-let lock = false;
-let matches = 0;
-
+const board=document.getElementById("gameBoard");
+let first=null, second=null, lock=false, matches=0;
 cards.forEach(text=>{
-
-let card = document.createElement("div");
-
+let card=document.createElement("div");
 card.className="card";
-
 card.dataset.message=text;
-
 card.innerHTML="💗";
-
-card.onclick = () => flip(card);
-
+card.onclick=()=>flip(card);
 board.appendChild(card);
-
 });
 
-
 function flip(card){
-
 if(lock || card.classList.contains("flipped")) return;
-
 card.classList.add("flipped");
-
-card.innerText = card.dataset.message;
-
-if(!first){
-
-first = card;
-return;
-
-}
-
-second = card;
-
-lock = true;
-
-if(first.dataset.message === second.dataset.message){
-
+card.innerText=card.dataset.message;
+if(!first){ first=card; return; }
+second=card;
+lock=true;
+if(first.dataset.message===second.dataset.message){
 matches++;
-
 reset();
-
-if(matches === messages.length){
-
+if(matches===messages.length){
 document.getElementById("finalMessage").style.display="block";
-
 }
-
 }else{
-
 setTimeout(()=>{
-
 first.classList.remove("flipped");
 second.classList.remove("flipped");
-
 first.innerHTML="💗";
 second.innerHTML="💗";
-
 reset();
-
 },1200);
-
+}
 }
 
-}
-
-function reset(){
-
-first=null;
-second=null;
-lock=false;
-
-}
+function reset(){ first=null; second=null; lock=false; }
 
 </script>
 
