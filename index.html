@@ -2,104 +2,105 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Will You Be My Easter Egg? 🥚💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Be My Easter Egg 💖</title>
 
 <style>
 
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+font-family:Arial;
+}
+
 body{
-font-family: Arial;
 text-align:center;
-background:linear-gradient(135deg,#ff7eb3,#ffb6c1,#ffc0cb);
+background:linear-gradient(135deg,#ff9ecf,#ffc0cb,#ffd6e7);
 color:white;
-padding:40px;
+padding:20px;
 overflow-x:hidden;
 }
 
 h1{
-font-size:45px;
-text-shadow:2px 2px 5px #ff4da6;
+font-size:34px;
+margin-bottom:10px;
+}
+
+p{
+font-size:18px;
+margin-bottom:20px;
 }
 
 button{
-padding:15px 30px;
-font-size:18px;
+padding:14px 25px;
 border:none;
 border-radius:30px;
+font-size:18px;
+margin:8px;
 cursor:pointer;
-margin:10px;
-transition:0.3s;
-}
-
-button:hover{
-transform:scale(1.1);
 }
 
 #yes{
-background:linear-gradient(45deg,#ff1493,#ff69b4);
+background:#ff2e8a;
 color:white;
 }
 
 #no{
-background:#ff4d6d;
+background:#ff6f91;
 color:white;
 position:absolute;
 }
 
 .egg{
-font-size:70px;
-cursor:pointer;
+font-size:55px;
 margin:10px;
-transition:0.3s;
+cursor:pointer;
 }
 
-.egg:hover{
-transform:scale(1.3);
-}
-
-#loveNote{
-font-size:24px;
-margin-top:20px;
-color:#fff0f5;
+#score{
+font-size:20px;
+margin:15px;
 }
 
 #photo{
 display:none;
-width:220px;
+width:70%;
+max-width:250px;
 border-radius:20px;
 margin-top:20px;
 box-shadow:0 0 20px pink;
 }
 
-.quiz{
-display:none;
-margin-top:30px;
+.gift{
+font-size:70px;
+cursor:pointer;
 }
 
-.bunny{
-font-size:60px;
+#giftText{
+font-size:20px;
+margin-top:10px;
+}
+
+#loveLetter{
+background:white;
+color:#ff2e8a;
+padding:20px;
+border-radius:15px;
+display:none;
+margin-top:20px;
 }
 
 .heart{
 position:fixed;
-color:#ff4da6;
-font-size:20px;
+font-size:18px;
 animation:float 6s linear infinite;
 }
 
 @keyframes float{
 0%{transform:translateY(100vh);}
 100%{transform:translateY(-10vh);}
-}
-
-#loveLetter{
-display:none;
-background:white;
-color:#ff1493;
-padding:25px;
-border-radius:20px;
-width:300px;
-margin:auto;
-box-shadow:0 0 20px pink;
 }
 
 </style>
@@ -109,149 +110,153 @@ box-shadow:0 0 20px pink;
 
 <h1>Will You Be My Easter Egg? 🥚💖</h1>
 
+<p id="typing"></p>
+
+<button id="yes" onclick="yesClicked()">YES 💕</button>
+<button id="no" onclick="moveButton()">NO 😒</button>
+
+<div id="result" style="display:none">
+
+<h2>You said YES 😍</h2>
+
 <p>
-I searched everywhere... <br>
-Turns out the sweetest Easter egg is YOU 😌💗
+Unlocked girlfriend benefits:
+<br>💋 Unlimited kisses
+<br>🤗 Lifetime cuddles
+<br>😂 Annoying boyfriend forever
 </p>
 
-<div class="bunny">🐰🌸🐰</div>
-
-<button id="yes" onclick="yesClicked()">YES 💖</button>
-<button id="no" onmouseover="moveButton()">NO 😒</button>
-
-<div id="result" style="display:none;">
-<h2>You chose YES!!! 🎉💖</h2>
-<p>You unlocked premium girlfriend benefits:</p>
-<p>
-💋 Unlimited kisses <br>
-🤗 Lifetime cuddles <br>
-😂 Annoying boyfriend forever <br>
-🍫 Unlimited Easter chocolate
-</p>
-
-<button onclick="showLetter()">Open Love Letter 💌</button>
-
-</div>
-
-<div id="loveLetter">
-<h3>💌 A Letter For You</h3>
-<p>
-Out of all the Easter eggs in the world,
-I found the most precious one — you. 🥺
-
-You make my days brighter,
-my heart happier,
-and my life sweeter.
-
-Happy Easter my love 💖
-</p>
 </div>
 
 <hr>
 
-<h2>🥚 Find the hidden love notes</h2>
+<h2>🥚 Easter Egg Hunt</h2>
+
+<p>Find the love eggs!</p>
+
+<div id="score">Eggs found: 0</div>
 
 <div>
-<span class="egg" onclick="loveNote(1)">🥚</span>
-<span class="egg" onclick="loveNote(2)">🥚</span>
-<span class="egg" onclick="loveNote(3)">🥚</span>
-<span class="egg" onclick="loveNote(4)">🥚</span>
-<span class="egg" onclick="loveNote(5)">🥚</span>
-</div>
 
-<p id="loveNote"></p>
+<span class="egg" onclick="collectEgg(this)">🥚</span>
+<span class="egg" onclick="collectEgg(this)">🥚</span>
+<span class="egg" onclick="collectEgg(this)">🥚</span>
+<span class="egg" onclick="collectEgg(this)">🥚</span>
+<span class="egg" onclick="collectEgg(this)">🥚</span>
+
+</div>
 
 <hr>
 
 <h2>📸 Mystery Egg</h2>
-<p>Click the egg to reveal the most beautiful girl in the world</p>
 
 <span class="egg" onclick="showPhoto()">🥚</span>
 
 <br>
+
 <img id="photo" src="herphoto.jpg">
 
 <hr>
 
-<div class="quiz" id="quiz">
+<h2>🎁 Special Gift</h2>
 
-<h2>😂 Relationship Quiz</h2>
+<div class="gift" onclick="openGift()">🎁</div>
 
-<p>How handsome is your boyfriend?</p>
+<p id="giftText"></p>
 
-<button onclick="quizAnswer()">Very handsome 😍</button>
-<button onclick="quizAnswer()">Extremely handsome 😌</button>
-<button onclick="quizAnswer()">Illegal levels of handsome 🚨</button>
+<hr>
 
-<p id="quizResult"></p>
-
-</div>
-
-<br>
-
-<button onclick="playMusic()">🎶 Play Romantic Music</button>
+<button onclick="playMusic()">🎵 Romantic Music</button>
 
 <audio id="music">
 <source src="love.mp3" type="audio/mpeg">
 </audio>
 
+<div id="loveLetter">
+
+<h3>💌 A Letter For You</h3>
+
+<p>
+
+Out of all the Easter eggs in the world...
+
+I found the most beautiful one.
+
+You ❤️
+
+You make my days brighter,
+my heart happier,
+and my life sweeter.
+
+Happy Easter my love 🥺💖
+
+</p>
+
+</div>
+
 <script>
 
-function yesClicked(){
-document.getElementById("result").style.display="block";
-document.getElementById("quiz").style.display="block";
-createHearts();
-}
+let score=0;
 
-function moveButton(){
-var button=document.getElementById("no");
+function collectEgg(egg){
 
-var x=Math.random()*window.innerWidth*0.8;
-var y=Math.random()*window.innerHeight*0.8;
+egg.innerHTML="💖";
 
-button.style.left=x+"px";
-button.style.top=y+"px";
-}
+score++;
 
-function loveNote(num){
-
-var notes=[
-"You make my world brighter than Easter chocolate 🍫❤️",
-"Your smile is my favorite notification 😌",
-"Plot twist: I love you more every day 🥺",
-"If kisses were eggs I'd give you a million 🥚💋",
-"You are my favorite human in the universe 🌎💖"
-];
-
-document.getElementById("loveNote").innerHTML=notes[num-1];
+document.getElementById("score").innerHTML="Eggs found: "+score;
 
 }
 
 function showPhoto(){
+
 document.getElementById("photo").style.display="block";
+
 }
 
-function quizAnswer(){
-document.getElementById("quizResult").innerHTML="Correct answer. Your boyfriend is dangerously handsome 😂💖";
-}
+function openGift(){
 
-function showLetter(){
+document.getElementById("giftText").innerHTML="SURPRISE! You win unlimited cuddles and kisses 😌💖";
+
 document.getElementById("loveLetter").style.display="block";
+
 }
 
 function playMusic(){
+
 document.getElementById("music").play();
+
 }
 
-function createHearts(){
+function yesClicked(){
 
-for(let i=0;i<30;i++){
+document.getElementById("result").style.display="block";
+
+confetti();
+
+}
+
+function moveButton(){
+
+let button=document.getElementById("no");
+
+button.style.left=Math.random()*80+"vw";
+button.style.top=Math.random()*80+"vh";
+
+}
+
+function confetti(){
+
+for(let i=0;i<40;i++){
 
 let heart=document.createElement("div");
+
 heart.className="heart";
+
 heart.innerHTML="💖";
 
 heart.style.left=Math.random()*100+"vw";
+
 heart.style.animationDuration=(Math.random()*3+3)+"s";
 
 document.body.appendChild(heart);
@@ -259,6 +264,26 @@ document.body.appendChild(heart);
 }
 
 }
+
+let text="I searched everywhere for Easter eggs... but the sweetest one is YOU 😌💖";
+
+let i=0;
+
+function typeWriter(){
+
+if(i<text.length){
+
+document.getElementById("typing").innerHTML+=text.charAt(i);
+
+i++;
+
+setTimeout(typeWriter,40);
+
+}
+
+}
+
+typeWriter();
 
 </script>
 
