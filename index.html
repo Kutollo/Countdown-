@@ -2,50 +2,72 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Will You Be My Easter Egg? 🥚❤️</title>
+<title>Will You Be My Easter Egg? 🥚💖</title>
 
 <style>
 
 body{
 font-family: Arial;
 text-align:center;
-background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+background:linear-gradient(135deg,#ff7eb3,#ffb6c1,#ffc0cb);
 color:white;
 padding:40px;
+overflow-x:hidden;
 }
 
 h1{
-font-size:40px;
+font-size:45px;
+text-shadow:2px 2px 5px #ff4da6;
 }
 
 button{
-padding:15px 25px;
+padding:15px 30px;
 font-size:18px;
 border:none;
-border-radius:10px;
+border-radius:30px;
 cursor:pointer;
 margin:10px;
+transition:0.3s;
 }
 
-#yes{background:#4CAF50;color:white;}
-#no{background:#ff4d4d;color:white;position:absolute;}
+button:hover{
+transform:scale(1.1);
+}
+
+#yes{
+background:linear-gradient(45deg,#ff1493,#ff69b4);
+color:white;
+}
+
+#no{
+background:#ff4d6d;
+color:white;
+position:absolute;
+}
 
 .egg{
-font-size:60px;
+font-size:70px;
 cursor:pointer;
 margin:10px;
+transition:0.3s;
+}
+
+.egg:hover{
+transform:scale(1.3);
 }
 
 #loveNote{
-font-size:22px;
+font-size:24px;
 margin-top:20px;
+color:#fff0f5;
 }
 
 #photo{
 display:none;
-width:200px;
+width:220px;
 border-radius:20px;
 margin-top:20px;
+box-shadow:0 0 20px pink;
 }
 
 .quiz{
@@ -53,25 +75,76 @@ display:none;
 margin-top:30px;
 }
 
+.bunny{
+font-size:60px;
+}
+
+.heart{
+position:fixed;
+color:#ff4da6;
+font-size:20px;
+animation:float 6s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(100vh);}
+100%{transform:translateY(-10vh);}
+}
+
+#loveLetter{
+display:none;
+background:white;
+color:#ff1493;
+padding:25px;
+border-radius:20px;
+width:300px;
+margin:auto;
+box-shadow:0 0 20px pink;
+}
+
 </style>
 </head>
 
 <body>
 
-<h1>Will You Be My Easter Egg? 🥚❤️</h1>
+<h1>Will You Be My Easter Egg? 🥚💖</h1>
 
 <p>
 I searched everywhere... <br>
-Turns out the sweetest Easter egg is YOU 😌
+Turns out the sweetest Easter egg is YOU 😌💗
 </p>
 
-<button id="yes" onclick="yesClicked()">YES ❤️</button>
+<div class="bunny">🐰🌸🐰</div>
+
+<button id="yes" onclick="yesClicked()">YES 💖</button>
 <button id="no" onmouseover="moveButton()">NO 😒</button>
 
 <div id="result" style="display:none;">
-<h2>You chose YES!!! 🎉</h2>
+<h2>You chose YES!!! 🎉💖</h2>
 <p>You unlocked premium girlfriend benefits:</p>
-<p>💋 Unlimited kisses<br>🤗 Lifetime cuddles<br>😂 Annoying boyfriend forever</p>
+<p>
+💋 Unlimited kisses <br>
+🤗 Lifetime cuddles <br>
+😂 Annoying boyfriend forever <br>
+🍫 Unlimited Easter chocolate
+</p>
+
+<button onclick="showLetter()">Open Love Letter 💌</button>
+
+</div>
+
+<div id="loveLetter">
+<h3>💌 A Letter For You</h3>
+<p>
+Out of all the Easter eggs in the world,
+I found the most precious one — you. 🥺
+
+You make my days brighter,
+my heart happier,
+and my life sweeter.
+
+Happy Easter my love 💖
+</p>
 </div>
 
 <hr>
@@ -82,6 +155,8 @@ Turns out the sweetest Easter egg is YOU 😌
 <span class="egg" onclick="loveNote(1)">🥚</span>
 <span class="egg" onclick="loveNote(2)">🥚</span>
 <span class="egg" onclick="loveNote(3)">🥚</span>
+<span class="egg" onclick="loveNote(4)">🥚</span>
+<span class="egg" onclick="loveNote(5)">🥚</span>
 </div>
 
 <p id="loveNote"></p>
@@ -112,11 +187,20 @@ Turns out the sweetest Easter egg is YOU 😌
 
 </div>
 
+<br>
+
+<button onclick="playMusic()">🎶 Play Romantic Music</button>
+
+<audio id="music">
+<source src="love.mp3" type="audio/mpeg">
+</audio>
+
 <script>
 
 function yesClicked(){
 document.getElementById("result").style.display="block";
 document.getElementById("quiz").style.display="block";
+createHearts();
 }
 
 function moveButton(){
@@ -131,21 +215,15 @@ button.style.top=y+"px";
 
 function loveNote(num){
 
-var text="";
+var notes=[
+"You make my world brighter than Easter chocolate 🍫❤️",
+"Your smile is my favorite notification 😌",
+"Plot twist: I love you more every day 🥺",
+"If kisses were eggs I'd give you a million 🥚💋",
+"You are my favorite human in the universe 🌎💖"
+];
 
-if(num==1){
-text="You make my world brighter than Easter chocolate 🍫❤️";
-}
-
-if(num==2){
-text="Your smile is my favorite notification 😌";
-}
-
-if(num==3){
-text="Plot twist: I love you more every day 🥺";
-}
-
-document.getElementById("loveNote").innerHTML=text;
+document.getElementById("loveNote").innerHTML=notes[num-1];
 
 }
 
@@ -154,7 +232,32 @@ document.getElementById("photo").style.display="block";
 }
 
 function quizAnswer(){
-document.getElementById("quizResult").innerHTML="Correct answer. Your boyfriend is dangerously handsome 😂❤️";
+document.getElementById("quizResult").innerHTML="Correct answer. Your boyfriend is dangerously handsome 😂💖";
+}
+
+function showLetter(){
+document.getElementById("loveLetter").style.display="block";
+}
+
+function playMusic(){
+document.getElementById("music").play();
+}
+
+function createHearts(){
+
+for(let i=0;i<30;i++){
+
+let heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="💖";
+
+heart.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=(Math.random()*3+3)+"s";
+
+document.body.appendChild(heart);
+
+}
+
 }
 
 </script>
