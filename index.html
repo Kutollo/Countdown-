@@ -2,110 +2,55 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy 21st Birthday MyPinkHeart 💖</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<title>Will You Be My Easter Egg? 🥚❤️</title>
 
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
-
 body{
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
+font-family: Arial;
 text-align:center;
+background:linear-gradient(135deg,#ff9a9e,#fad0c4);
 color:white;
-background:url("ourphoto.jpg") no-repeat center center/cover;
-overflow:hidden;
+padding:40px;
 }
-
-/* Glass container */
-
-.container{
-background:rgba(255,255,255,0.18);
-backdrop-filter:blur(12px);
-padding:40px 30px;
-border-radius:25px;
-max-width:600px;
-box-shadow:0 10px 30px rgba(0,0,0,0.35);
-animation:fadeIn 2s ease;
-}
-
-/* Title */
 
 h1{
-font-family:'Great Vibes',cursive;
-font-size:48px;
-margin-bottom:10px;
+font-size:40px;
 }
-
-.age{
-font-size:26px;
-font-weight:600;
-margin-bottom:20px;
-}
-
-/* Message */
-
-.message{
-font-size:16px;
-line-height:1.7;
-margin-bottom:25px;
-}
-
-/* Button */
 
 button{
-background:#ff4fa3;
-border:none;
-padding:12px 22px;
-border-radius:25px;
-color:white;
-font-size:14px;
-cursor:pointer;
-transition:0.3s;
-}
-
-button:hover{
-transform:scale(1.05);
-background:#ff2d8d;
-}
-
-/* Hidden surprise */
-
-.surprise{
-display:none;
-margin-top:20px;
+padding:15px 25px;
 font-size:18px;
-font-weight:500;
+border:none;
+border-radius:10px;
+cursor:pointer;
+margin:10px;
 }
 
-/* Floating hearts */
+#yes{background:#4CAF50;color:white;}
+#no{background:#ff4d4d;color:white;position:absolute;}
 
-.heart{
-position:absolute;
-bottom:-10px;
-font-size:20px;
-animation:float 6s linear infinite;
-opacity:0.8;
+.egg{
+font-size:60px;
+cursor:pointer;
+margin:10px;
 }
 
-@keyframes float{
-0%{transform:translateY(0) scale(1);}
-100%{transform:translateY(-110vh) scale(1.5);}
+#loveNote{
+font-size:22px;
+margin-top:20px;
 }
 
-@keyframes fadeIn{
-from{opacity:0; transform:translateY(30px);}
-to{opacity:1; transform:translateY(0);}
+#photo{
+display:none;
+width:200px;
+border-radius:20px;
+margin-top:20px;
+}
+
+.quiz{
+display:none;
+margin-top:30px;
 }
 
 </style>
@@ -113,57 +58,104 @@ to{opacity:1; transform:translateY(0);}
 
 <body>
 
-<div class="container">
+<h1>Will You Be My Easter Egg? 🥚❤️</h1>
 
-<h1>Happy Birthday</h1>
-<div class="age">Tiisetso Desiree Mnisi 💖</div>
-<div class="age">21 Years of Beautiful Magic ✨</div>
-
-<p class="message">
-Today is not just another day… it’s the day the world was gifted with someone truly special.
-
-Watching you grow, smile, dream and shine makes my heart the happiest place in the universe.
-
-You deserve love, happiness, success and every beautiful thing life can offer.
-
-And I promise to always celebrate you, support you and remind you how amazing you are.
-
-Happy 21st Birthday MyPinkHeart 🎂💖
+<p>
+I searched everywhere... <br>
+Turns out the sweetest Easter egg is YOU 😌
 </p>
 
-<button onclick="showSurprise()">Open Your Surprise 🎁</button>
+<button id="yes" onclick="yesClicked()">YES ❤️</button>
+<button id="no" onmouseover="moveButton()">NO 😒</button>
 
-<div class="surprise" id="surprise">
-I love you more than words can explain ❤️
+<div id="result" style="display:none;">
+<h2>You chose YES!!! 🎉</h2>
+<p>You unlocked premium girlfriend benefits:</p>
+<p>💋 Unlimited kisses<br>🤗 Lifetime cuddles<br>😂 Annoying boyfriend forever</p>
 </div>
+
+<hr>
+
+<h2>🥚 Find the hidden love notes</h2>
+
+<div>
+<span class="egg" onclick="loveNote(1)">🥚</span>
+<span class="egg" onclick="loveNote(2)">🥚</span>
+<span class="egg" onclick="loveNote(3)">🥚</span>
+</div>
+
+<p id="loveNote"></p>
+
+<hr>
+
+<h2>📸 Mystery Egg</h2>
+<p>Click the egg to reveal the most beautiful girl in the world</p>
+
+<span class="egg" onclick="showPhoto()">🥚</span>
+
+<br>
+<img id="photo" src="herphoto.jpg">
+
+<hr>
+
+<div class="quiz" id="quiz">
+
+<h2>😂 Relationship Quiz</h2>
+
+<p>How handsome is your boyfriend?</p>
+
+<button onclick="quizAnswer()">Very handsome 😍</button>
+<button onclick="quizAnswer()">Extremely handsome 😌</button>
+<button onclick="quizAnswer()">Illegal levels of handsome 🚨</button>
+
+<p id="quizResult"></p>
 
 </div>
 
 <script>
 
-/* Surprise */
-
-function showSurprise(){
-document.getElementById("surprise").style.display="block";
+function yesClicked(){
+document.getElementById("result").style.display="block";
+document.getElementById("quiz").style.display="block";
 }
 
-/* Floating hearts */
+function moveButton(){
+var button=document.getElementById("no");
 
-setInterval(()=>{
-const heart=document.createElement("div");
-heart.classList.add("heart");
-heart.innerHTML="💖";
+var x=Math.random()*window.innerWidth*0.8;
+var y=Math.random()*window.innerHeight*0.8;
 
-heart.style.left=Math.random()*100+"vw";
-heart.style.fontSize=(Math.random()*20+10)+"px";
+button.style.left=x+"px";
+button.style.top=y+"px";
+}
 
-document.body.appendChild(heart);
+function loveNote(num){
 
-setTimeout(()=>{
-heart.remove();
-},6000);
+var text="";
 
-},500);
+if(num==1){
+text="You make my world brighter than Easter chocolate 🍫❤️";
+}
+
+if(num==2){
+text="Your smile is my favorite notification 😌";
+}
+
+if(num==3){
+text="Plot twist: I love you more every day 🥺";
+}
+
+document.getElementById("loveNote").innerHTML=text;
+
+}
+
+function showPhoto(){
+document.getElementById("photo").style.display="block";
+}
+
+function quizAnswer(){
+document.getElementById("quizResult").innerHTML="Correct answer. Your boyfriend is dangerously handsome 😂❤️";
+}
 
 </script>
 
